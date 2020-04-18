@@ -1,0 +1,272 @@
+{
+    "code": 1,
+    "msg": "",
+    "data": [{
+        "component": "text",
+        "label": "单行文本",
+        "icon": "text",
+        "setting": [{
+            "field": "title",
+            "default": "请输入标题"
+        }, {
+            "field": "desc",
+            "default": "请输入描述"
+        }],
+        "options": ["log_result", "require", "tpl_memory"]
+    }, {
+        "component": "textarea",
+        "label": "多行文本",
+        "icon": "duohangwenben",
+        "setting": [{
+            "field": "title",
+            "default": "请输入标题"
+        }, {
+            "field": "desc",
+            "default": "请输入描述"
+        }],
+        "options": ["require", "tpl_memory"]
+    }, {
+        "component": "number",
+        "label": "数字",
+        "icon": "shuzi",
+        "setting": [{
+            "field": "title",
+            "default": "请输入标题"
+        }, {
+            "field": "desc",
+            "default": "请输入描述"
+        }, {
+            "field": "unit",
+            "default": ""
+        }],
+        "options": ["log_result", "require", "tpl_memory"]
+    }, {
+        "component": "date",
+        "label": "日期",
+        "icon": "calendar",
+        "setting": [{
+            "field": "title",
+            "default": "请输入标题"
+        }, {
+            "field": "desc",
+            "default": "请输入描述"
+        }],
+        "options": ["require", "current_date", "tpl_memory"]
+    }, {
+        "component": "radio",
+        "label": "单选项",
+        "icon": "check-circle",
+        "setting": [{
+            "field": "title",
+            "default": "请输入标题"
+        }, {
+            "field": "desc",
+            "default": "请输入描述"
+        }, {
+            "field": "radio"
+        }],
+        "options": ["require", "log_result", "preview", "tpl_memory"]
+    }, {
+        "component": "checkbox",
+        "label": "多选项",
+        "icon": "duoxuankuang",
+        "setting": [{
+            "field": "title",
+            "default": "请输入标题"
+        }, {
+            "field": "desc",
+            "default": "请输入描述"
+        }, {
+            "field": "checkbox"
+        }],
+        "options": ["require", "preview", "tpl_memory"]
+    }, {
+        "component": "image",
+        "label": "图片",
+        "icon": "camera",
+        "setting": [{
+            "field": "title",
+            "default": "请输入标题"
+        }, {
+            "field": "desc",
+            "default": "请输入描述"
+        }, {
+            "field": "upload",
+            "type": "radio",
+            "value": {
+                "1": "拍照和相册",
+                "2": "只允许拍照"
+            },
+            "default": 1
+        }],
+        "options": ["require", "watermark"]
+    }, {
+        "component": "checklist",
+        "label": "检查项",
+        "icon": "jianchaxiang",
+        "setting": [{
+            "field": "title",
+            "default": "请输入标题"
+        }, {
+            "field": "desc",
+            "default": "请输入描述"
+        }, {
+            "field": "checklist"
+        }],
+        "options": ["require", "tpl_memory"]
+    }, {
+        "component": "group",
+        "label": "分组标题",
+        "icon": "biaoti",
+        "setting": [],
+        "options": []
+    }, {
+        "component": "audio",
+        "label": "录音",
+        "icon": "audio",
+        "setting": [{
+            "field": "title",
+            "default": "请输入标题"
+        }, {
+            "field": "desc",
+            "default": "请输入描述"
+        }, {
+            "field": "audio"
+        }],
+        "options": ["require"]
+    }, {
+        "component": "video",
+        "label": "视频",
+        "icon": "video",
+        "setting": [{
+            "field": "title",
+            "default": "请输入标题"
+        }, {
+            "field": "desc",
+            "default": "请输入描述"
+        }, {
+            "field": "upload",
+            "type": "radio",
+            "value": {
+                "1": "拍摄和相册",
+                "2": "只允许拍摄"
+            },
+            "default": 1
+        }],
+        "options": ["require"]
+    }, {
+        "component": "identity",
+        "label": "身份证",
+        "icon": "identity",
+        "setting": [{
+            "field": "title",
+            "default": "身份证号"
+        }, {
+            "field": "desc",
+            "default": "请输入"
+        }, {
+            "field": "show",
+            "type": "checkbox",
+            "value": {
+                "1": "姓名",
+                "2": "身份证号",
+                "3": "地址"
+            },
+            "default": 2
+        }],
+        "options": ["log_result", "require", "tpl_memory"]
+    }, {
+        "component": "owner_address",
+        "label": "地址",
+        "icon": "owner_address",
+        "setting": [{
+            "field": "title",
+            "default": "地址"
+        }, {
+            "field": "desc",
+            "default": "请输入"
+        }, {
+            "field": "address",
+            "default": "请选择省市区"
+        }, {
+            "field": "address_detail",
+            "default": "详细地址（如小区门牌号）"
+        }],
+        "options": ["log_result", "require", "tpl_memory"]
+    }, {
+        "component": "carnumber",
+        "label": "车牌号",
+        "icon": "carnumber",
+        "setting": [{
+            "field": "title",
+            "default": "车牌号"
+        }, {
+            "field": "desc",
+            "default": "请输入"
+        }],
+        "options": ["log_result", "require", "tpl_memory"]
+    }, {
+        "component": "name",
+        "label": "姓名",
+        "icon": "name",
+        "setting": [{
+            "field": "title",
+            "default": "姓名"
+        }, {
+            "field": "desc",
+            "default": "请输入"
+        }],
+        "options": ["log_result", "require", "tpl_memory"]
+    }, {
+        "component": "sex",
+        "label": "性别",
+        "icon": "sex",
+        "setting": [{
+            "field": "title",
+            "default": "性别"
+        }, {
+            "field": "desc",
+            "default": "请选择"
+        }, {
+            "field": "radio"
+        }],
+        "options": ["log_result", "require", "tpl_memory", "preview"]
+    }, {
+        "component": "matrix",
+        "label": "表格",
+        "icon": "matrix",
+        "setting": [{
+            "field": "title",
+            "default": "表格"
+        }, {
+            "field": "item"
+        }],
+        "options": ["require", "tpl_memory"]
+    }, {
+        "component": "signature",
+        "label": "手写签名",
+        "icon": "signature",
+        "setting": [{
+            "field": "title",
+            "default": "登记者签字"
+        }, {
+            "field": "desc",
+            "default": "请点击签字，作为登记依据"
+        }],
+        "options": ["require"]
+    }, {
+        "component": "customer_number",
+        "label": "用户自定义编号",
+        "icon": "customer_number",
+        "setting": [{
+            "field": "title",
+            "default": "编号"
+        }, {
+            "field": "desc",
+            "default": "请输入"
+        }],
+        "options": ["log_result", "require", "tpl_memory"]
+    }],
+    "url": "",
+    "wait": 0
+}

@@ -1,0 +1,189 @@
+{{extend ("../../layout/layout.xtpl")}}
+{{#block ("body")}}
+
+<Panel title="列表页">
+    <SchemaForm ref="searchForm" traverse={qverse(($)=>{
+        $('*').itemProps({
+            itemCol:8,
+            labelCol:10
+        })
+    })} 
+    {{#if(searchDefaultValue)}}defaultValue= {
+        {{{$env.JSON.stringify(searchDefaultValue)}}} 
+    } 
+    {{/if}}
+    onSubmit={methods.onSubmitHandler}>
+        
+        __SEARCH__
+        <FormButtonGroup offset={2}>
+            <Submit>查询</Submit>
+            <Reset>重置</Reset>
+            <a href="javascript:void(0);" onClick={()=>{
+                window.location.href = '/page/__tablename__/create';
+            }}>创建__ENTITYNAME__</a>
+        </FormButtonGroup>
+    </SchemaForm>
+    <Table
+        dataSource={state.dataSource}
+        isTree={false}
+        style={ { minHeight: 200,marginTop:20 } }
+        isLoading={state.loading}
+    >
+        __TABLE_COLUMN__
+        
+        <Table.Column
+            title="操作"
+            lock="right"
+            width={200}
+            cell={(value, index, record) => {
+                return (
+                    <BlockView marginY={10}>
+                        __Approval__ACTION__
+                        <Button
+                            size="small"
+                            onClick={() => {
+                                window.location.href =  "/page/__tablename__/detail/" + record.Id;
+                            } }
+                        >
+                            查看
+                        </Button>
+                        <Button
+                            size="small"
+                            onClick={() => { 
+                                window.location.href =  "/page/__tablename__/edit/" + record.Id;
+                            } }
+                        >
+                            编辑
+                        </Button>
+                        <Button
+                            size="small"
+                            onClick={methods.onRemoveHandler(record)}
+                        >
+                            删除
+                        </Button>
+                    </BlockView>
+                )
+            }}
+        />
+    </Table>
+    <BlockView align="center" marginTop={20}>
+        <Pagination {...state.pagination} onChange={methods.onChangePage} />
+    </BlockView>
+</Panel>
+<relim-script>
+    const Toast = require("toast");
+    const Dialog = require("dialog");
+    const MAIN_URL = "/api/__tablename__/search";
+    const REMOVE_URL = "/api/__tablename__/remove"
+    module.exports = {
+        state: {
+            loading: false,
+            errorMessage: "",
+            status: "normal",
+            formData: {},
+            pagination: {
+                current: 1,
+                total: 0,
+                pageSize: 3
+            }
+        },
+        methods: {
+            onChangePage(pageIndex) {
+                this.setState({
+                    pagination: Object.assign(this.state.pagination, {
+                        current: pageIndex
+                    })
+                })
+                this.methods.loadData()
+            },
+            onRemoveHandler(record) {
+                return () => {
+                    Dialog.confirm({
+                        title: "提示",
+                        content: "您确定要删除吗？",
+                        onOk: () => {
+                            fetch(REMOVE_URL, {
+                                credentials: 'same-origin',
+                                method: 'POST',
+                                data: {
+                                    _csrf: '{{ $csrf }}',
+                                    Id: record.Id  
+                                }
+                            })
+                            .then(res => res.json())
+                            .then(res => {
+                                if (res && res.success) {
+                                    Toast.success("删除成功")
+                                    this.methods.loadData()
+                                } else {
+                                    Toast.error("删除失败，请稍后重试");
+                                }
+                            })
+                        }
+                    })
+                }
+            },
+            onSubmitHandler(values) {
+                let pagination = this.state.pagination;
+                pagination.current = 1;
+                this.setState(
+                    {
+                        pagination: pagination,
+                        formData: values
+                    },
+                    () => {
+                        this.methods.loadData()
+                    }
+                )
+            },
+            loadData(values) {
+                this.setState({
+                    loading: true
+                })
+                fetch(MAIN_URL, {
+                    credentials: 'same-origin',
+                    data: {
+                        pagination: JSON.stringify(this.state.pagination),
+                        query: JSON.stringify(
+                            Object.assign(this.state.formData, values)
+                        ),
+                        timestamp: Date.now()
+                    }
+                })
+                    .then(res => res.json())
+                    .then(
+                        res => {
+                            if (res && res.success) {
+                                this.setState({
+                                    loading: false,
+                                    status: "normal",
+                                    dataSource: res.data,
+                                    pagination: Object.assign(this.state.pagination, {
+                                        total: res.totalCount
+                                    })
+                                })
+                            } else {
+                                this.setState({
+                                    loading: false,
+                                    status: "error",
+                                    errorMessage: res.msg
+                                })
+                            }
+                        },
+                        err => {
+                            this.setState({
+                                loading: false,
+                                status: "error",
+                                errorMessage: ""
+                            })
+                        }
+                    )
+            }
+        },
+        componentDidMount() {
+            this.refs['searchForm'].getInstance().submit();
+        }
+    }
+</relim-script>
+
+{{/block}}

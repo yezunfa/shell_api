@@ -1,0 +1,26 @@
+{{extend ("./layout/index.xtpl")}}
+
+{{#block("head")}}
+
+
+<style type="text/css">
+
+
+</style>
+
+{{/block}}
+
+
+{{#block("body")}}
+  {{include('../home/carousel.xtpl')}}
+  {{include('../home/game.xtpl')}}
+  {{include('../home/webchat.xtpl')}}
+  {{include('../home/package.xtpl')}}
+  {{include('../home/whoarewe.xtpl')}}
+{{/block}}
+
+
+
+{{#block("footer")}}
+
+{{/block}}

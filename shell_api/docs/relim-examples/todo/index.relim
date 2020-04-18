@@ -1,0 +1,74 @@
+<RelimDocRender markdown={`
+\`\`\`\`relim
+<state declare="list as [],record as ''" />
+<!--
+大标题，设置样式，以React风格设置样式，Relim同样支持以HTML风格设置样式
+-->
+
+<div
+    style={{
+        margin: "20px 20px 30px 20px",
+        fontSize: 30,
+        color: "#888"
+    }}
+>
+    Todo
+</div>
+<InlineView marginLeft={20}>
+    <!--
+    输入框组件
+    -->
+
+    <Form
+        onSubmit={(e) => {
+            e.preventDefault()
+            $setState({
+                list: list.concat({
+                    index: list.length + 1,
+                    value: record
+                }),
+                record: ""
+            })
+        }}
+    >
+        <Input
+            value={record}
+            onChange={val => {
+                $setState({
+                    record: val
+                })
+            }}
+        />
+        <Button htmlType="submit" style={{
+            marginLeft:10
+        }}>Add record</Button>
+    </Form>
+</InlineView>
+<Block margin={20}>
+    <!--
+    表格组件
+    -->
+
+    <Table dataSource={list} isZebra={true}>
+        <Table.Column title="索引" width={200} dataIndex="index" />
+        <Table.Column title="记录" width={200} dataIndex="value" />
+        <Table.Column
+            title="删除"
+            cell={(value, index, record) => (
+                <Button
+                    onClick={() => {
+                        $setState({
+                            list: list.filter((item, _index) => {
+                                return _index !== index
+                            })
+                        })
+                    }}
+                >
+                    删除
+                </Button>
+            )}
+        />
+    </Table>
+</Block>
+\`\`\`\`
+`} />

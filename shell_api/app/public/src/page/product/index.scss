@@ -1,0 +1,43 @@
+@import '../common.scss';
+$borderColor: #D4D2D2;
+$colorRed: #F04844;
+$grayBg: #F3F3F3;
+
+.page-count {
+    width: 1360px;
+    margin: auto;
+    .next-card {
+        .query{
+            width: 100%;
+        }
+        .table {
+            font-size: 14px;
+            font-weight: normal;
+            margin-top: 40px;
+            .next-table-header tr {
+                height: 50px;
+                th {
+                    color: #111;
+                    font-size: 16px;
+                    font-weight: bold;
+                    height: 50px;
+                    text-align: center;
+                }
+            }
+            tr {
+                div.next-table-cell-wrapper {
+                    padding: 0;
+                    text-align: center;
+                }
+
+                td {
+                    .block-view {
+                        div {
+                            display: inline-block !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="charset" content="utf-8" />
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="//assets.cnhash.com/dsl/index.css">
+    <link rel="stylesheet" href="//assets.cnhash.com/dsl/index.common.css">
+    <script src="//assets.cnhash.com/dsl/index.js"></script>
+    <script src="//assets.cnhash.com/dsl/react-components.js"></script>
+    <script src="//assets.cnhash.com/dsl/relim-react-bizcharts/index.umd.js"></script>
+    <script src="//assets.cnhash.com/dsl/relim-react-router/index.umd.js"></script>
+    <script src="//assets.cnhash.com/dsl/relim-react-markdown/index.umd.js"></script>
+    <script src="//assets.cnhash.com/dsl/relim-react-editor/index.umd.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="{{ helper.getCDNHost() }}/public/third-part/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ helper.getCDNHost() }}/public/third-part/ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="{{ helper.getCDNHost() }}/public/third-part/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+    {{{block ("head")}}}
+</head>
+<body class="page">
+    <h2> {{! $env.JSON.stringify($userOperation)}}
+   <div id="app-placeholder"></div>
+   <script type="text/relim" id="template">
+   {{{block ("body")}}}
+   </script>
+    <script>
+        RelimReact.use(
+            RelimReactComponents(),
+            RelimReactBizcharts(),
+            RelimReactRouter(),
+            RelimReactMarkdown(),
+            RelimReactEditor()
+        );
+
+        RelimReact.render(
+            document.getElementById("template").innerHTML,
+            "#app-placeholder"
+        );
+    </script>
+
+     {{{block ("footer")}}}
+</body>
+</html>

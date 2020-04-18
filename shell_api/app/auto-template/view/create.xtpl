@@ -1,0 +1,78 @@
+{{extend ("../../layout/layout.xtpl")}}
+{{#block ("body")}}
+
+__INCLUDE__
+
+<Panel title="创建__ENTITYNAME__">
+    <Feedback style={ { marginBottom: 20 } }>
+        创建说明〜
+    </Feedback>
+    <FormSchema
+        traverse={qverse($ => {
+            $("*")
+            .itemProps({
+                labelCol: 3
+            });
+            // .required(true); 设置所有字段是必填
+
+            $("*", {
+            exclude: ({ payload }) => {
+                return (payload.type === "number" || payload.type === "boolean");
+            }
+            }).style({
+                width: 500
+            });
+        })}
+        defaultValue={
+            __defaultValue__
+        }
+        onSubmit={methods.onSubmitHandler}
+    >
+        
+        __TABLE_FIELD__
+        <FormButtonGroup offset={6}>
+            <Button onClick={ ()=> { window.location.href="/page/__tablename__/manage" } }>返回</Button>
+            <Submit>提交</Submit>
+            <Reset>重置</Reset>
+        </FormButtonGroup>
+    </FormSchema>
+</Panel>
+<relim-script>
+    const Toast = require("toast")
+    module.exports = {
+        state: function(){
+            return {
+                formData: {}
+            }
+        },
+        methods:{
+            onSubmitHandler(values){
+                __FOREIGNKEY__VALUE__
+                __UPLOAD__KEYS__
+                __EDITOR__KEYS__
+                values._csrf = '{{ $csrf }}';
+                fetch("/api/__tablename__/create",{
+                    credentials: 'same-origin',
+                    method: "POST",
+                    data:values
+                }).then(res=>res.json()).then(res=>{
+                    if(res && res.success){
+                        Toast.success('提交成功')
+                    } else {
+                        if(res && res.message) {
+                            Toast.error('提交失败:' + res.message);
+                        } else {
+                            Toast.error('提交失败,请稍后重试');
+                        }
+                    }
+                })
+            }
+        }
+    }
+</relim-script>
+<style>
+    .schema-form-container div[name="Id"].next-form-item.next-row {
+        display: none !important;
+    }
+</style>
+{{/block}}

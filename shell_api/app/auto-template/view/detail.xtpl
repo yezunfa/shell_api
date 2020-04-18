@@ -1,0 +1,59 @@
+{{extend ("../../layout/layout.xtpl")}}
+{{#block ("body")}}
+
+__INCLUDE__
+<Panel title="__ENTITYNAME__详情">
+    <Feedback style={ { marginBottom: 20 } }>
+        详情说明〜
+    </Feedback>
+    <FormSchema
+        traverse={qverse($ => {
+            $("*")
+            .itemProps({
+                labelCol: 3
+            });
+
+            $("*").props({
+                disabled: true
+            });
+            // .required(true); 设置所有字段是必填
+
+            $("*", {
+            exclude: ({ payload }) => {
+                return (payload.type === "number" || payload.type === "boolean");
+            }
+            }).style({
+                width: 500
+            });
+        })}
+        defaultValue= {
+            {{{$env.JSON.stringify(entity)}}}
+        }
+    >
+        
+        __TABLE_FIELD__
+
+        {{#if($query && $query.action !== "Approval")}}
+       <FormButtonGroup offset={6}>
+            <Button onClick={ ()=> { window.location.href="/page/__tablename__/manage" } }>返回</Button>
+        </FormButtonGroup>
+        {{/if}}
+    </FormSchema>
+
+    __ApprovalProcess_getDetailApprovalForm__
+
+</Panel>
+<relim-script>
+    const Toast = require("toast");
+    module.exports = {
+        state: function(){
+            return {
+                formData: {{{$env.JSON.stringify(entity)}}}
+            }
+        },
+        methods:{
+            __ApprovalProcess_getDetailApprovalMethods__
+        }
+    }
+</relim-script>
+{{/block}}

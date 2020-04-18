@@ -1,0 +1,152 @@
+<style>
+  .next-card {
+    display: block;
+  }
+  .next-card-body {
+    height: auto !important;
+  }
+</style>
+
+<RelimDocRender markdown={`
+Relim中不同请求发送方式的适用场景：
+1. 使用state的from关键字发送请求，适用于组件或页面初始化时获取一些初始化数据用
+2. 使用A标签发送请求，适用于一些点击操作的场景。比如表格每行数据的点击审批、驳回之类的**点击后发送请求的操作**
+3. 使用Request发送请求，适用于一些一次性发送请求的场景。比如打开弹窗后，先请求一个接口获取初始化数据，再显示弹窗内容
+4. 使用FormRequest发送请求，适用于表单提交的场景
+5. 使用Relim内置fetch发送请求，适用于以上及其之外的所有场景，用它来处理上面几种方法不适用的场景
+
+## 请求参数说明
+所有的请求都接收统一的参数。
+state、A、FormRequest、Request组件接收requestOptions数据作为配置参数，fetch函数的第二个参数位请求参数。配置参数的详细内容为：
+
+| params        | type    | default   | description |
+|---------------|---------|-----------|-------------|
+| method        | string  | 'get'     | 除了 http method 外，还可以是 jsonp|
+| timeout       | number  | 3000      | 超时时间，单位毫秒|
+| credentials   | string  | 'include' | 请求是否携带cookie，可选值：include omit same-origin|
+| headers       | -       | -         | 同fetch|
+| body          | -       | -         | 同fetch，**不可与data同时使用**，一般只有当data数据提交不满足你的需求是，才需要|
+| data        | object  | null      | json 对象，会根据 method 以及 headers['Content-Type']自动转为fetch的能够处理的body或url querystring|
+| method为jsonp时才生效的参数|
+| callback      | string  | 'jsonp_{{random_number}}' | jsonp function name|
+| jsonpCallback | string  | 'callback' | jsonp 回调url上的参数名|
+| originResponse | boolean | false    | 是否返回fetch原始的reponse对象|
+
+## state中发送请求
+
+\`\`\`\`relimeditor
+<state declare="
+  data from //dip.alibaba-inc.com/api/v2/services/schema/mock/17544
+" requestOptions={{
+  data: 1
+}} />
+<p>远程请求的数据</p>
+{JSON.stringify(data)}
+\`\`\`\`
+
+## 使用A标签发送请求
+\`\`\`\`relimeditor
+<p>点击下面链接发送请求</p>
+<A href="//dip.alibaba-inc.com/api/v2/services/schema/mock/17544" onSuccess={(res) => {
+  Dialog.alert({
+    content: <div>
+      <p>请求成功</p>
+    </div>
+  })
+}}>点我发送请求</A>
+<p>点击下面按钮发送请求</p>
+<A href="//dip.alibaba-inc.com/api/v2/services/schema/mock/17544" onSuccess={(res) => {
+  Dialog.alert({
+    content: <div>
+      <p>请求成功</p>
+    </div>
+  })
+}}><Button>点我发送请求</Button></A>
+<br/>
+<A href="//dip.alibaba-inc.com/api/v2/services/schema/mock/17544" onSuccess={(res) => {
+  Dialog.alert({
+    content: <div>
+      <p>请求成功</p>
+    </div>
+  })
+}} requestOptions={{
+  data: {
+    a: 1
+  }
+}}><Button>带数据的请求</Button></A>
+\`\`\`\`
+
+## 使用Relim内置fetch发送请求
+\`\`\`\`relimeditor
+<p>点击下面按钮发送请求</p>
+<Button onClick={() => {
+  fetch("//dip.alibaba-inc.com/api/v2/services/schema/mock/17544").then(res => {
+    return res.json()
+  }).then(res => {
+    Dialog.alert({
+      content: <div>
+        <p>请求成功</p>
+      </div>
+    })
+  })
+}}>点我发送请求</Button>
+<br/>
+<Button onClick={() => {
+  fetch("//dip.alibaba-inc.com/api/v2/services/schema/mock/17544", {
+    data: {
+      a: 1
+    }
+  }).then(res => {
+    return res.json()
+  }).then(res => {
+    Dialog.alert({
+      content: <div>
+        <p>请求成功</p>
+      </div>
+    })
+  })
+}}>带数据的请求</Button>
+\`\`\`\`
+
+## 使用Request组件发送一次性请求
+\`\`\`\`relimeditor
+<p>渲染时就发送请求</p>
+<Request url="//dip.alibaba-inc.com/api/v2/services/schema/mock/17544">{res => {
+  return <div style={{width: 500}}>{JSON.stringify(res)}</div>
+}}</Request>
+<br/>
+<Button onClick={()=>{
+  FnDialog({
+    title: '自定义弹窗',
+    style: {
+      width: 500,
+      height: 300
+    }
+  }).open((resolve, reject) => {
+    return <Request url="//dip.alibaba-inc.com/api/v2/services/schema/mock/17544">{res => {
+      return JSON.stringify(res)
+    }}</Request>
+  })
+}}>打开弹窗时发送请求请求初始化数据</Button>
+\`\`\`\`
+
+## 使用FormRequest组件提交表单请求
+\`\`\`\`relimeditor
+<FormRequest 
+   ref="request"
+   url="//dip.alibaba-inc.com/api/v2/services/schema/mock/17544"
+   onSuccess={(response,options)=>{
+     Dialog.alert({
+       content: '提交成功！'
+     })
+   }}
+   onFail={(response,options)=>{}}
+   onError={(response,options)=>{}}
+>
+    <SchemaForm>
+       <Field name="id" title="商品ID" type="string" default="1"/>
+       <Submit />
+    </SchemaForm>
+</FormRequest>
+\`\`\`\`
+`} />

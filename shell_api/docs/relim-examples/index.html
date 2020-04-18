@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>
+        Relim React Components
+    </title>
+    <link rel="stylesheet"
+        type="text/css"
+        href="/relim-examples/relim-doc-render/index.css"/>
+    <link rel="stylesheet"
+        type="text/css"
+        href="//g.alicdn.com/mui/fusion/4.1.44/index-noreset.css"/>
+    <style>
+        .next-nav {
+            margin:20px 0;
+        }
+        .next-menu-submenu-item-popup.opened .next-menu-wrapper {
+            z-index: 10000;
+        }
+        .next-menu-submenu-item-popup.opened .next-menu-wrapper .next-menu-content {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="//g.alicdn.com/relim/relim-react/3.0.0/index.umd.js">
+    </script>
+    <script src="//g.alicdn.com/relim/relim-react-components/3.0.0/index.umd.js">
+    </script>
+    <script src="//g.alicdn.com/relim/relim-react-bizcharts/3.0.0/index.umd.js">
+    </script>
+    <script src="//g.alicdn.com/relim/relim-react-router/3.0.2/index.umd.js">
+    </script>
+    <script src="//g.alicdn.com/relim/relim-react-markdown/3.0.0/index.umd.js">
+    </script>
+    <script src="/relim-examples/relim-doc-render/index.js"></script>
+    <script type="text/relim"
+        id="template">
+        <component name="Sidebar">
+            <Nav direction="ver" style={{width: 200}}>
+                <Nav.Item
+                    selected={match("/")}
+                    onClick={() => {
+                        props.history.push("/")
+                    }}
+                >
+                    首页
+                </Nav.Item>
+                <Nav.Item
+                    selected={match("/todo")}
+                    onClick={() => {
+                        props.history.push("/todo")
+                    }}
+                >
+                    TODO列表
+                </Nav.Item>
+                <Nav.Item
+                    selected={match("/ice")}
+                    onClick={() => {
+                        props.history.push("/ice")
+                    }}
+                >
+                    ICE场景
+                </Nav.Item>
+                <Nav.Item
+                    selected={match("/crud")}
+                    onClick={() => {
+                        props.history.push("/crud")
+                    }}
+                >
+                    CRUD单页应用
+                </Nav.Item>
+                <Nav.SubNav label="图表场景">
+                    <Nav.Item key="complex" onClick={() => {
+                        props.history.push('/chart/complex')
+                    }}>复杂综合图表</Nav.Item>
+                    <Nav.Item key="singleLine" onClick={() => {
+                        props.history.push('/chart/singleLine')
+                    }}>单条折线图</Nav.Item>
+                    <Nav.Item key="doubleLine" onClick={() => {
+                        props.history.push('/chart/doubleLine')
+                    }}>多条折线图</Nav.Item>
+                    <Nav.Item key="smoothLine" onClick={() => {
+                        props.history.push('/chart/smoothLine')
+                    }}>曲线折线图</Nav.Item>
+                    <Nav.Item key="baseBar" onClick={() => {
+                        props.history.push('/chart/baseBar')
+                    }}>基础柱状图</Nav.Item>
+                    <Nav.Item key="dodgeBar" onClick={() => {
+                        props.history.push('/chart/dodgeBar')
+                    }}>分组柱状图</Nav.Item>
+                    <Nav.Item key="stackBar" onClick={() => {
+                        props.history.push('/chart/stackBar')
+                    }}>堆叠柱状图</Nav.Item>
+                    <Nav.Item key="pie" onClick={() => {
+                        props.history.push('/chart/pie')
+                    }}>饼图</Nav.Item>
+                    <Nav.Item key="ring" onClick={() => {
+                        props.history.push('/chart/ring')
+                    }}>环状图</Nav.Item>
+                    <Nav.Item key="sunburst" onClick={() => {
+                        props.history.push('/chart/sunburst')
+                    }}>旭日图</Nav.Item>
+                    <Nav.Item key="scatterseries" onClick={() => {
+                        props.history.push('/chart/scatterseries')
+                    }}>多色散点图</Nav.Item>
+                    <Nav.Item key="bubble" onClick={() => {
+                        props.history.push('/chart/bubble')
+                    }}>气泡图</Nav.Item>
+                    <Nav.Item key="area" onClick={() => {
+                        props.history.push('/chart/area')
+                    }}>基础面积图</Nav.Item>
+                    <Nav.Item key="stackArea" onClick={() => {
+                        props.history.push('/chart/stackArea')
+                    }}>堆叠面积图</Nav.Item> 
+                    <Nav.Item key="percentageArea" onClick={() => {
+                        props.history.push('/chart/percentageArea')
+                    }}>百分比堆叠面积图</Nav.Item>
+                    <Nav.Item key="more">
+                        <a href="http://bizcharts.alibaba-inc.com/3_0/demo" target="_blank">...更多图表</a>
+                    </Nav.Item>
+                </Nav.SubNav>
+                <Nav.Item onClick={() => {
+                    props.history.push("/fetch")
+                }}
+                    selected={match("/fetch")}
+                >
+                    请求场景
+                </Nav.Item>
+                <Nav.Item selected={false}>
+                    <a
+                        href="http://gitlab.alibaba-inc.com/relim/relim-examples/tree/master"
+                        target="_blank"
+                    >
+                        GITLAB
+                    </a>
+                </Nav.Item>
+            </Nav>
+            <relim-script>
+                var ReactRouter = require("react-router")
+                module.exports = {
+                    methods: {
+                        match(path) {
+                            return ReactRouter.matchPath(
+                                this.props.location.pathname,
+                                {
+                                    path: path,
+                                    exact: true
+                                }
+                            )
+                        }
+                    }
+                }
+            </relim-script>
+        </component>
+        <HashRouter>
+                <Grid.Row>
+                    <Grid.Col span="4">
+                        <Route children={props => <Sidebar {...props} />} />
+                    </Grid.Col>
+                    <Grid.Col span="20">
+                            <Route
+                                exact
+                                path="/"
+                                component={props => (
+                                    <include path="./home.relim" {...props} />
+                                )}
+                            />
+                            <Route
+                                path="/crud"
+                                component={props => (
+                                    <include path="./crud/list.relim" {...props}/>
+                                )}
+                            />
+                            <Route
+                                path="/crud_edit"
+                                component={props => (
+                                    <include path="./crud/edit.relim" {...props}/>
+                                )}
+                            />
+                            <Route
+                                exact
+                                path="/ice"
+                                component={props => (
+                                    <include path="./ice.relim" {...props} />
+                                )}
+                            />
+                            <Route
+                                path="/crud_detail"
+                                component={props => (
+                                    <include
+                                        path="./crud/detail.relim"
+                                        {...props}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path="/crud_create"
+                                component={props => (
+                                    <include
+                                        path="./crud/create.relim"
+                                        {...props}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path="/todo"
+                                component={props => (
+                                    <include path="./todo/index.relim" {...props} />
+                                )}
+                            />
+                            <Route 
+                                path="/chart"
+                                component={props => (
+                                    <include path="./chart/index.relim" {...props} />
+                                )}
+                            />
+                            <Route
+                                path="/fetch" 
+                                component={props => (
+                                    <include path="./fetch/index.relim" {...props}/>
+                                )}
+                            />
+                    </Grid.Col>
+                </Grid.Row>
+        </HashRouter>
+        <style>
+            .next-nav-normal.ver .next-nav-menu .next-nav-item:before{
+                background:linear-gradient(135deg,#0c3472,#0c3472);
+            }
+            .next-nav-normal.ver .next-nav-menu .next-nav-item:hover{
+                color: #6b66ce;
+            }
+            .next-nav-normal.ver .next-nav-menu .next-nav-item.selected{
+                color: #6b66ce;
+            }
+            .next-menu-submenu-title:hover{
+                color: #6b66ce !important;
+            }
+        </style>
+    </script>
+    <script>
+        // if (window.parent !== window) {
+        //     document.domain='relim.alibaba.net'
+        //     window.__RELIM_DEVTOOLS_GLOBAL_HOOK__ = window.parent.__RELIM_DEVTOOLS_GLOBAL_HOOK__;
+        // }
+        RelimReact.use(
+            RelimReactComponents(),
+            RelimReactBizcharts(),
+            RelimReactRouter(),
+            RelimReactMarkdown(),
+            {
+                getComponents: function() {
+                    return {
+                        RelimDocRender: window.RelimDocRender
+                    }
+                }
+            }
+        )
+        RelimReact.render(
+            document.getElementById("template").innerHTML,
+            "#app"
+        )
+    </script>
+    <style>
+        html, body{  
+            height: 100%;  
+            padding: 0;  
+            margin: 0;  
+        }  
+    </style>
+</body>
+</html>

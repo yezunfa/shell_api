@@ -1,0 +1,491 @@
+{
+    "code": 1,
+    "msg": "",
+    "data": {
+        "tpl_id": 704943,
+        "org_id": 8077083,
+        "user_id": 8024637,
+        "name": "口罩收集",
+        "status": 0,
+        "is_del": 0,
+        "remark": "大家收集口罩拉",
+        "icon": "",
+        "note": "",
+        "btn_title": "提交",
+        "groups": [{
+            "id": 1083890,
+            "tpl_id": 704943,
+            "title": "",
+            "sort": 1,
+            "status": 3,
+            "components": [{
+                "id": 4194967,
+                "tpl_component": "text",
+                "title": "单行文本",
+                "desc": "tiptxt",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 0,
+                "options": {
+                    "log_result": [{
+                        "id": 11169462,
+                        "value": "1",
+                        "disabled": false
+                    }],
+                    "require": [{
+                        "id": 11169463,
+                        "value": "1"
+                    }],
+                    "tpl_memory": [{
+                        "id": 11169464,
+                        "value": "1"
+                    }]
+                }
+            }, {
+                "id": 4194968,
+                "tpl_component": "textarea",
+                "title": "多行文本",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 1,
+                "options": {
+                    "require": [{
+                        "id": 11169465,
+                        "value": "1"
+                    }],
+                    "tpl_memory": [{
+                        "id": 11169466,
+                        "value": "1"
+                    }]
+                }
+            }, {
+                "id": 4194969,
+                "tpl_component": "number",
+                "title": "数字123",
+                "desc": "2222",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 2,
+                "options": {
+                    "unit": [{
+                        "id": 11169467,
+                        "value": "111",
+                        "limit": 8
+                    }],
+                    "log_result": [{
+                        "id": 11169468,
+                        "value": "0",
+                        "disabled": true
+                    }],
+                    "require": [{
+                        "id": 11169469,
+                        "value": "1"
+                    }],
+                    "tpl_memory": [{
+                        "id": 11169470,
+                        "value": "0"
+                    }]
+                }
+            }, {
+                "id": 4194970,
+                "tpl_component": "date",
+                "title": "日期",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 3,
+                "options": {
+                    "require": [{
+                        "id": 11169471,
+                        "value": "0"
+                    }],
+                    "current_date": [{
+                        "id": 11169472,
+                        "value": "1"
+                    }],
+                    "tpl_memory": [{
+                        "id": 11169473,
+                        "value": "0"
+                    }]
+                }
+            }, {
+                "id": 4194971,
+                "tpl_component": "radio",
+                "title": "单选项",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 4,
+                "options": {
+                    "radio": [{
+                        "id": 11169474,
+                        "value": "A",
+                        "selected": false
+                    }, {
+                        "id": 11169475,
+                        "value": "B",
+                        "selected": false
+                    }, {
+                        "id": 11169476,
+                        "value": "C",
+                        "selected": false
+                    }],
+                    "require": [{
+                        "id": 11169477,
+                        "value": "0"
+                    }],
+                    "log_result": [{
+                        "id": 11169478,
+                        "value": "0",
+                        "disabled": true
+                    }],
+                    "preview": [{
+                        "id": 11169479,
+                        "value": "1"
+                    }],
+                    "tpl_memory": [{
+                        "id": 11169480,
+                        "value": "0"
+                    }]
+                }
+            }, {
+                "id": 4194972,
+                "tpl_component": "checkbox",
+                "title": "ABAB",
+                "desc": "B",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 5,
+                "options": {
+                    "checkbox": [{
+                        "id": 11169481,
+                        "value": "A",
+                        "selected": false
+                    }, {
+                        "id": 11169482,
+                        "value": "B",
+                        "selected": false
+                    }, {
+                        "id": 11169483,
+                        "value": "C",
+                        "selected": false
+                    }],
+                    "require": [{
+                        "id": 11169484,
+                        "value": "0"
+                    }],
+                    "preview": [{
+                        "id": 11169485,
+                        "value": "1"
+                    }],
+                    "tpl_memory": [{
+                        "id": 11169486,
+                        "value": "0"
+                    }]
+                }
+            }, {
+                "id": 4194973,
+                "tpl_component": "checklist",
+                "title": "检查项",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 6,
+                "options": {
+                    "checklist": [{
+                        "id": 11169487,
+                        "value": "检查项1check"
+                    }, {
+                        "id": 11169488,
+                        "value": "检查项cheeck"
+                    }],
+                    "require": [{
+                        "id": 11169489,
+                        "value": "0"
+                    }],
+                    "tpl_memory": [{
+                        "id": 11169490,
+                        "value": "0"
+                    }]
+                }
+            }, {
+                "id": 4194974,
+                "tpl_component": "address",
+                "title": "定位test",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 7,
+                "options": {
+                    "require": [{
+                        "id": 11169491,
+                        "value": "1"
+                    }]
+                }
+            }, {
+                "id": 4194975,
+                "tpl_component": "matrix",
+                "title": "表格",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 8,
+                "options": {
+                    "item": [{
+                        "id": 11169492,
+                        "value": "项目1",
+                        "type": "text"
+                    }, {
+                        "id": 11169493,
+                        "value": "项目2",
+                        "type": "text"
+                    }],
+                    "require": [{
+                        "id": 11169494,
+                        "value": "0"
+                    }],
+                    "tpl_memory": [{
+                        "id": 11169495,
+                        "value": "0"
+                    }]
+                }
+            }, {
+                "id": 4194976,
+                "tpl_component": "image",
+                "title": "图片",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 9,
+                "options": {
+                    "upload": [{
+                        "id": 11169496,
+                        "value": "1"
+                    }],
+                    "require": [{
+                        "id": 11169497,
+                        "value": "0"
+                    }],
+                    "watermark": [{
+                        "id": 11169498,
+                        "value": "15",
+                        "bottom_tag": "此水印由 xx公司 创建"
+                    }]
+                }
+            }, {
+                "id": 4194977,
+                "tpl_component": "video",
+                "title": "视频",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 10,
+                "options": {
+                    "upload": [{
+                        "id": 11169499,
+                        "value": "1"
+                    }],
+                    "require": [{
+                        "id": 11169500,
+                        "value": "0"
+                    }]
+                }
+            }, {
+                "id": 4194978,
+                "tpl_component": "audio",
+                "title": "录音",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 11,
+                "options": {
+                    "require": [{
+                        "id": 11169501,
+                        "value": "0"
+                    }]
+                }
+            }, {
+                "id": 4194979,
+                "tpl_component": "name",
+                "title": "姓名",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 12,
+                "options": {
+                    "log_result": [{
+                        "id": 11169502,
+                        "value": "0",
+                        "disabled": true
+                    }],
+                    "require": [{
+                        "id": 11169503,
+                        "value": "0"
+                    }],
+                    "tpl_memory": [{
+                        "id": 11169504,
+                        "value": "1",
+                        "userMemory": true
+                    }]
+                }
+            }, {
+                "id": 4194980,
+                "tpl_component": "sex",
+                "title": "性别",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 13,
+                "options": {
+                    "radio": [{
+                        "id": 11169505,
+                        "value": "男",
+                        "selected": false
+                    }, {
+                        "id": 11169506,
+                        "value": "女",
+                        "selected": false
+                    }],
+                    "log_result": [{
+                        "id": 11169507,
+                        "value": "0",
+                        "disabled": false
+                    }],
+                    "require": [{
+                        "id": 11169508,
+                        "value": "0"
+                    }],
+                    "tpl_memory": [{
+                        "id": 11169509,
+                        "value": "1",
+                        "userMemory": true
+                    }],
+                    "preview": [{
+                        "id": 11169510,
+                        "value": "1"
+                    }]
+                }
+            }, {
+                "id": 4194981,
+                "tpl_component": "recorder",
+                "title": "微信名",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 14,
+                "options": {
+                    "require": [{
+                        "id": 11169511,
+                        "value": "1"
+                    }],
+                    "log_result": [{
+                        "id": 11169512,
+                        "value": "0",
+                        "disabled": true
+                    }]
+                }
+            }, {
+                "id": 4194982,
+                "tpl_component": "tel",
+                "title": "手机",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 15,
+                "options": {
+                    "require": [{
+                        "id": 11169513,
+                        "value": "1"
+                    }],
+                    "log_result": [{
+                        "id": 11169514,
+                        "value": "0",
+                        "disabled": true
+                    }]
+                }
+            }, {
+                "id": 4194983,
+                "tpl_component": "identity",
+                "title": "身份证号",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083890,
+                "sort": 16,
+                "options": {
+                    "log_result": [{
+                        "id": 11169515,
+                        "value": "0",
+                        "disabled": true
+                    }],
+                    "require": [{
+                        "id": 11169516,
+                        "value": "0"
+                    }],
+                    "tpl_memory": [{
+                        "id": 11169517,
+                        "value": "1",
+                        "userMemory": true
+                    }]
+                }
+            }]
+        }, {
+            "id": 1083891,
+            "tpl_id": 704943,
+            "title": "分组标题",
+            "sort": 2,
+            "status": 0,
+            "components": [{
+                "id": 4194984,
+                "tpl_component": "carnumber",
+                "title": "车牌",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083891,
+                "sort": 0,
+                "options": {
+                    "log_result": [{
+                        "id": 11169518,
+                        "value": "0",
+                        "disabled": true
+                    }],
+                    "require": [{
+                        "id": 11169519,
+                        "value": "0"
+                    }],
+                    "tpl_memory": [{
+                        "id": 11169520,
+                        "value": "1",
+                        "userMemory": true
+                    }]
+                }
+            }, {
+                "id": 4194985,
+                "tpl_component": "carnumber",
+                "title": "车牌",
+                "desc": "",
+                "status": 0,
+                "group_id": 1083891,
+                "sort": 1,
+                "options": {
+                    "log_result": [{
+                        "id": 11169521,
+                        "value": "0",
+                        "disabled": true
+                    }],
+                    "require": [{
+                        "id": 11169522,
+                        "value": "0"
+                    }],
+                    "tpl_memory": [{
+                        "id": 11169523,
+                        "value": "1",
+                        "userMemory": true
+                    }]
+                }
+            }]
+        }]
+    },
+    "url": "",
+    "wait": 3
+}

@@ -1,0 +1,602 @@
+{
+    "qrcode_compontent": [{
+        "sort": 0,
+        "component_code": "text",
+        "attribute_list": [{
+            "content_html": {
+                "value": "<p>测试。这是个富文档框测试。这是个富文档框测试。这是个富文档框测试。这是个富文档框</p><p><br></p>",
+                "name": "文本 html 片段",
+                "attribute_id": 4,
+                "attribute_multiple_id": 1
+            }
+        }]
+    }, {
+        "sort": 1,
+        "component_code": "text",
+        "attribute_list": [{
+            "content_html": {
+                "value": "<section class=\"stylelib-wrapper\" data-contenteditable=\"false\"><section style=\"position:relative;text-align:center;\"><section style=\"position:absolute;top:50%;left:0;width:100%;height:0;border-bottom:1px solid #dddddd;\"><br></section><section data-stylelib-stylename=\"color\" style=\"position:relative;display:inline-block;margin:2px 0px;padding:2px 10px;color:#B71C1C;background-color:#fff;border-radius:4px;\" data-contenteditable=\"true\"><p><span style=\"font-size:14px\"><strong>年会流程</strong></span></p></section></section></section>",
+                "name": "文本 html 片段",
+                "attribute_id": 4,
+                "attribute_multiple_id": 1
+            }
+        }]
+    }, {
+        "id": 44148551,
+        "qrcode_id": 29888112,
+        "component_code": "table",
+        "identity_id": 0,
+        "sort": 2,
+        "status": 0,
+        "tpl_com_id": 32916558,
+        "org_id": 8077083,
+        "batch_id": 0,
+        "component_status": 0,
+        "attribute_list": [{
+            "table_html": {
+                "id": 915998,
+                "value": "{\"name\":\"priceInfo\",\"key\":9,\"columns\":[{\"title\":\"年会活动流程\",\"colSpan\":3,\"dataIndex\":\"col1\",\"key\":\"col1\"},{\"title\":\"\",\"colSpan\":0,\"dataIndex\":\"col2\",\"key\":\"col2\"},{\"title\":\"\",\"colSpan\":0,\"dataIndex\":\"col3\",\"key\":\"col3\"}],\"data\":[{\"key\":1,\"col1\":\"17:00~17:30\",\"col2\":\" 人员签到\",\"col3\":\"签到区\"},{\"key\":2,\"col1\":\"17:30~18:00\",\"col2\":\"总经理致辞 \",\"col3\":\"5号厅\"},{\"key\":3,\"col1\":\"18:00~19:30\",\"col2\":\"年度晚宴就餐 \",\"col3\":\"5号厅\"},{\"key\":4,\"col1\":\"19:30~21:00\",\"col2\":\"节目表演+抽奖\",\"col3\":\"5号厅\"}]}",
+                "status": 0,
+                "attribute_id": 19,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916558,
+                "name": "表格html 片段",
+                "is_default_value": 0,
+                "multiple_id": "904983",
+                "attribute_multiple_id": 2
+            }
+        }],
+        "group_count": 1,
+        "encryption": "7dd098503daa3094bf9dd7fd9e10dc28"
+    }, {
+        "sort": 3,
+        "component_code": "text",
+        "attribute_list": [{
+            "content_html": {
+                "value": "<section class=\"stylelib-wrapper\" data-contenteditable=\"false\"><section style=\"position:relative;text-align:center;\"><section style=\"position:absolute;top:50%;left:0;width:100%;height:0;border-bottom:1px solid #dddddd;\"><br></section><section data-stylelib-stylename=\"color\" style=\"position:relative;display:inline-block;margin:2px 0px;padding:2px 10px;color:#B71C1C;background-color:#fff;border-radius:4px;\" data-contenteditable=\"true\"><p><span style=\"font-size:14px\"><strong>晚宴座位安排</strong></span></p></section></section></section>",
+                "name": "文本 html 片段",
+                "attribute_id": 4,
+                "attribute_multiple_id": 1
+            }
+        }]
+    }, {
+        "id": 44148553,
+        "qrcode_id": 29888112,
+        "component_code": "image",
+        "identity_id": 0,
+        "sort": 4,
+        "status": 0,
+        "tpl_com_id": 32916560,
+        "org_id": 8077083,
+        "batch_id": 0,
+        "component_status": 0,
+        "attribute_list": [{
+            "image_url": {
+                "id": 62788093,
+                "value": "https://ncstatic.clewm.net/rsrc/2020/0309/06/66916bca1adfc3a10681d6e943d02649.png",
+                "status": 0,
+                "attribute_id": 5,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916560,
+                "name": "图片地址",
+                "is_default_value": 0,
+                "source_id": 28936249
+            },
+            "wxa_path": {
+                "id": 62788094,
+                "value": "",
+                "status": 0,
+                "attribute_id": 6,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916560,
+                "name": "图片链接",
+                "is_default_value": 0
+            },
+            "prew_type": {
+                "id": 62788095,
+                "value": "1",
+                "status": 0,
+                "attribute_id": 67,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916560,
+                "name": "预览效果",
+                "is_default_value": 0,
+                "enum_encryption": "906d60bb7e4a69e62b11995fd4edaa1f",
+                "enum_msg": [{
+                    "id": 66060569,
+                    "attribute_value_id": 62788095,
+                    "enum_text": "平铺",
+                    "enum_value": 1,
+                    "sort": 0,
+                    "status": 0,
+                    "create_time": 0,
+                    "update_time": 0,
+                    "component_code": "image"
+                }, {
+                    "id": 66060570,
+                    "attribute_value_id": 62788095,
+                    "enum_text": "轮播",
+                    "enum_value": 0,
+                    "sort": 1,
+                    "status": 0,
+                    "create_time": 0,
+                    "update_time": 0,
+                    "component_code": "image"
+                }]
+            },
+            "image_size": {
+                "id": 62788096,
+                "value": "1.83 M",
+                "status": 0,
+                "attribute_id": 68,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916560,
+                "name": "图片大小",
+                "is_default_value": 0
+            },
+            "image_width": {
+                "id": 62788097,
+                "value": "1184",
+                "status": 0,
+                "attribute_id": 74,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916560,
+                "name": "图片宽度",
+                "is_default_value": 0
+            },
+            "image_height": {
+                "id": 62788098,
+                "value": "1530",
+                "status": 0,
+                "attribute_id": 75,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916560,
+                "name": "图片高度",
+                "is_default_value": 0
+            },
+            "image_style": {
+                "id": 62788099,
+                "value": "1",
+                "status": 0,
+                "attribute_id": 112,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916560,
+                "name": "图片样式",
+                "is_default_value": 0,
+                "enum_encryption": "1bdc9354fbbf5edeca7f69cfcd1ee559",
+                "enum_msg": [{
+                    "id": 66060571,
+                    "attribute_value_id": 62788099,
+                    "enum_text": "样式一",
+                    "enum_value": 1,
+                    "sort": 0,
+                    "status": 0,
+                    "create_time": 0,
+                    "update_time": 0,
+                    "component_code": "image"
+                }, {
+                    "id": 66060572,
+                    "attribute_value_id": 62788099,
+                    "enum_text": "样式二",
+                    "enum_value": 2,
+                    "sort": 1,
+                    "status": 0,
+                    "create_time": 0,
+                    "update_time": 0,
+                    "component_code": "image"
+                }, {
+                    "id": 66060573,
+                    "attribute_value_id": 62788099,
+                    "enum_text": "样式三",
+                    "enum_value": 3,
+                    "sort": 2,
+                    "status": 0,
+                    "create_time": 0,
+                    "update_time": 0,
+                    "component_code": "image"
+                }]
+            }
+        }],
+        "group_count": 1,
+        "encryption": "c6f8203c35bc2f9bd078d80319c13bc1"
+    }, {
+        "sort": 5,
+        "component_code": "text",
+        "attribute_list": [{
+            "content_html": {
+                "value": "<section class=\"stylelib-wrapper last-child\" data-contenteditable=\"false\"><section style=\"position:relative;padding:13px 0;text-align:center;\"><section data-stylelib-stylename=\"border-color\" style=\"position:absolute;top:45%;left:0;float:left;display:inline-block;width:45%;height:0;margin-top:0.2em;border-bottom-width:1px;border-bottom-style:dotted;border-color:#9A1C0E;\"><br></section><section data-stylelib-stylename=\"border-color\" style=\"position:absolute;top:45%;right:0;float:right;display:inline-block;width:45%;height:0;margin-top:0.2em;border-bottom-width:1px;border-bottom-style:dotted;border-color:#9A1C0E;\"><br></section><section data-stylelib-stylename=\"background-color\" style=\"position:absolute;top:45%;left:50%;width:0.5em;height:0.5em;margin-left:-0.25em;background-color:#9A1C0E;transform:rotate(45deg);\"><br></section></section></section>",
+                "name": "文本 html 片段",
+                "attribute_id": 4,
+                "attribute_multiple_id": 1
+            }
+        }]
+    }, {
+        "id": 44148604,
+        "qrcode_id": 29888112,
+        "component_code": "text",
+        "identity_id": 0,
+        "sort": 6,
+        "status": 1,
+        "tpl_com_id": 32916602,
+        "org_id": 8077083,
+        "batch_id": 0,
+        "component_status": 0,
+        "attribute_list": [{
+            "content_html": {
+                "id": 26032155,
+                "value": "<p>测试。这是个富文档框</p><p><br></p>",
+                "status": 0,
+                "attribute_id": 4,
+                "group_id": 1,
+                "real_group_id": 1,
+                "tpl_com_id": 32916602,
+                "name": "文本 html 片段",
+                "is_default_value": 0,
+                "multiple_id": "22507395",
+                "attribute_multiple_id": 1
+            }
+        }],
+        "group_count": 1,
+        "encryption": "144ec65a26de731d07f89913fec48bd8"
+    }, {
+        "id": 44148605,
+        "qrcode_id": 29888112,
+        "component_code": "text",
+        "identity_id": 0,
+        "sort": 7,
+        "status": 1,
+        "tpl_com_id": 32916603,
+        "org_id": 8077083,
+        "batch_id": 0,
+        "component_status": 0,
+        "attribute_list": [{
+            "content_html": {
+                "id": 26032156,
+                "value": "<section class=\"stylelib-wrapper\" data-contenteditable=\"false\"><section style=\"position:relative;text-align:center;\"><section style=\"position:absolute;top:50%;left:0;width:100%;height:0;border-bottom:1px solid #dddddd;\"><br></section><section data-stylelib-stylename=\"color\" style=\"position:relative;display:inline-block;margin:2px 0px;padding:2px 10px;color:#B71C1C;background-color:#fff;border-radius:4px;\" data-contenteditable=\"true\"><p><span style=\"font-size:14px\"><strong>年会流程</strong></span></p></section></section></section>",
+                "status": 0,
+                "attribute_id": 4,
+                "group_id": 1,
+                "real_group_id": 1,
+                "tpl_com_id": 32916603,
+                "name": "文本 html 片段",
+                "is_default_value": 0,
+                "multiple_id": "22507396",
+                "attribute_multiple_id": 1
+            }
+        }],
+        "group_count": 1,
+        "encryption": "058e566621aecd1bb3a43ab9444336b1"
+    }, {
+        "id": 44148606,
+        "qrcode_id": 29888112,
+        "component_code": "text",
+        "identity_id": 0,
+        "sort": 8,
+        "status": 1,
+        "tpl_com_id": 32916604,
+        "org_id": 8077083,
+        "batch_id": 0,
+        "component_status": 0,
+        "attribute_list": [{
+            "content_html": {
+                "id": 26032157,
+                "value": "<section class=\"stylelib-wrapper\" data-contenteditable=\"false\"><section style=\"position:relative;text-align:center;\"><section style=\"position:absolute;top:50%;left:0;width:100%;height:0;border-bottom:1px solid #dddddd;\"><br></section><section data-stylelib-stylename=\"color\" style=\"position:relative;display:inline-block;margin:2px 0px;padding:2px 10px;color:#B71C1C;background-color:#fff;border-radius:4px;\" data-contenteditable=\"true\"><p><span style=\"font-size:14px\"><strong>晚宴座位安排</strong></span></p></section></section></section>",
+                "status": 0,
+                "attribute_id": 4,
+                "group_id": 1,
+                "real_group_id": 1,
+                "tpl_com_id": 32916604,
+                "name": "文本 html 片段",
+                "is_default_value": 0,
+                "multiple_id": "22507397",
+                "attribute_multiple_id": 1
+            }
+        }],
+        "group_count": 1,
+        "encryption": "46a71f5d8c4a0a45d8461969ef5f6d7a"
+    }, {
+        "id": 44148607,
+        "qrcode_id": 29888112,
+        "component_code": "text",
+        "identity_id": 0,
+        "sort": 9,
+        "status": 1,
+        "tpl_com_id": 32916605,
+        "org_id": 8077083,
+        "batch_id": 0,
+        "component_status": 0,
+        "attribute_list": [{
+            "content_html": {
+                "id": 26032158,
+                "value": "<section class=\"stylelib-wrapper last-child\" data-contenteditable=\"false\"><section style=\"position:relative;padding:13px 0;text-align:center;\"><section data-stylelib-stylename=\"border-color\" style=\"position:absolute;top:45%;left:0;float:left;display:inline-block;width:45%;height:0;margin-top:0.2em;border-bottom-width:1px;border-bottom-style:dotted;border-color:#9A1C0E;\"><br></section><section data-stylelib-stylename=\"border-color\" style=\"position:absolute;top:45%;right:0;float:right;display:inline-block;width:45%;height:0;margin-top:0.2em;border-bottom-width:1px;border-bottom-style:dotted;border-color:#9A1C0E;\"><br></section><section data-stylelib-stylename=\"background-color\" style=\"position:absolute;top:45%;left:50%;width:0.5em;height:0.5em;margin-left:-0.25em;background-color:#9A1C0E;transform:rotate(45deg);\"><br></section></section></section>",
+                "status": 0,
+                "attribute_id": 4,
+                "group_id": 1,
+                "real_group_id": 1,
+                "tpl_com_id": 32916605,
+                "name": "文本 html 片段",
+                "is_default_value": 0,
+                "multiple_id": "22507398",
+                "attribute_multiple_id": 1
+            }
+        }],
+        "group_count": 1,
+        "encryption": "e18096b975bf05be81360e2f53b873b1"
+    }, {
+        "id": 44148608,
+        "qrcode_id": 29888112,
+        "component_code": "recordlog",
+        "identity_id": 0,
+        "sort": 10,
+        "status": 1,
+        "tpl_com_id": 32916606,
+        "org_id": 8077083,
+        "batch_id": 0,
+        "component_status": 0
+    }, {
+        "component_code": "recordlog",
+        "attribute_list": [],
+        "status": 0,
+        "sort": 11
+    }],
+    "qrcode_record": {
+        "id": 29888112,
+        "coding": "qURogCJ",
+        "wx_url": "",
+        "web_url": "http://qr61.cn/oLxokI/qURogCJ",
+        "wxcode_url": "",
+        "qrcode_url": "https://qr.api.cli.im/qr?data=http%3A%2F%2Fqr61.cn%2FoLxokI%2FqURogCJ&level=H&transparent=&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=220&kid=bizcliim&time=1583707193&key=cbb661ebbf59b7cfe4e16149ee037a27",
+        "list_name": "年会签到",
+        "qrcode_name": "",
+        "scene_module_id": 1414,
+        "desc": "",
+        "category_id": 4388666,
+        "tpl_id": 6005279,
+        "identity_id": 0,
+        "org_id": 8077083,
+        "update_time": 1583707193,
+        "create_time": 1583706879,
+        "status": 0,
+        "preset_case": 0,
+        "show_org_dest": 0,
+        "can_scan_update": 0,
+        "is_mobile_updated": 0,
+        "create_from": 3,
+        "tpl_qrcode_status": 0,
+        "tpl_qrcode_updated": 0,
+        "batch_id": 0,
+        "log_status": 1,
+        "excel_status": 0,
+        "tpl_name": "",
+        "batch_name": "",
+        "route_type": 1,
+        "share_qrcode_url": "",
+        "qrstyle_url": "",
+        "top_style": {
+            "id": 722506,
+            "qrcode_id": 29888112,
+            "theme_color": "B71C1C",
+            "font_color": "FFF",
+            "bg_path": "",
+            "create_time": 1583706879,
+            "color_style": 0,
+            "color_picker_img": "https://ncstatic.clewm.net/rsrc/2020/0117/15/95cb24a0c88b498c970060b1a43a36a7.png",
+            "img_main_colors": "120101,510202,710203,9A1C0E,D25F28,F28F4E",
+            "color_from": 0,
+            "status": 0
+        },
+        "component_value_empty": 0,
+        "log_name": "年会签到",
+        "reset_limit_log": 0,
+        "img_name": ""
+    },
+    "qrcode_top_component": [{
+        "id": 44148557,
+        "qrcode_id": 29888112,
+        "component_code": "text",
+        "identity_id": 0,
+        "sort": 0,
+        "status": 0,
+        "tpl_com_id": 32916564,
+        "org_id": 8077083,
+        "batch_id": 0,
+        "component_status": 1,
+        "attribute_list": [{
+            "content_html": {
+                "id": 26032128,
+                "value": "",
+                "status": 0,
+                "attribute_id": 4,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916564,
+                "name": "文本 html 片段",
+                "is_default_value": 0,
+                "multiple_id": "22507368",
+                "attribute_multiple_id": 1
+            }
+        }],
+        "group_count": 1,
+        "encryption": "033e261781e1141e74671b6c8354def8"
+    }, {
+        "id": 44148558,
+        "qrcode_id": 29888112,
+        "component_code": "image",
+        "identity_id": 0,
+        "sort": 1,
+        "status": 0,
+        "tpl_com_id": 32916565,
+        "org_id": 8077083,
+        "batch_id": 0,
+        "component_status": 1,
+        "attribute_list": [{
+            "image_url": {
+                "id": 62788100,
+                "value": "https://ncstatic.clewm.net/rsrc/2020/0309/06/5624df6ee7feccee55772cba5d35e3e3.png",
+                "status": 0,
+                "attribute_id": 5,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916565,
+                "name": "图片地址",
+                "is_default_value": 0,
+                "source_id": 28936250
+            },
+            "wxa_path": {
+                "id": 62788101,
+                "value": "",
+                "status": 0,
+                "attribute_id": 6,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916565,
+                "name": "图片链接",
+                "is_default_value": 0
+            },
+            "prew_type": {
+                "id": 62788102,
+                "value": "1",
+                "status": 0,
+                "attribute_id": 67,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916565,
+                "name": "预览效果",
+                "is_default_value": 0,
+                "enum_encryption": "90bde4af8d6d15160d3f94dcb9eb0e7c",
+                "enum_msg": [{
+                    "id": 66060574,
+                    "attribute_value_id": 62788102,
+                    "enum_text": "平铺",
+                    "enum_value": 1,
+                    "sort": 0,
+                    "status": 0,
+                    "create_time": 0,
+                    "update_time": 0,
+                    "component_code": "image"
+                }, {
+                    "id": 66060575,
+                    "attribute_value_id": 62788102,
+                    "enum_text": "轮播",
+                    "enum_value": 0,
+                    "sort": 1,
+                    "status": 0,
+                    "create_time": 0,
+                    "update_time": 0,
+                    "component_code": "image"
+                }]
+            },
+            "image_size": {
+                "id": 62788103,
+                "value": "1.53 M",
+                "status": 0,
+                "attribute_id": 68,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916565,
+                "name": "图片大小",
+                "is_default_value": 0
+            },
+            "image_width": {
+                "id": 62788104,
+                "value": "1242",
+                "status": 0,
+                "attribute_id": 74,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916565,
+                "name": "图片宽度",
+                "is_default_value": 0
+            },
+            "image_height": {
+                "id": 62788105,
+                "value": "1000",
+                "status": 0,
+                "attribute_id": 75,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916565,
+                "name": "图片高度",
+                "is_default_value": 0
+            },
+            "image_style": {
+                "id": 62788106,
+                "value": "1",
+                "status": 0,
+                "attribute_id": 112,
+                "group_id": 0,
+                "real_group_id": 1,
+                "tpl_com_id": 32916565,
+                "name": "图片样式",
+                "is_default_value": 0,
+                "enum_encryption": "ce00ab86a7d48b11509b0ac3f3d0c591",
+                "enum_msg": [{
+                    "id": 66060576,
+                    "attribute_value_id": 62788106,
+                    "enum_text": "样式一",
+                    "enum_value": 1,
+                    "sort": 0,
+                    "status": 0,
+                    "create_time": 0,
+                    "update_time": 0,
+                    "component_code": "image"
+                }, {
+                    "id": 66060577,
+                    "attribute_value_id": 62788106,
+                    "enum_text": "样式二",
+                    "enum_value": 2,
+                    "sort": 1,
+                    "status": 0,
+                    "create_time": 0,
+                    "update_time": 0,
+                    "component_code": "image"
+                }, {
+                    "id": 66060578,
+                    "attribute_value_id": 62788106,
+                    "enum_text": "样式三",
+                    "enum_value": 3,
+                    "sort": 2,
+                    "status": 0,
+                    "create_time": 0,
+                    "update_time": 0,
+                    "component_code": "image"
+                }]
+            }
+        }],
+        "group_count": 1,
+        "encryption": "dae54cf87884709e72d440f49daf5f1f"
+    }, {
+        "id": 44148609,
+        "qrcode_id": 29888112,
+        "component_code": "recordview",
+        "identity_id": 0,
+        "sort": 2,
+        "status": 1,
+        "tpl_com_id": 32916607,
+        "org_id": 8077083,
+        "batch_id": 0,
+        "component_status": 1
+    }, {
+        "component_code": "recordview",
+        "attribute_list": [],
+        "status": 2,
+        "sort": 3
+    }],
+    "debug_data": {
+        "uniqueId": "saveQrcodeMsg_2",
+        "timestamp": 1583707288889,
+        "userId": "8024637",
+        "cvid": "201178824",
+        "url": "https://console.cli.im/nedit/29888112?&scene_log=eyJzaWQiOiIxNDE0IiwiaWlkIjowLCJidG50eXBlIjoiNyIsImJ0bmlkIjoiMzQ2NCIsImJ0bnZhbCI6IjI2MjQyMjE4IiwiY2YiOjMsImJhdGNodHlwZSI6MCwiYXRpbWUiOjE1ODM3MDY3NDIsInN0YWdpZCI6MCwicHVibGlja2V5IjoiNzU3N2E0ZGZiMjJkMTg3MjZlNWIzYTQ4YmZkM2IxYjUifQ%3D%3D&create_from=3&categoryId=4388666&pageFrom=addcode",
+        "referrer": "https://console.cli.im/active/activecode?categoryId=4388666&p=1",
+        "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+    }
+}

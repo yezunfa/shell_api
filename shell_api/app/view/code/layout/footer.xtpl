@@ -1,0 +1,46 @@
+<footer id="footer" class="main-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3">
+              <h4 class="h6">联系我们</h4>
+              <p>深圳市马丁鱼科技有限公司</p>
+              <hr>
+              
+              <hr class="d-block d-lg-none">
+            </div>
+            <div class="col-lg-6">
+              <h4 class="h6">联系地址</h4>
+              <p class="text-uppercase"><strong>深圳市南山区汉京国际532</strong>
+                <br> 联系人：  <strong>Alex</strong>
+                <br> 联系电话：  <strong>19925481257 (同微信号)</strong>
+                <br> Email：  <strong>yubhbh@126.com</strong>
+              </p>
+              <a href="#bussiness-position" class="btn btn-template-main">关注我们的公众号</a>
+              <hr class="d-block d-lg-none">
+            </div>
+          </div>
+        </div>
+        <div class="copyrights">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4 text-center-md">
+                <div class="copyright" style="position:absolute; bottom: 10px; left: 10px;">
+                <div class="fr" style="display:flex;margin-top: 30px;">
+                    <a target="_blank" href="http://www.miitbeian.gov.cn" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;" data-spm-anchor-id="5176.8087400.631162.107">
+                        <img style="width: 20px;" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif">
+                    </a>
+                        <a target="_blank" href="http://www.miitbeian.gov.cn" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;" data-spm-anchor-id="5176.8087400.631162.108">
+                            <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png" data-spm-anchor-id="5176.8087400.631162.i0.379a5c69O2SNMG">
+                            <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备18144639号-1</span>
+                        </a>
+                    </div>
+                </div>
+              </div>
+              <div class="col-lg-8 text-right text-center-md">
+                <p><a href="https://madingyu.com/"   title="">© 2020 深圳市马丁鱼科技有限公司</a></p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>

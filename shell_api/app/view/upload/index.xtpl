@@ -1,0 +1,306 @@
+<html>
+<head>
+    <title>图片上传服务</title>
+    <script src="{{ helper.getCDNHost() }}/public/offical-web/vendor/jquery/jquery.min.js"></script>
+    <style>
+        .box {
+            width: 600px;
+            height: 300px;
+        }
+        #pasteImg{
+          
+            border: dashed;
+            background-image: url('{{  helper.getCDNHost() + "/public/img/uploadbg.png" }}');
+            background-size: 100%;
+        }
+
+        #pasteImg img{
+            width: 100%;
+            height: 100%;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <h2>上传图片服务</h2>
+    <div id="pasteImg"  class="box" contenteditable="true"></div>
+    <form id="uploadForm">
+    <input type="file" name="image" style="" id="imgfile" accept="image/*">选择图片</input>
+    <button style="" id="btnGO">上传图片</button>
+    </form>
+    <h2>markdown/html语法</h2>
+    <div class="result">
+        <textarea class="box">
+        </textarea>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        function paste_img(e) {
+            if (e.clipboardData && e.clipboardData.items) {
+
+                var imageContent = e.clipboardData.getData('image/png');
+                ele = e.clipboardData.items
+                for (var i = 0; i < ele.length; ++i) {
+                    //粘贴图片
+                    if (ele[i].kind == 'file' && ele[i].type.indexOf('image/') !== -1) {
+                        var blob = ele[i].getAsFile();
+                        window.URL = window.URL || window.webkitURL;
+                        var blobUrl = window.URL.createObjectURL(blob);
+                        // 显示到div中，此时是显示的本地图片数据，并没有上传到服务器
+                        var new_img = document.createElement('img');
+                        new_img.setAttribute('src', blobUrl);
+                        new_img.setAttribute('blobdata', blob);
+                        // 移动div光标到新元素后面
+                        insertHtmlAtCaret(new_img);
+                        // 直接上传，当然你也可以不在这上传，可以点击按钮在上传
+                        uploadImg(blob);
+                    }
+                    //粘贴文本
+                    else if (ele[i].kind === "string" && ele[i].type.indexOf('text/plain') != -1) {
+                        //粘贴文本回调函数
+                        ele[i].getAsString(
+                            function (str) {
+                                insertHtmlAtCaret(document.createTextNode(str)); //插入文本到光标处 并移动光标到新位置
+                            })
+
+                    } else return;
+
+                }
+
+
+            } else {
+                alert('不支持的浏览器');
+            }
+        }
+        //绑定粘贴事件
+        document.getElementById('pasteImg').onpaste = function () {
+            paste_img(event);
+            return false;
+        };
+
+        //聊天内容框 插入文本或者其他元素后，移动置光标到最新处
+        function insertHtmlAtCaret(childElement) {
+            var sel, range;
+            if (window.getSelection) {
+                // IE9 and non-IE
+                sel = window.getSelection();
+                if (sel.getRangeAt && sel.rangeCount) {
+                    range = sel.getRangeAt(0);
+                    range.deleteContents();
+
+                    var el = document.createElement("div");
+                    el.appendChild(childElement);
+                    var frag = document.createDocumentFragment(),
+                        node, lastNode;
+                    while ((node = el.firstChild)) {
+                        lastNode = frag.appendChild(node);
+                    }
+
+                    range.insertNode(frag);
+                    if (lastNode) {
+                        range = range.cloneRange();
+                        range.setStartAfter(lastNode);
+                        range.collapse(true);
+                        sel.removeAllRanges();
+                        sel.addRange(range);
+                    }
+                }
+            } else if (document.selection && document.selection.type != "Control") {
+                // IE < 9
+                //document.selection.createRange().pasteHTML(html);
+            }
+        }
+
+        var createStandardXHR = function () {
+            try {
+                return new window.XMLHttpRequest();
+            } catch (e) {
+                return false;
+            }
+        };
+        var createActiveXHR = function () {
+            try {
+                return new window.ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {
+                return false;
+            }
+        };
+
+        var xhr;
+
+        function createXHR() {
+            var temp = createStandardXHR() || createActiveXHR();
+
+            if (window.XDomainRequest === undefined) {
+                return temp;
+            } else {
+                return new XDomainRequest();
+            }
+        }
+        //前端上传方法
+        function uploadImg(obj) {
+
+            xhr = createXHR();
+            if (xhr) {
+                xhr.onerror = err;
+                xhr.ontimeout = timeo;
+                xhr.onprogress = progres;
+                xhr.onload = loadd;
+                xhr.timeout = timeo;
+
+            } else {
+                alert("Failed to create");
+            }
+
+            //发送的数据
+            var fd = new FormData();
+            fd.append("image", obj, "imgtest.png");
+
+            //使用ajax发送
+            xhr.open('POST', '/img/upload?_csrf={{_csrf}}', true); 
+            xhr.send(fd);
+        }
+
+        function err() {
+            // alert("XDR onerror");
+        }
+
+        function timeo() {
+            // alert("XDR ontimeout");
+        }
+
+        function setTextArea(imgInfo) {
+            var mardownImg = ["![](" + imgInfo.imgURL + ")\n\n"];
+            mardownImg.push('<img src="' + imgInfo.imgURL + '" />');
+            $('.result textarea').val(mardownImg.join(''));
+        }
+
+        function loadd() {
+            console.log(xhr.responseText);
+            var res = xhr.response;
+            try{
+                var imgInfo = JSON.parse(xhr.response);
+                setTextArea(imgInfo)
+            } catch(ex) {
+                console.log(ex);
+                throw ex;
+            }
+             
+        }
+
+        function progres() {
+            //alert("XDR onprogress");
+        }
+
+        function stopdata() {
+            xhr.abort();
+        }
+
+
+        //以下是拖拽事件
+        document.addEventListener("dragenter", function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }, false);
+        document.addEventListener("dragleave", function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }, false);
+
+        document.addEventListener("dragover", function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }, false);
+        document.addEventListener("drop", function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            handleFiles(e.dataTransfer.files);
+
+        }, false);
+
+        //拖拽文件处理事件
+        handleFiles = function (files) {
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+
+                //如果拖住进来的是图片文件则显示
+                if (file.type.match(/image*/)) {
+                    $("#pasteImg").focus();
+                    var blob = file;
+                    window.URL = window.URL || window.webkitURL;
+                    var blobUrl = window.URL.createObjectURL(blob); // 显示到div中，此时是显示的本地图片数据，并没有上传到服务器 
+                    var new_img = document.createElement('img');
+                    new_img.setAttribute('src', blobUrl);
+                    new_img.setAttribute('blobdata', blob);
+                    // 移动div光标到新元素后面
+                    insertHtmlAtCaret(new_img);
+                    // 直接上传，当然你也可以不在这上传，可以点击按钮在上传
+                    uploadImg(blob);
+                } else {
+                    continue;
+                }
+            }
+        }
+
+        // $(function() {
+        //     $('#imgfile').onChange(function() {
+                
+        //     });
+        // });
+
+
+
+        document.getElementById('btnGO').onclick = function (e) {
+            if(!$("#imgfile").val()) {
+                alert('先选择图片再上传');
+                return false;
+            }
+            $.ajax({
+                url: '/img/upload?_csrf={{_csrf}}',
+                type: 'POST',
+                cache: false,
+                data: new FormData($('#uploadForm')[0]),
+                processData: false,
+                contentType: false
+            }).done(function(res) {
+                var imgInfo = res;
+                setTextArea(imgInfo)
+            }).fail(function(res) {
+                console.log(res);
+            });
+                    
+            e.preventDefault();
+        };
+
+        //**dataURL to blob**
+        function dataURLtoBlob(dataurl) {
+            var arr = dataurl.split(','),
+                mime = arr[0].match(/:(.*?);/)[1],
+                bstr = atob(arr[1]),
+                n = bstr.length,
+                u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new Blob([u8arr], {
+                type: mime
+            });
+        }
+
+        //**blob to dataURL**
+        function blobToDataURL(blob, callback) {
+            var a = new FileReader();
+            a.onload = function (e) {
+                callback(e.target.result);
+            }
+            a.readAsDataURL(blob);
+        }
+    }
+
+</script>
+
+</html>

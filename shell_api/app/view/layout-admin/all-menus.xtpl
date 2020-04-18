@@ -1,0 +1,722 @@
+<div id="allMenu" style="display: none;">
+        <div class="admincp-map ui-widget-content ui-draggable" nctype="map_nav" id="draggable">
+            <div class="title ui-widget-header ui-draggable-handle" style="border: none;background: #fff;">
+                <h3>管理中心全部菜单</h3>
+                <h5>切换显示全部管理菜单，通过点击勾选可添加菜单为管理常用操作项，最多添加10个</h5>
+                <span>
+                    <a nctype="map_off" onclick="$('#allMenu').hide();" href="JavaScript:void(0);">X</a>
+                </span>
+            </div>
+            <div class="content">
+                <ul class="admincp-map-nav">
+                    <li class="">
+                        <a href="javascript:void(0);" data-param="map-system">平台</a>
+                    </li>
+                    <li class="selected">
+                        <a href="javascript:void(0);" data-param="map-shop">商城</a>
+                    </li>
+                    <li class="">
+                        <a href="javascript:void(0);" data-param="map-mobile">手机端</a>
+                    </li>
+                    <li class="">
+                        <a href="javascript:void(0);" data-param="map-cms">APP</a>
+                    </li>
+                    <!--<li class=""><a href="javascript:void(0);" data-param="map-cms">资源</a></li>-->
+                </ul>
+                <div class="admincp-map-div" data-param="map-system" style="display: none;">
+                    <dl>
+                        <dt>设置</dt>
+                        <dd class="
+                                        ">
+                            <a href="http://127.0.0.1:7001/page/cnh_product/manage" data-param="" target="workspace">商店设置</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="reg_fields.php?act=list" data-param="" target="workspace">会员注册项设置</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="payment.php?act=list" data-param="" target="workspace">支付方式</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="shipping.php?act=list" data-param="" target="workspace">地区&配送</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="shop_config.php?act=mail_settings" data-param="" target="workspace">邮件服务器设置</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="cron.php?act=list" data-param="" target="workspace">计划任务</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="friend_link.php?act=list" data-param="" target="workspace">友情链接</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="friend_partner.php?act=list" data-param="" target="workspace">合作伙伴</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="oss_configure.php?act=list" data-param="" target="workspace">接口对接</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="captcha_manage.php?act=main" data-param="" target="workspace">验证码设置</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="check_file_priv.php?act=check" data-param="" target="workspace">文件权限检测</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="navigator.php?act=list" data-param="" target="workspace">自定义导航栏</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="sitemap.php" data-param="" target="workspace">站点地图</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="keywords_manage.php?act=list" data-param="" target="workspace">用户检索记录</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>广告管理</dt>
+                        <dd class="
+                                        ">
+                            <a href="ads.php?act=list" data-param="" target="workspace">广告列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="ad_position.php?act=list" data-param="" target="workspace">广告位置</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>文章管理</dt>
+                        <dd class="
+                                        ">
+                            <a href="articlecat.php?act=list" data-param="" target="workspace">文章分类</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="article.php?act=list" data-param="" target="workspace">文章列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>会员</dt>
+                        <dd class="
+                                        ">
+                            <a href="users.php?act=list" data-param="" target="workspace">会员列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="integrate.php?act=list" data-param="" target="workspace">会员整合</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="user_msg.php?act=list_all" data-param="" target="workspace">会员留言</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="user_account.php?act=list" data-param="" target="workspace">充值和提现申请</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="user_account_manage.php?act=list" data-param="" target="workspace">资金管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="user_address_log.php?act=list" data-param="" target="workspace">收货地址列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="user_baitiao_log.php?act=list" data-param="" target="workspace">会员白条</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="user_vat.php?act=list" data-param="" target="workspace">会员增票资质</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>权限管理</dt>
+                        <dd class="
+                                        ">
+                            <a href="privilege.php?act=list" data-param="" target="workspace">管理员列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="privilege_seller.php?act=list" data-param="" target="workspace">下级管理员列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="admin_logs.php?act=list" data-param="" target="workspace">管理员日志</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="message.php?act=list" data-param="" target="workspace">管理员留言</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="role.php?act=list" data-param="" target="workspace">角色管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="agency.php?act=list" data-param="" target="workspace">办事处列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="services.php?act=list" data-param="" target="workspace">客服管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="suppliers.php?act=list" data-param="" target="workspace">供货商列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>模板管理</dt>
+                        <dd class="
+                                        ">
+                            <a href="visualhome.php?act=list" data-param="" target="workspace">首页可视化</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="template.php?act=list" data-param="" target="workspace">模板选择</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="template.php?act=library" data-param="" target="workspace">库项目管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="edit_languages.php?act=list" data-param="" target="workspace">语言项编辑</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="template.php?act=backup_setting" data-param="" target="workspace">模板设置备份</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="mail_template.php?act=list" data-param="" target="workspace">邮件模板</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>数据库管理</dt>
+                        <dd class="
+                                        ">
+                            <a href="database.php?act=backup" data-param="" target="workspace">数据备份</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="database.php?act=optimize" data-param="" target="workspace">数据表优化</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="sql.php?act=main" data-param="" target="workspace">SQL查询</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="table_prefix.php?act=edit" data-param="" target="workspace">修改表前缀</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="transfer_manage.php" data-param="" target="workspace">源站点信息设置</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="transfer_manage.php?act=choose" data-param="" target="workspace">迁移数据</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?m=admin" data-param="" target="workspace">更新字段</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="index.php?act=clear_cache" data-param="" target="workspace">清除缓存</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="convert.php?act=main" data-param="" target="workspace">转换数据</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>邮件群发管理</dt>
+                        <dd class="
+                                        ">
+                            <a href="attention_list.php?act=list" data-param="" target="workspace">关注管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="email_list.php?act=list" data-param="" target="workspace">邮件订阅管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="magazine_list.php?act=list" data-param="" target="workspace">杂志管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="view_sendlist.php?act=list" data-param="" target="workspace">邮件队列管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>自营</dt>
+                        <dd class="
+                                        ">
+                            <a href="offline_store.php?act=list" data-param="" target="workspace">自营门店</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="offline_store.php?act=order_stats" data-param="" target="workspace">门店订单统计</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="index.php?act=merchants_first" data-param="" target="workspace">自营设置</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                </div>
+                <div class="admincp-map-div" data-param="map-shop" style="display: block;">
+                    <dl>
+                        <dt>商品管理</dt>
+                        <dd class="
+										">
+                            <a href="goods.php?act=list" data-param="" target="workspace">商品列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="category.php?act=list" data-param="" target="workspace">商品分类</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="comment_manage.php?act=list" data-param="" target="workspace">用户评论</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="brand.php?act=list" data-param="" target="workspace">品牌管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="goods_type.php?act=manage" data-param="" target="workspace">商品类型</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="goods_batch.php?act=select" data-param="" target="workspace">商品批量修改</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="discuss_circle.php?act=list" data-param="" target="workspace">网友讨论圈</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="gallery_album.php?act=list" data-param="" target="workspace">图片库管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="goods_report.php?act=list" data-param="" target="workspace">举报管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="sale_notice.php?act=list" data-param="" target="workspace">商品降价通知</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>库存管理</dt>
+                        <dd class="
+										">
+                            <a href="goods_inventory_logs.php?act=list&step=put" data-param="" target="workspace">库存入库</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="goods_inventory_logs.php?act=list&step=out" data-param="" target="workspace">库存出库</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>促销管理</dt>
+                        <dd class="
+										">
+                            <a href="snatch.php?act=list" data-param="" target="workspace">夺宝奇兵</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="seckill.php?act=list" data-param="" target="workspace">秒杀活动</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="bonus.php?act=list" data-param="" target="workspace">红包类型</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="group_buy.php?act=list" data-param="" target="workspace">团购活动</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="topic.php?act=list" data-param="" target="workspace">专题管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="auction.php?act=list" data-param="" target="workspace">拍卖活动</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="favourable.php?act=list" data-param="" target="workspace">优惠活动</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="wholesale.php?act=list" data-param="" target="workspace">批发管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="package.php?act=list" data-param="" target="workspace">超值礼包</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="exchange_goods.php?act=list" data-param="" target="workspace">积分商城商品</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="presale.php?act=list" data-param="" target="workspace">预售活动</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="coupons.php?act=list" data-param="" target="workspace">优惠券</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="../mobile/index.php?r=team/admin/index" data-param="" target="workspace">拼团活动</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="value_card.php?act=list" data-param="" target="workspace">储值卡</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="gift_gard.php?act=list" data-param="" target="workspace">礼品卡列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>订单管理</dt>
+                        <dd class="
+										">
+                            <a href="order.php?act=list" data-param="" target="workspace">订单列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="order.php?act=templates" data-param="" target="workspace">订单打印</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="goods_booking.php?act=list_all" data-param="" target="workspace">缺货登记</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="order.php?act=add" data-param="" target="workspace">添加订单</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="order.php?act=delivery_list" data-param="" target="workspace">发货单列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="order.php?act=back_list" data-param="" target="workspace">退货单列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="mc_order.php" data-param="" target="workspace">批量添加订单</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="order.php?act=back_cause_list" data-param="" target="workspace">退货原因列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="order.php?act=order_detection" data-param="" target="workspace">检测已发货订单</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="order.php?act=return_list" data-param="" target="workspace">退换货申请列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="complaint.php?act=list" data-param="" target="workspace">投诉管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>推荐管理</dt>
+                        <dd class="
+										">
+                            <a href="affiliate.php?act=list" data-param="" target="workspace">推荐设置</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="affiliate_ck.php?act=list" data-param="" target="workspace">分成管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>店铺管理</dt>
+                        <dd class="
+										">
+                            <a href="merchants_steps.php?act=step_up" data-param="" target="workspace">店铺设置</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="merchants_users_list.php?act=list" data-param="" target="workspace">店铺列表</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="merchants_commission.php?act=list" data-param="" target="workspace">店铺佣金</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="seller_domain.php?act=list" data-param="" target="workspace">店铺域名</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="merchants_account.php?act=list&act_type=merchants_seller_account" data-param="" target="workspace">店铺账户</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="offline_store.php?act=list&type=1" data-param="" target="workspace">店铺门店</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+										">
+                            <a href="comment_seller.php?act=list" data-param="" target="workspace">店铺满意度</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                </div>
+                <div class="admincp-map-div" data-param="map-mobile" style="display: none;">
+                    <dl>
+                        <dt>手机端管理</dt>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=oauth/admin" data-param="" target="workspace">授权登录</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="touch_navigator.php?act=list" data-param="" target="workspace">导航管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="touch_ads.php?act=list" data-param="" target="workspace">广告管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="touch_ad_position.php?act=list" data-param="" target="workspace">广告位管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="touch_topic.php?act=list" data-param="" target="workspace">专题管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>微信通管理</dt>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=wechat/admin/modify" data-param="" target="workspace">公众号设置</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=wechat/admin/mass_message" data-param="" target="workspace">群发消息</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=wechat/admin/reply_subscribe" data-param="" target="workspace">自动回复</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=wechat/admin/menu_list" data-param="" target="workspace">自定义菜单</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=wechat/admin/subscribe_list" data-param="" target="workspace">粉丝管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=wechat/admin/article" data-param="" target="workspace">素材管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=wechat/admin/qrcode_list" data-param="" target="workspace">二维码管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=wechat/extend" data-param="" target="workspace">功能扩展</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=wechat/admin/template" data-param="" target="workspace">消息提醒</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                    <dl>
+                        <dt>分销管理</dt>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=drp/admin/config" data-param="" target="workspace">店铺设置</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=drp/admin/shop" data-param="" target="workspace">分销商管理</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=drp/admin/drplist" data-param="" target="workspace">分销排行</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=drp/admin/drporderlist" data-param="" target="workspace">分销订单操作</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+                        <dd class="
+                                        ">
+                            <a href="../mobile/index.php?r=drp/admin/drpsetconfig" data-param="" target="workspace">分销比例设置</a>
+                            <i class="fa fa-check-square-o"></i>
+                        </dd>
+
+                    </dl>
+                </div>
+
+                <div class="admincp-map-div" data-param="map-cms" style="display: none;">
+                </div>
+                <div class="admincp-map-div" data-param="map-cms" style="display: none;">
+                </div>
+
+            </div>
+        </div>
+    </div>

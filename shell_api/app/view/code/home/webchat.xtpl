@@ -1,0 +1,16 @@
+<section id="bussiness" style="background-image: linear-gradient(45deg, #3F5EFB 0%, #FC466B 100%);" class="bar no-mb padding-big text-center-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                
+                <div  data-wow-delay="0.4s"><img style="width: 100%;" src="{{websiteSourcePath}}img/new-defined.png" alt="" class="img-fluid"></div>
+ 
+                
+            </div>
+            <div  data-wow-delay="0.4s" class="col-md-6 text-center">
+                <img style="width: 50%;" src="{{websiteSourcePath}}img/ercode.png" alt="" class="img-fluid">
+                <p id="packages-position" style="color:#fff; margin-top: 1rem;">了解更多？<a href="javascript:void(0);" class="btn btn-template-main">请微信扫码关注我们</a></p>
+            </div>
+        </div>
+    </div>
+</section>

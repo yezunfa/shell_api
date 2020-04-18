@@ -1,0 +1,60 @@
+.next-dialog {
+    border: 0;
+    border-radius: 5px;
+
+    .next-dialog-header {
+        box-sizing: border-box;
+        height: 30px;
+        padding-top: 10px;
+        border-radius: 5px 5px 0 0;
+        font-size: 16px;
+        color: #666;
+        background-color: #f2f2f2;
+    }
+
+    .next-loading {
+        display: block;
+
+        .dialog-select-user {
+            display: flex;
+            align-items: center;
+
+            .next-input {
+                margin: 0 15px;
+            }
+        }
+
+        .dialog-message {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+
+            .next-input {
+                margin: 0 15px;
+            }
+        }
+        .dialog-count {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            .margin {
+                margin: 0 20px 0 15px;
+            }
+        }
+        .actions {
+            margin-top: 20px;
+            text-align: right;
+            .submit {
+                margin-right: 20px;
+            }
+        }
+    }
+
+    .before:before {
+        display: inline-block;
+        margin-right: 4px;
+        content: "*";
+        font-family: SimSun;
+        color: #D43;
+    }
+}

@@ -1,0 +1,103 @@
+<RelimDocRender components={{
+    Panel: (props) => {
+        return <include path="../components/panel.relim" {...props}/>
+    }
+}} markdown={`
+\`\`\`\`relim
+<Panel title="编辑页">
+    <FormSchema
+        value={state.formData}
+        traverse={qverse($ => {
+            $("*")
+                .itemProps({
+                    labelCol: 6
+                })
+                .props({
+                    style: {
+                        width: 400
+                    }
+                })
+                .required(true)
+        })}
+        onSubmit={methods.onSubmitHandler}
+    >
+        <Field type="string" name="supplierName" title="公司名称" />
+        <Field type="string" name="supplierEmail" title="公司邮箱" />
+        <Field type="string" name="companyTel" title="公司电话" />
+        <Field type="string" name="bizLicense" title="营业执照" />
+        <Field type="string" name="legalPerson" title="法人姓名" />
+        <Field type="string" name="legalPersonId" title="法人身份证" />
+        <Field type="string" name="fixedEmployeeNum" title="固定员工数" />
+        <Field
+            type="string"
+            name="companyDetail"
+            title="公司介绍"
+            x-props={{ multiple: true }}
+        />
+        <FormButtonGroup offset={6}>
+            <Submit>提交</Submit>
+            <Reset>重置</Reset>
+        </FormButtonGroup>
+    </FormSchema>
+    <script>
+        const Toast = require("toast")
+        const Dialog = require("dialog")
+        const MAIN_URL = "//dip.taobao.net/api/v2/services/schema/mock/72461"
+        module.exports = {
+            methods: {
+                onSubmitHandler(values) {
+                    fetch(
+                        "//dip.taobao.net/api/v2/services/schema/mock/72461",
+                        {
+                            data: values
+                        }
+                    )
+                        .then(res => res.json())
+                        .then(res => {
+                            if (res && res.success) {
+                                Toast.success("提交成功")
+                            } else {
+                                Toast.error("提交失败")
+                            }
+                        })
+                },
+                loadData() {
+                    this.setState({
+                        loading: true
+                    })
+                    fetch(MAIN_URL)
+                        .then(res => res.json())
+                        .then(
+                            res => {
+                                if (res && res.success) {
+                                    this.setState({
+                                        loading: false,
+                                        status: "normal",
+                                        formData: res.data
+                                    })
+                                } else {
+                                    this.setState({
+                                        loading: false,
+                                        status: "error",
+                                        errorMessage: res.msg
+                                    })
+                                }
+                            },
+                            err => {
+                                this.setState({
+                                    loading: false,
+                                    status: "error",
+                                    errorMessage: ""
+                                })
+                            }
+                        )
+                }
+            },
+            componentDidMount() {
+                this.methods.loadData()
+            }
+        }
+    </script>
+</Panel>
+\`\`\`\`
+`}/>

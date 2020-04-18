@@ -1,0 +1,40 @@
+<RelimDocRender componentPkgs={[{
+  name: "RelimReactBizcharts",
+  page: "//g.alicdn.com/relim/relim-react-bizcharts/3.0.0/index.umd.js"
+}]} markdown={`
+\`\`\`\`relimeditor
+<component name="ScatterSeries">
+  <template>
+    <Chart data={state.data} forceFit>
+      <Tooltip showTitle={false} crosshairs={{type:'cross'}} itemTpl='<li data-index={index} style="margin-bottom:4px;"><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}<br/>{value}</li>'/>
+      <Axis name='height' />
+      <Axis name='weight' />
+      <Legend />
+      <Geom type='point' position="height*weight" color='gender' opacity={0.65} shape="circle" size={4} tooltip={['gender*height*weight', (gender, height, weight) => {
+        return {
+          name: gender,
+          value: height + '(cm), ' + weight + '(kg)'
+        };
+      }]} />
+    </Chart>
+  </template>
+  <relim-script>
+    module.exports = {
+      state: {
+        data: []
+      },
+      componentDidMount: function() {
+        fetch('./chart/scatter.json').then(res => {
+          return res.json()
+        }).then(result => {
+          this.setState({
+            data: result
+          })
+        })
+      }
+    }
+  </relim-script>
+</component>
+<ScatterSeries/>
+\`\`\`\`
+`} />

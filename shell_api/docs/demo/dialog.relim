@@ -1,0 +1,41 @@
+<Feedback style={{ marginBottom: 20 }}>
+    该例子主要是函数式的弹窗调用逻辑
+  </Feedback>
+  <template name="dialog">
+    <div>
+      <Field name="id" type="string" title="商品ID" />
+      <Field name="name" type="string" title="商品名称" />
+      <FormButtonGroup align="right">
+        <Submit>确定</Submit>
+        <Button onClick={reject}>取消</Button>
+      </FormButtonGroup>
+    </div>
+  </template>
+
+  <Button
+    onClick={() => {
+      FormDialog(
+        {
+          traverse: qverse($ => {
+            $("*").itemProps({
+              labelCol: 8
+            });
+          })
+        },
+        {
+          style: {
+            width: 400
+          }
+        }
+      )
+        .open((resolve, reject) => dialog()({ resolve, reject }))
+        .then(
+          values => {
+            console.log(values);
+          },
+          () => {}
+        );
+    }}
+  >
+    打开弹窗
+  </Button>

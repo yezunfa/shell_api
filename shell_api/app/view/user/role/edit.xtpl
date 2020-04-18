@@ -1,0 +1,277 @@
+{{extend ("../../layout/layout.xtpl")}}
+{{#block ("body")}}
+
+ 
+<Panel title="角色权限设置">
+    <Loading tip="loading..." shape='flower' color='#333' visible={ state.visible }>
+    <Feedback style={ { marginBottom: 20 } }>
+        角色权限设置,请勾选
+    </Feedback>
+    <Checkbox onChange={(enable)=> { methods.setChangeState(enable) } } >全选</Checkbox>
+ 
+    <ul className="menu-tree">
+        <for in={state.formData} index="$index" item="$item">
+            <li className="level-0">
+                {$item.Name} 
+                <if condition={$item.operations}>
+                    <for in={$item.operations} index="$key" item="$value">
+                        <Checkbox onChange={()=> { methods.onChange($item.Id,$value.Function) } } checked={state.boolen || $value.enable} >{$value.Name}</Checkbox>
+                    </for>
+                </if>
+                <if condition={$item.children}>
+                    <ul className="level-children">
+                        <for in={$item.children} index="$index" item="$item">
+                            <li  className="level-0-0">
+                                 {$item.Name} 
+                                  <if condition={$item.operations}>
+                                    <for in={$item.operations} index="$key" item="$value">
+                                        <Checkbox onChange={()=> { methods.onChange($item.Id,$value.Function) } } checked={state.boolen || $value.enable} >{$value.Name}</Checkbox>
+                                    </for>
+                                </if>
+                                <if condition={$item.children}>
+                                    <ul className="level-children">
+                                        <for in={$item.children} index="$index" item="$item">
+                                            <li  className="level-0-0">
+                                                {$item.Name} 
+                                                <if condition={$item.operations}>
+                                                    <for in={$item.operations} index="$key" item="$value">
+                                                        <Checkbox onChange={()=> { methods.onChange($item.Id,$value.Function) } } checked={state.boolen || $value.enable} >{$value.Name}</Checkbox>
+                                                    </for>
+                                                </if>
+
+                                                <if condition={$item.children}>
+                                                    <ul className="level-children">
+                                                        <for in={$item.children} index="$index" item="$item">
+                                                            <li  className="level-0-0">
+                                                                {$item.Name} 
+                                                                <if condition={$item.operations}>
+                                                                    <for in={$item.operations} index="$key" item="$value">
+                                                                        <Checkbox onChange={()=> { methods.onChange($item.Id,$value.Function) } } checked={$value.enable} >{$value.Name}</Checkbox>
+                                                                    </for>
+                                                                </if>
+                                                            </li>
+                                                        </for>
+                                                    </ul>
+                                                </if>
+                                            </li>
+                                        </for>
+                                    </ul>
+                                </if>
+
+                            </li>
+                        </for>
+                    </ul>
+                </if>
+            </li>
+        </for>
+    </ul> 
+   
+
+    {{! <Tree
+        defaultExpandAll
+        multiple
+        selectable={false}
+        checkStrictly={checkStrictly}
+        checkedKeys={checkedKeys}
+        onCheck={this.handleCheck}
+        onExpand={ () => {
+            console.log(2324354)
+        } }
+    >
+        {  methods.loop(state.formData) }
+    </Tree> }}
+
+    <FormButtonGroup offset={6}>
+        <Button type="Primary" onClick={ methods.onSubmitHandler}>保存</Button>
+        <Button type="" onClick={()=> { window.location.href="/user/role-right"}  }>返回</Button>
+    </FormButtonGroup>
+    </Loading>
+    <style>
+        .level-0{
+            padding: 0 0 0 20px;
+        }
+         .level-0-0{
+            padding: 0 0 0 60px;
+        }
+        .hide {
+            display: none !important;
+        }
+    </style>
+    <relim-script>
+    const Toast = require("toast")
+    module.exports = {
+        state: function(){
+            return {
+                formData: {{{$env.JSON.stringify(menuTree)}}},
+                menuList: [],  // 保存角色菜单操作
+                boolen: null,
+                visible: false
+            }
+        },
+        methods:{
+            onChange(menuId, operationFun) {
+                // 改变子菜单，父菜单状态
+                this.methods.getMenuEntity(menuId, operationFun)
+               
+                var getAndSetMenu = function(arr) {
+                    for(var i=0; i < arr.length; i++ ) {
+                        if(arr[i].Id === menuId) {
+                            arr[i].operations[operationFun].enable = !arr[i].operations[operationFun].enable;
+                        }
+                        if(arr[i].children && arr[i].children.length) {
+                            arr[i].children = getAndSetMenu(arr[i].children) 
+                        }
+                    }
+                    return arr;
+                }
+                var formData = getAndSetMenu(this.state.formData);
+                this.setState({
+                   formData: formData,
+                   timeStamp: Date.now()
+                }, ()=> {
+                    // console.log(this.state.formData);
+                });
+                
+            },
+            setChangeState (enable, targetArr = this.state.formData){
+                targetArr.forEach(item => {
+                    for (let i in item.operations) {
+                        item.operations[i].enable = enable;
+                    }
+                    if (item.children && item.children.length!== 0) {
+                        return this.methods.setChangeState(enable, item.children);
+                    }
+                })
+                this.setState({
+                    formData: this.state.formData,
+                   timeStamp: Date.now()
+                })
+            },
+
+
+            onSubmitHandler(){
+                // loading
+                this.setState({
+                    visible: true
+                })
+                // 点击提交生成menuList
+                this.state.menuList = [];
+                this.methods.saveMenuOperation();
+
+                var values = {};
+                values._csrf = '{{ $csrf }}';
+                values.sysRoleId = "{{sysRoleId}}";
+                values.data = JSON.stringify(this.state.menuList);
+                fetch("/user/role",{
+                    credentials: 'same-origin',
+                    method: "POST",
+                    data: values
+                }).then(res=>res.json()).then(res=>{
+                    this.setState({
+                        visible: false
+                    })
+                    if(res && res.success){
+                        Toast.success('提交成功')
+                    } else {
+                        Toast.error('提交失败')
+                    }
+                })
+            },
+            // 根据菜单Id，操作名获得菜单实体对象
+            getMenuEntity(menuId, operationFun, targetArr = this.state.formData) {
+                targetArr.forEach(item => {
+                    if (item.Id === menuId) {
+                        return this.methods.changeMenuEnable(item, !item.operations[operationFun].enable);
+                    } else {
+                        if (!item.children || item.children.length === 0) return;
+                        // 尾递归处理
+                        return this.methods.getMenuEntity(menuId, operationFun, item.children);
+                    }
+                })
+            },
+            // 根据菜单实体对象，是否可用，改变上下文菜单
+            changeMenuEnable(menuEntity, enable, targetArr = this.state.formData) {
+                // 向下影响
+                if (!enable && menuEntity.children && menuEntity.children.length !== 0) {
+                    menuEntity.children.forEach(item => {
+                        for (let i in item.operations) {
+                            item.operations[i].enable = enable;
+                        }
+                        if (item.children && item.children.length !== 0) {
+                            return this.methods.changeMenuEnable(item, enable);
+                        } 
+                    })
+                // 向上影响
+                } else if (enable) {
+                    targetArr.forEach(item => {
+                        if (item.Id === menuEntity.ParentId) {
+                            item.operations["Show"].enable = enable;
+                            if (item.ParentId !== null) {
+                                return this.methods.changeMenuEnable(item, enable);
+                            }
+                        } else {
+                            if (item.children && item.children.length !== 0) {
+                                return this.methods.changeMenuEnable(menuEntity, enable, item.children);
+                            }
+                        }
+                    })
+                }
+            },
+            // 保存菜单操作
+            saveMenuOperation(targetArr = this.state.formData, menuList = this.state.menuList) {
+                targetArr.forEach(item => {
+                    for (let i in item.operations) {
+                        if (item.operations[i].enable) {
+                            menuList.push({
+                                Id: item.Id,
+                                operations: {
+                                    [item.operations[i].Function]: {
+                                        SysOperationId: item.operations[i].SysOperationId,
+                                        enable: item.operations[i].enable
+                                    }
+                                }
+                            })
+                        }
+                    }
+                    if (item.children && item.children.length !== 0) {
+                        return this.methods.saveMenuOperation(item.children);
+                    }
+                })
+            },
+            loop(data) {
+                return data.map(item => {
+                    let operationsArr = [];
+                    for (let i in item.operations) {
+                        operationsArr.push(item.operations[i]);
+                    }
+                    return (
+                        <Tree.Node 
+                            label={ 
+                                operationsArr.map(
+                                    (entity, index) => {
+                                        let spanClassName = index === 0 ? "title" : "hide";
+                                        if (entity.enable) {
+                                            this.methods.saveMenuOperation(entity.enable, entity, item);
+                                        }
+                                        return (
+                                            <span>
+                                                <span className={ spanClassName }>{ item.Name }</span>
+                                                <Checkbox checked={entity.enable}  onChange={(checked)=> { this.methods.saveMenuOperation(checked, entity, item) } }>{entity.Name}</Checkbox>
+                                            </span>
+                                        )
+                                    }
+                                ) 
+                            } 
+                        >
+                            {item.children && item.children.length ? this.methods.loop(item.children) : null}
+                        </Tree.Node>
+                    )
+                })
+            }
+        }
+    }
+</relim-script>
+
+ 
+</Panel>
+{{/block}}

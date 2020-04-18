@@ -1,0 +1,178 @@
+<RelimDocRender components={{
+    Panel: (props) => {
+        return <include path="../components/panel.relim" {...props}/>
+    }
+}} scope={{
+    push: props.history.push
+}} markdown={`
+\`\`\`\`relim
+<Panel title="列表页">
+    <SchemaForm traverse={qverse(($)=>{
+        $('*').itemProps({
+            itemCol:8,
+            labelCol:6
+        })
+    })} onSubmit={methods.onSubmitHandler}>
+        <Field type="string" name="supplierId" title="供应商ID" />
+        <Field type="string" name="supplierName" title="供应商名称" />
+        <Field type="string" name="supplierEmail" title="供应商邮箱" />
+        <Field
+            type="string"
+            name="bizStatus"
+            enum={[
+                { label: "通过", value: "pass" },
+                { label: "不通过", value: "reject" }
+            ]}
+            title="状态"
+        />
+        <FormButtonGroup offset={2}>
+            <Submit>查询</Submit>
+            <Reset>重置</Reset>
+            <a href="javascript:void(0);" onClick={()=>{
+                push('/crud_create')
+            }}>创建供应商</a>
+        </FormButtonGroup>
+    </SchemaForm>
+    <Table
+        dataSource={state.dataSource}
+        style={{ minHeight: 200,marginTop:20 }}
+        isLoading={state.loading}
+    >
+        <Table.Column dataIndex="supplierId" title="供应商ID" />
+        <Table.Column dataIndex="supplierName" title="供应商名称" />
+        <Table.Column dataIndex="supplierEmail" title="供应商邮箱" />
+        <Table.Column dataIndex="phone" title="联系电话" />
+        <Table.Column dataIndex="bizStatus" title="状态" />
+        <Table.Column
+            title="操作"
+            cell={(value, index, record) => {
+                return (
+                    <InlineView marginY={10}>
+                        <Button
+                            size="small"
+                            onClick={() => {
+                                push(
+                                    "/crud_detail?id=" + record.supplierId
+                                )
+                            }}
+                        >
+                            详情
+                        </Button>
+                        <Button
+                            size="small"
+                            onClick={() =>
+                                push(
+                                    "/crud_edit?id=" + record.supplierId
+                                )}
+                        >
+                            编辑
+                        </Button>
+                        <Button
+                            size="small"
+                            onClick={methods.onRemoveHandler(record)}
+                        >
+                            删除
+                        </Button>
+                    </InlineView>
+                )
+            }}
+        />
+    </Table>
+    <BlockView align="center" marginTop={20}>
+        <Pagination {...state.pagination} onChange={methods.onChangePage} />
+    </BlockView>
+</Panel>
+<script>
+    const Toast = require("toast")
+    const Dialog = require("dialog")
+    const MAIN_URL = "//dip.taobao.net/api/v2/services/schema/mock/72299"
+    module.exports = {
+        state: {
+            loading: false,
+            errorMessage: "",
+            status: "normal",
+            formData: {},
+            pagination: {
+                current: 1,
+                total: 0,
+                pageSize: 20
+            }
+        },
+        methods: {
+            onChangePage(pageIndex) {
+                this.setState({
+                    current: pageIndex
+                })
+                this.methods.loadData()
+            },
+            onRemoveHandler() {
+                return () => {
+                    Dialog.confirm({
+                        title: "提示",
+                        content: "您确定要删除吗？",
+                        onOk: () => {
+                            Toast.success("删除成功")
+                            this.methods.loadData()
+                        }
+                    })
+                }
+            },
+            onSubmitHandler(values) {
+                this.setState(
+                    {
+                        formData: values
+                    },
+                    () => {
+                        this.methods.loadData()
+                    }
+                )
+            },
+            loadData(values) {
+                this.setState({
+                    loading: true
+                })
+                fetch(MAIN_URL, {
+                    data: {
+                        pagination: JSON.stringify(this.state.pagination),
+                        query: JSON.stringify(
+                            Object.assign(this.state.formData, values)
+                        )
+                    }
+                })
+                    .then(res => res.json())
+                    .then(
+                        res => {
+                            if (res && res.success) {
+                                this.setState({
+                                    loading: false,
+                                    status: "normal",
+                                    dataSource: res.data,
+                                    pagination: {
+                                        total: res.totalCount
+                                    }
+                                })
+                            } else {
+                                this.setState({
+                                    loading: false,
+                                    status: "error",
+                                    errorMessage: res.msg
+                                })
+                            }
+                        },
+                        err => {
+                            this.setState({
+                                loading: false,
+                                status: "error",
+                                errorMessage: ""
+                            })
+                        }
+                    )
+            }
+        },
+        componentDidMount() {
+            this.methods.loadData()
+        }
+    }
+</script>
+\`\`\`\`
+`} />

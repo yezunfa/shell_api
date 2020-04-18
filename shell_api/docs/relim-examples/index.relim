@@ -1,0 +1,55 @@
+<style>
+    .next-card {
+        display: block;
+    }
+</style>
+<Block marginTop={20}>
+    <Grid.Row>
+        <Grid.Col span="6">
+            <Card title="TODO APP" bodyHeight="auto">
+                <a
+                    href="javascript:void(0);"
+                    onClick={() => {
+                        props.history.push("/todo")
+                    }}
+                >
+                    <img
+                        src="https://img.alicdn.com/tfs/TB1oqjFjRfH8KJjy1XbXXbLdXXa-2842-1642.png"
+                        height="200"
+                    />
+                </a>
+            </Card>
+        </Grid.Col>
+        <Grid.Col span="6">
+            <Card title="CRUD LIST" bodyHeight="auto">
+                <a
+                    href="javascript:void(0);"
+                    onClick={() => {
+                        props.history.push("/crud")
+                    }}
+                >
+                    <img
+                        src="https://img.alicdn.com/tfs/TB1oqjFjRfH8KJjy1XbXXbLdXXa-2842-1642.png"
+                        height="200"
+                    />
+                </a>
+            </Card>
+        </Grid.Col>
+        <Grid.Col span="6">
+            <Card title="图表场景" bodyHeight="auto">
+                <a
+                    href="javascript:void(0);"
+                    onClick={() => {
+                        props.history.push("/chart/singleLine")
+                    }}
+                >
+                    <img
+                        src="https://img.alicdn.com/tfs/TB1oqjFjRfH8KJjy1XbXXbLdXXa-2842-1642.png"
+                        height="200"
+                    />
+                </a>
+            </Card>
+        </Grid.Col>
+    </Grid.Row>
+</Block>
+<include path="./home.relim" />

@@ -1,0 +1,26 @@
+{
+    "UserId": "d132132",
+    "EventId": "6ca4fe64-afa7-462d-89af-9ea9186fd222",
+    "UserIdBehalf": 0,
+    "RegUserField": [{
+            "RegFeildId": 1,
+            "Value": "yeyeye"
+        },
+        {
+            "RegFeildId": 2,
+            "Value": "wwwwww@ww.com"
+        },
+        {
+            "RegFeildId": 3,
+            "Value": "wwwwww@ww.com"
+        },
+        {
+            "RegFeildId": 4,
+            "Value": "wwwwww@ww.com"
+        },
+        {
+            "RegFeildId": 5,
+            "Value": "wwwwww@ww.com"
+        }
+    ]
+}

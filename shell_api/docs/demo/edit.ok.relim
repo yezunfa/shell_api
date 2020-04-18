@@ -1,0 +1,202 @@
+{{extend ("../../layout/layout.xtpl")}}
+{{#block ("body")}}
+
+
+<Panel title="编辑Sysmenu">
+    <Feedback style={ { marginBottom: 20 } }>
+        编辑说明〜
+    </Feedback>
+        <Dialog
+      visible={state.showDialog}
+      style={ { width: 900} }
+      title={'title'}
+      onOk={ ()=>methods.showDialog(false)}
+      onClose={()=> methods.showDialog(false)}
+      footer={<div>
+        <Button onClick={()=> methods.showDialog(false)}>{ 'cancel' }</Button>
+        <Button onClick={()=> {}} type="primary">{ 'ok' }</Button>
+      </div>} className="shop-tool-url-set-dialog">
+       <div className="tab-con">
+         <Table
+                dataSource={state.dataSource}
+                style={ { minHeight: 200,marginTop:20 } }
+                isLoading={state.loading}
+            >
+            <Table.Column
+            title="操作"
+            cell={(value, index, record) => {
+                return (
+                    <InlineView marginY={10}>
+                        <Button
+                            size="small"
+                            onClick={() => {
+                                document.getElementById('r-ParentId').innerHTML = record.Id; // + record.Name ;
+                                methods.showDialog(false);
+                            } }
+                        >
+                            选择
+                        </Button>
+                    </InlineView>
+                )
+            }}
+        />
+            <Table.Column dataIndex="Id" title="主键" />
+            <Table.Column dataIndex="Name" title="菜单名称" />
+            <Table.Column dataIndex="ParentId" title="父模块" />
+            <Table.Column dataIndex="Url" title="网址" />
+            <Table.Column dataIndex="Iconic" title="图标" />
+            <Table.Column dataIndex="Sort" title="排序" />
+            <Table.Column dataIndex="Remark" title="备注" />
+            <Table.Column dataIndex="State" title="状态" />
+            <Table.Column dataIndex="IsLeaf" title="是否是子节点" />
+        </Table>
+        </div>
+    </Dialog>
+    <FormSchema
+        traverse={qverse($ => {
+            $("*")
+            .itemProps({
+                labelCol: 3
+            });
+            // .required(true); 设置所有字段是必填
+
+            $("Id").props({
+                disabled: true
+            });
+
+            $("*", {
+            exclude: ({ payload }) => {
+                return (payload.type === "number" || payload.type === "boolean");
+            }
+            }).style({
+                width: 500
+            });
+        })}
+        defaultValue= {
+            {{{$env.JSON.stringify(entity)}}}
+        }
+        onSubmit={methods.onSubmitHandler}
+    >
+        
+        		<Field type="string" name="Id" title="主键" />
+		<Field type="string" name="Name" title="菜单名称" />
+ 
+        <Field type="string" x-component="text" name="ParentId" x-props={ {
+            render:(value)=><div style={ {color:'red'} }><span id="r-ParentId">{value}</span>
+            <Button onClick={()=>{
+                
+                methods.showDialog(true);
+            } }>选择</Button>
+            </div>
+        } } title="父模块"/>
+		<Field type="string" name="Url" title="网址" />
+		<Field type="string" name="Iconic" title="图标" />
+		<Field type="string" name="Sort" title="排序" />
+		<Field type="string" name="Remark" title="备注" />
+		<Field type="string" name="State" title="状态" />
+		<Field type="string" name="IsLeaf" title="是否是子节点" />
+		<Field name="Valid" type="number" title="是否有效" x-nav-title
+                            enum={[
+                            {
+                                label: "有效",
+                                value: 1
+                            },
+                            {
+                                label: "无效",
+                                value: 0
+                            }
+                            ]}
+                            />
+        <FormButtonGroup offset={6}>
+            <Button onClick={ ()=> { window.location.href="/page/sysmenu/manage" } }>返回</Button>
+            <Submit>提交</Submit>
+        </FormButtonGroup>
+    </FormSchema>
+</Panel>
+<relim-script>
+    const Toast = require("toast")
+     const MAIN_URL = "/api/sysmenu/search";
+    module.exports = {
+        state: {
+            showDialog: false,
+            loading: false,
+            errorMessage: "",
+            status: "normal",
+            formData: {},
+            dataSource: [],
+            pagination: {
+                current: 1,
+                total: 0,
+                pageSize: 3
+            }
+        },
+        methods:{
+            onSubmitHandler(values){
+                values.ParentId = document.getElementById('r-ParentId').innerHTML ;
+                debugger;
+                fetch("/api/sysmenu/edit",{
+                    method: "POST",
+                    data: values
+                }).then(res=>res.json()).then(res=>{
+                    if(res && res.success){
+                        Toast.success('提交成功')
+                    } else {
+                        Toast.error('提交失败')
+                    }
+                })
+            },
+            showDialog(isShow) {
+                debugger;
+                this.setState({
+                   showDialog: isShow 
+                });
+                if(isShow) {
+                   this.methods.loadData()
+                }
+            },
+            loadData(values) {
+                this.setState({
+                    loading: true
+                })
+                fetch(MAIN_URL, {
+                    data: {
+                        pagination: JSON.stringify(this.state.pagination),
+                        query: JSON.stringify(
+                            Object.assign(this.state.formData, values)
+                        )
+                    }
+                })
+                    .then(res => res.json())
+                    .then(
+                        res => {
+                            if (res && res.success) {
+                                this.setState({
+                                    loading: false,
+                                    status: "normal",
+                                    dataSource: res.data,
+                                    pagination: Object.assign(this.state.pagination, {
+                                        total: res.totalCount
+                                    })
+                                })
+                            } else {
+                                this.setState({
+                                    loading: false,
+                                    status: "error",
+                                    errorMessage: res.msg
+                                })
+                            }
+                        },
+                        err => {
+                            this.setState({
+                                loading: false,
+                                status: "error",
+                                errorMessage: ""
+                            })
+                        }
+                    )
+            }
+        }
+    }
+</relim-script>
+
+{{/block}}

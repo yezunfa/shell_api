@@ -1,0 +1,114 @@
+<section id="testimonial" class="home-section paddingbot-60 parallax" data-stellar-background-ratio="0.5" style="background-position: 0% -91.8281px;">
+
+      <div class="carousel-reviews broun-block">
+        <div class="container">
+          <div class="row">
+            <div id="carousel-reviews" class="carousel slide" data-ride="carousel">
+
+              <div class="carousel-inner">
+                <div class="item active">
+                  <div class="col-md-4 col-sm-6">
+                    <div class="block-text rel zmin">
+                      <a title="" href="#">树上春树</a>
+                      <div class="mark">评分: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span> </span>
+                      </div>
+                      <p>快速活动报名</p>
+                      <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+                    </div>
+                    <div class="person-text rel text-light">
+                      <img src="img/testimonials/4.jpg" alt="" class="person img-circle">
+                      <a title="" href="#">树上春树</a>
+                      <span>广西，南宁</span>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-6 hidden-xs">
+                    <div class="block-text rel zmin">
+                      <a title="" href="#">小花花</a>
+                      <div class="mark">评分: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star-empty"></span>
+                        <span data-value="3" class="glyphicon glyphicon-star-empty"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span> </span>
+                      </div>
+                      <p>看V推荐的买来试试，隔一天两天用一次 ，一瓶估计能用一个月不错了，效果好的话再来买大瓶</p>
+                      <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+                    </div>
+                    <div class="person-text rel text-light">
+                      <img src="img/testimonials/5.jpg" alt="" class="person img-circle">
+                      <a title="" href="#">小花花</a>
+                      <span>广东, 深圳</span>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-6 hidden-sm hidden-xs">
+                    <div class="block-text rel zmin">
+                      <a title="" href="#">张三</a>
+                      <div class="mark">评分: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star"></span><span data-value="5" class="glyphicon glyphicon-star"></span> </span>
+                      </div>
+                      <p>！想要效果更显著您可以按照这样的步骤来护肤哦：洁面-爽肤水-去角质精华-其他精华-保湿-防晒（白天），保湿防晒很重要，不可以省略哦~效果因人而异快的话1-3个月就会见效，我们建议是坚持使用3-6个月以上哦。坚持就是胜利，加油哦~</p>
+                      <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+                    </div>
+                    <div class="person-text rel text-light">
+                      <img src="img/testimonials/6.jpg" alt="" class="person img-circle">
+                      <a title="" href="#">Suzanne Adam</a>
+                      <span>Detroit, Michigan</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="col-md-4 col-sm-6">
+                    <div class="block-text rel zmin">
+                      <a title="" href="#">树上春树</a>
+                      <div class="mark">评分: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span> </span>
+                      </div>
+                      <p>大油脸也不冒油了 我的肤质：我是油皮，用这个十分契合 整体评价：一定要注意分寸，这东西药性很强，皮薄的人不建议用，会蜕皮 美白效果：我的痘痘暗沉肌得到了改善</p>
+                      <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+                    </div>
+                    <div class="person-text rel text-light">
+                      <img src="img/testimonials/4.jpg" alt="" class="person img-circle">
+                      <a title="" href="#">树上春树</a>
+                      <span>广西，南宁</span>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-6 hidden-xs">
+                    <div class="block-text rel zmin">
+                      <a title="" href="#">小花花</a>
+                      <div class="mark">评分: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star-empty"></span>
+                        <span data-value="3" class="glyphicon glyphicon-star-empty"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span> </span>
+                      </div>
+                      <p>看V推荐的买来试试，隔一天两天用一次 ，一瓶估计能用一个月不错了，效果好的话再来买大瓶</p>
+                      <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+                    </div>
+                    <div class="person-text rel text-light">
+                      <img src="img/testimonials/5.jpg" alt="" class="person img-circle">
+                      <a title="" href="#">小花花</a>
+                      <span>广东, 深圳</span>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-6 hidden-sm hidden-xs">
+                    <div class="block-text rel zmin">
+                      <a title="" href="#">张三</a>
+                      <div class="mark">评分: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star"></span><span data-value="5" class="glyphicon glyphicon-star"></span> </span>
+                      </div>
+                      <p>！想要效果更显著您可以按照这样的步骤来护肤哦：洁面-爽肤水-去角质精华-其他精华-保湿-防晒（白天），保湿防晒很重要，不可以省略哦~效果因人而异快的话1-3个月就会见效，我们建议是坚持使用3-6个月以上哦。坚持就是胜利，加油哦~</p>
+                      <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+                    </div>
+                    <div class="person-text rel text-light">
+                      <img src="img/testimonials/6.jpg" alt="" class="person img-circle">
+                      <a title="" href="#">Suzanne Adam</a>
+                      <span>Detroit, Michigan</span>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <a class="left carousel-control" href="#carousel-reviews" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+              <a class="right carousel-control" href="#carousel-reviews" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>

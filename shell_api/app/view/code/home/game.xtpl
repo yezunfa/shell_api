@@ -1,0 +1,10 @@
+<section class="" style="background-color: #282547">
+    <div class="container">
+        <div class="box-con" style="position:relative;">
+            <img src="{{websiteSourcePath}}img/game.png" style="width:100%" alt="" class="">
+            <div style="position:absolute; bottom: 50px" id="bussiness-position"></div>
+        </div>
+        
+    </div>
+   
+</section>

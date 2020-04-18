@@ -1,0 +1,186 @@
+
+<Panel title="创建Sysrole">
+    <FormProvider>
+    <FormSchema
+      autoAddColon={true}
+      traverse={qverse($ => {
+        $("*")
+        .itemProps({
+            labelCol: 3
+        });
+        // .required(true); 设置所有字段是必填
+
+        $("*", {
+          exclude: ({ payload }) => {
+            return (payload.type === "number" || payload.type === "boolean");
+          }
+        }).style({
+          width: 500
+        });
+
+        // 选女性才出现三围
+        $("*", {
+            include: ["bust", "waistline", "hips"]
+        })
+        .stateBy(() => {
+            return $("male").value() === "female";
+        })
+        .then(schema => {
+            return schema;
+        });
+
+
+        $("shoes")
+          .stateBy(() => {
+            return $("male").value() === "female";
+          })
+          .then(
+            schema => {
+              schema.enum = schema.enum.map(item => {
+                item.disabled = true;
+                return item;
+              });
+              return schema;
+            },
+            schema => {
+              return schema;
+            }
+          );
+        // 默认值
+        // $("home").default("杭州");
+      })}
+      defaultValue={ {
+          id: "dcccc",
+          male: "male"
+      } }
+      schema={ {
+        type: "object",
+        properties: {
+          id: {
+            type: "string",
+            title: "用户ID"
+          },
+          name: {
+            type: "string",
+            title: "用户名称"
+          }
+        }
+      } }
+      onSubmit={values => {
+        console.log(values);
+      }}
+    >
+      <Field
+        name="hidden"
+        type="string"
+        x-props={ {
+          htmlType: "hidden"
+        } }
+        default="123123"
+      />
+
+      <Field name="age" type="date" title="年龄" default="1991-11-30" />
+
+      <Field name="school" type="string" title="班级" />
+      <Field name="monitor" title="开启监控" type="boolean" />
+      <Field
+        name="male"
+        type="string"
+        title="性别"
+        enum={[
+          {
+            label: "男",
+            value: "male"
+          },
+          {
+            label: "女",
+            value: "female"
+          }
+        ]}
+      />
+
+      <Field
+        name="shoes"
+        type="string"
+        title="最爱的篮球鞋"
+        enum={[
+          {
+            label: "nike",
+            value: "nike"
+          },
+          {
+            label: "adidass",
+            value: "adidass"
+          }
+        ]}
+      />
+
+      <Field
+        name="signature"
+        type="string"
+        title="个人签名"
+        x-props={ {
+          multiple: true,
+          hasLimitHint: true,
+          maxLength: 140
+        } }
+      />
+
+      <Field
+        type="string"
+        name="home"
+        title="家乡"
+        value="杭州"
+        enum={[
+          {
+            label: "杭州",
+            value: "杭州"
+          },
+          {
+            label: "上海",
+            value: "上海"
+          },
+          {
+            label: "成都",
+            value: "成都"
+          }
+        ]}
+        x-component="radio"
+      />
+
+      <Field name="bust" type="number" title="胸围" />
+
+      <Field name="waistline" type="number" title="腰围" />
+
+      <Field name="hips" type="number" title="臀围" />
+
+    </FormSchema>
+    <FormButtonGroup offset={2}>
+      <Clear>清空</Clear>
+      <Submit type="primary">提交</Submit>
+      <Reset>重置</Reset>
+    </FormButtonGroup>
+  </FormProvider>
+
+  
+
+</Panel>
+<relim-script>
+    const Toast = require("toast")
+    module.exports = {
+        methods:{
+            onSubmitHandler(values){
+                fetch("/api/sysrole/create",{
+                    method: "POST",
+                    data:values
+                }).then(res=>res.json()).then(res=>{
+                    if(res && res.success){
+                        Toast.success('提交成功')
+                    } else {
+                        Toast.error('提交失败')
+                    }
+                })
+            }
+        }
+    }
+</relim-script>

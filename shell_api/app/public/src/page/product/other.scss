@@ -1,0 +1,85 @@
+$borderColor: #D4D2D2;
+$colorRed: #F04844;
+$grayBg: #F3F3F3;
+.page-head {
+    width: 100%;
+    height: 50px;
+    background-color: #F0F0F0;
+    .nav {
+        width: 1300px;
+        height: 50px;
+        margin: auto;
+        margin-bottom: 40px;
+        h2 {
+            width: 120px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 16px;
+            color: #666666;
+            margin: 0 !important;
+            float: left;
+        }
+        span,Button {
+            display: block;
+            font-size: 14px;
+            width: 78px;
+            height: 28px;
+            line-height: 28px;
+            border: 1px #333 solid;
+            margin-top: 10px;
+            margin-right: 40px;
+            float: right;
+            text-align: center;
+            background-color: #FaFaFa;
+            a {
+                text-decoration: none;
+                color: #333;
+            }
+        }
+        Button{
+            width: 138px;
+        }
+    }
+}
+.page-count {
+    width: 1360px;
+    margin: auto;
+    .next-card {
+        .query{
+            width: 100%;
+            margin-top: 40px;
+        }
+        .table {
+            font-size: 14px;
+            font-weight: normal;
+            margin-top: 40px;
+            .next-table-header tr {
+                height: 50px;
+                th {
+                    color: #111;
+                    font-size: 16px;
+                    font-weight: bold;
+                    height: 50px;
+                    text-align: center;
+                }
+            }
+            tr {
+                div.next-table-cell-wrapper {
+                    padding: 0;
+                    text-align: center;
+                    min-height: 30px;
+                    line-height: 30px;
+                }
+                td {
+                    .block-view {
+                        div {
+                            display: inline-block !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+a:visited {color: #4077CC!important;}

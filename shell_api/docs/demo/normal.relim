@@ -1,0 +1,224 @@
+ <template name="fileTpl">
+    <a href="">{helpText}</a >
+  </template>
+
+    <FormSchema
+      labelAlign="top"
+      style={ {
+        margin: "0 150px"
+      } }
+      scrollToFirstError
+      traverse={qverse($ => {
+        $("*")
+          .itemProps({
+            labelCol: 4
+          })
+          .required(true);
+        $("*", {
+          include: ({ payload: schema, path }) =>
+            (schema.type === "string" || schema.type === "date") &&
+            path.indexOf("friends") == -1
+        }).style({
+          width: 400
+        });
+        $("friends.0.*").props({
+          disabled: true
+        });
+        $("*", {
+          include: ["bust", "waistline", "hips"]
+        })
+          .stateBy(() => {
+            return $("male").value() === "female";
+          })
+          .then(schema => {
+            return schema;
+          });
+        $("age").display(() => {
+          return $("male").value() == "female";
+        });
+        $("shoes")
+          .stateBy(() => {
+            return $("male").value() === "female";
+          })
+          .then(
+            schema => {
+              schema.enum = schema.enum.map(item => {
+                item.disabled = true;
+                return item;
+              });
+              return schema;
+            },
+            schema => {
+              return schema;
+            }
+          );
+        $("home").default("杭州");
+      })}
+      schema={ {
+        type: "object",
+        properties: {
+          id: {
+            type: "string",
+            title: "用户ID"
+          },
+          name: {
+            type: "string",
+            title: "用户名称"
+          }
+        }
+      } }
+      onSubmit={values => {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            console.log(values);
+            resolve();
+          }, 2000);
+        });
+      } }
+    >
+      <Field
+        name="hidden"
+        type="string"
+        x-props={ {
+          htmlType: "hidden"
+        } }
+        default="123123"
+      />
+      <Field
+        type="range"
+        name="normal"
+        default={0}
+        x-props={ {
+          min: 0,
+          max: 100,
+          marks: [0, 100]
+        } }
+        x-help="长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示"
+        title="范围选择"
+      />
+      <Field
+        name="age"
+        type="date"
+        title="年龄"
+        x-nav-title
+        default="1991-11-30"
+      />
+      <Field name="school" type="string" x-nav-title title="班级" />
+      <Field
+        name="male"
+        type="string"
+        title="性别"
+        x-nav-title
+        enum={[
+          {
+            label: "男",
+            value: "male"
+          },
+          {
+            label: "女",
+            value: "female"
+          }
+        ]}
+      />
+      <Field
+        name="shoes"
+        type="string"
+        title="最爱的篮球鞋"
+        x-nav-title
+        x-props={ { multiple: true } }
+        enum={["nike", "addidas"]}
+      />
+      <Field
+        name="signature"
+        type="string"
+        title="个人签名"
+        x-props={ {
+          multiple: true,
+          hasLimitHint: true,
+          maxLength: 140
+        } }
+      />
+      <Field
+        type="string"
+        name="home"
+        title="家乡"
+        enum={[
+          {
+            label: "杭州",
+            value: "杭州"
+          },
+          {
+            label: "上海",
+            value: "上海"
+          },
+          {
+            label: "成都",
+            value: "成都"
+          }
+        ]}
+        x-component="radio"
+      />
+       <Field name="testfield" type="string" title="测试" default={"23"}/>
+      <Field name="bust" type="number" title="胸围" default={23}/>
+      <Field name="waistline" type="number" title="腰围" />
+      <Field name="hips" type="number" title="臀围" />
+      <Field
+        name="friends"
+        type="array"
+        x-props={ { width: "100%" } }
+        title="朋友"
+        x-component="table"
+      >
+        <Field type="object">
+          <Field name="name" title="姓名" type="string" />
+          <Field name="tel" title="电话" type="string" />
+          <Field
+            name="email"
+            title="邮箱"
+            type="string"
+            enum={["@126.com", "@163.com", "@gmail.com"]}
+          />
+          <Field
+            name="sex"
+            title="性别"
+            enum={["男性", "女性"]}
+            x-component="radio"
+            type="string"
+          />
+          <Field name="monitor" title="开启监控" type="boolean" default={true} />
+        </Field>
+      </Field>
+      <Field
+        name="shenfenzheng"
+        type="array"
+        title="身份证"
+        x-component="upload"
+        x-help="长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示长提示提示"
+        x-props={ {
+          help: fileTpl()({
+            helpText: "查看图例"
+          }),
+          listType: "picture-card"
+        } }
+      />
+      <Field name="asddd" type="array" title="哈哈哈">
+        <Field type="string" name="1233" />
+      </Field>
+      <Field
+        name="License"
+        type="array"
+        title="资质文件"
+        x-component="upload"
+        x-props={ {
+          disabled: true,
+          help: fileTpl()({
+            helpText: "查看模板"
+          })
+        } }
+      />
+      <FormButtonGroup sticky>
+        <Submit type="primary" size="large">
+          提交
+        </Submit>
+      </FormButtonGroup>
+    </FormSchema>

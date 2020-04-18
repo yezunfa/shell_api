@@ -1,0 +1,168 @@
+<RelimDocRender
+    componentPkgs={[
+        {
+            name: "RelimIceComponents",
+            js: [
+                "//g.alicdn.com/relim/relim-ice-components/3.0.0/index.umd.js"
+            ],
+            css: [
+                "//g.alicdn.com/ice-assets/ice-design/skin.css",
+                "//g.alicdn.com/relim/relim-ice-components/3.0.0/ice-patch.css"
+            ]
+        }
+    ]}
+    exact
+    markdown={`
+
+## 巨幕组件
+\`\`\`\`relim
+    <IceJumbotron>
+          <h1 style={{fontSize: '40px', marginBottom: '20px'}}>这是一个ICE简单场景</h1>
+          <p>
+            在这里，我们可以让您体验到Relim对各种组件体系的兼容程度
+          </p>
+    </IceJumbotron>
+\`\`\`\`
+
+## Loading组件
+\`\`\`\`relim
+<div style={{
+  padding: '20px',
+  background: '#ccc'
+}}>
+    <IceLoading type="square-spin" style={{
+  // loading 组件水平居中
+  margin: '0 auto'
+}} />
+    <br />
+    <IceLoading type="ball-spin-fade-loader" style={{
+  // loading 组件水平居中
+  margin: '0 auto'
+}} />
+    <br />
+    <IceLoading type="pacman"  style={{
+  // loading 组件水平居中
+  margin: '0 auto'
+}} />
+</div>
+\`\`\`\`
+
+## 表情编辑器
+
+\`\`\`\`relim
+<ExpressionEditor
+    maxLength={130}
+    placeholder="请输入自动回复内容"
+    valueType="dd"
+    style={{width: 540}}
+/>
+\`\`\`\`
+
+## 地址选择器
+
+\`\`\`\`relim
+<IceAddress
+    style={{display: 'inline-block'}} 
+    size="large"
+    level={[2, 3, 4]}
+    value={[{name: '陕西', level: 2, code: '610000'}]}
+    rootLevel={{code: '1', name: '中国', level: 1}}
+/>
+<Input
+    style={{marginLeft: '10px', verticalAlign: 'top'}} 
+    size="large"
+    placeholder="请填写详细地址"
+/>
+
+\`\`\`\`
+
+
+## 块选择器
+
+\`\`\`\`relim
+
+<IceBoxSelector
+    dataSource={[{
+  src: 'https://img.alicdn.com/tps/TB1.ACpKFXXXXamaXXXXXXXXXXX-654-654.jpg',
+}, {
+  src: 'https://img.alicdn.com/tps/TB13x5tKFXXXXc_XVXXXXXXXXXX-658-658.jpg',
+}]}
+    deletable={true}
+    checkTriggerStyle={{bottom: 'auto', left: 'auto', width: 50, height: 50}}
+>
+    <SelectorRender />
+</IceBoxSelector>
+<component name="SelectorRender">
+    <img style={{width: '100%', height: '100%'}} src={props.src} />
+</component>
+
+\`\`\`\`
+
+## 图片展示
+
+\`\`\`\`relim
+<IceImg
+    width={200}
+    height={200}
+    src="//img.alicdn.com/tfs/TB1K..3PpXXXXa4XFXXXXXXXXXX-311-199.png"
+    type="cover"
+    shape="circle"
+    style={{border: '1px solid #ccc', margin: '10px'}}
+/>
+<IceImg
+    width={300}
+    height={200}
+    src="//img.alicdn.com/tfs/TB1oPNcPFXXXXXQXpXXXXXXXXXX-341-202.png"
+    type="cover"
+    shape="sharp"
+    style={{border: '1px solid #ccc', margin: '10px'}}
+/>
+<IceImg
+    width={300}
+    height={200}
+    src="//img.alicdn.com/tfs/TB1oPNcPFXXXXXQXpXXXXXXXXXX-341-202.png"
+    type="cover"
+    style={{border: '1px solid #ccc', margin: '10px'}}
+/>
+
+<h1>contain 模式下展示</h1>
+
+<IceImg
+    width={300}
+    height={200}
+    src="//img.alicdn.com/tfs/TB1A2c4PpXXXXaiXFXXXXXXXXXX-274-201.png"
+    type="contain"
+    style={{border: '1px solid #ccc', margin: '10px'}}
+/>
+<IceImg
+    width={350}
+    height={200}
+    src="//img.alicdn.com/tfs/TB17wwYPpXXXXXHXVXXXXXXXXXX-297-199.png"
+    type="contain"
+    shape="sharp"
+    style={{border: '1px solid #ccc', margin: '10px'}}
+/>
+<IceImg
+    width={200}
+    height={200}
+    src="//img.alicdn.com/tfs/TB17wwYPpXXXXXHXVXXXXXXXXXX-297-199.png"
+    type="contain"
+    shape="circle"
+    style={{border: '1px solid #ccc', margin: '10px'}}
+/>
+\`\`\`\`
+
+### Notification
+\`\`\`\`relim
+
+<Button onClick={()=>{
+    console.log(IceNotification)
+    IceNotification.open({
+      message: 'Notification Title',
+      description: 'A function will be be called after the notification is closed (automatically after the "duration" time of manually).'
+    });
+}}>Click Me</Button>
+
+\`\`\`\`
+`}
+/>

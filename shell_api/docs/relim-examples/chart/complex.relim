@@ -1,0 +1,662 @@
+
+<div style={{ background: "#eee", padding: 10,minHeight:1000 }}>
+    <Feedback style={{margin:'10px 0'}}>
+        查看源码请点击跳转至{" "}<a href="http://gitlab.alibaba-inc.com/relim/relim-examples/blob/master/chart/complex.relim">http://gitlab.alibaba-inc.com/relim/relim-examples/blob/master/chart/complex.relim</a>
+    </Feedback>
+    <Panel title="期货销售跟踪">
+        <SchemaForm
+            defaultValue={formData}
+            onChange={(values, { target, field }) => {
+                if (target.name === "catIds") {
+                    $setState({
+                        brands: categorys.reduce((buf, cat) => {
+                            if (cat.value == target.value) {
+                                return cat.children
+                            }
+                            return buf
+                        }, [])
+                    })
+                }
+            }}
+            traverse={qverse($ => {
+                $("*")
+                    .itemProps({
+                        itemCol: 8,
+                        labelCol: 6
+                    })
+                    .props({
+                        style: {
+                            width: 200
+                        }
+                    })
+            })}
+            onSubmit={methods.onFormSubmit}
+        >
+            <Field
+                type="date"
+                x-props={{
+                    format: "YYYY-MM-DD",
+                    disabledDate: item => {
+                        return [1, 2, 4, 5, 6, 7].indexOf(item.week) >= 0
+                    }
+                }}
+                name="endTime"
+                title="截止时间"
+            />
+            <Field
+                type="string"
+                name="year"
+                x-component="select"
+                x-props={{
+                    url:
+                        "http://dip.taobao.net/api/v2/services/schema/mock/78528"
+                }}
+                title="年份季节"
+            />
+            <Field
+                type="string"
+                name="sellerIds"
+                x-component="select"
+                x-props={{
+                    url:
+                        "http://dip.taobao.net/api/v2/services/schema/mock/78528"
+                }}
+                title="商户ID"
+            />
+            <Field
+                type="string"
+                name="catIds"
+                enum={categorys.map(item => ({
+                    label: item.label,
+                    value: item.value
+                }))}
+                title="类目"
+            />
+            <Field type="string" name="brandIds" enum={brands} title="品牌" />
+            <FormButtonGroup offset={2}>
+                <Submit>查询</Submit>
+                <Clear>清空</Clear>
+            </FormButtonGroup>
+        </SchemaForm>
+    </Panel>
+    <Panel>
+        <Row>
+            <Col span={12}>
+                <Row>
+                    <for in={ringData}>
+                        <Col span={8}>
+                            <Progg {...$item} />
+                        </Col>
+                    </for>
+                </Row>
+            </Col>
+            <Col span={12}>
+                <Chart width={600} height={400} data={lineData}>
+                    <Axis name="ymd" />
+                    <Axis name="dim_value" visible={false} label={null} />
+                    <Tooltip crosshairs={{ type: "y" }} format={v => v + "%"} />
+                    <Legend />
+                    <Geom
+                        type="line"
+                        position="ymd*dim_value"
+                        color="dims"
+                        tooltip={[
+                            "dims*dim_value",
+                            (name, value) => {
+                                return {
+                                    name,
+                                    value: value + "%"
+                                }
+                            }
+                        ]}
+                    />
+                    <Geom
+                        type="point"
+                        position="ymd*dim_value"
+                        Tooltip={false}
+                        size={4}
+                        shape={"circle"}
+                        color={"dims"}
+                        style={{ stroke: "#fff", lineWidth: 1 }}
+                    />
+                </Chart>
+            </Col>
+        </Row>
+    </Panel>
+    <Panel>
+        <SchemaForm
+            inline
+            defaultValue={formData2}
+            onChange={methods.onFormSubmit2}
+        >
+            <Field
+                type="string"
+                name="arriTag"
+                x-component="tabselect"
+                enum={[
+                    {
+                        label: "商家到货详情",
+                        value: "1"
+                    },
+                    {
+                        label: "品牌到货详情",
+                        value: "2"
+                    },
+                    {
+                        label: "类目到货详情",
+                        value: "3"
+                    },
+                    {
+                        label: "季节到货详情",
+                        value: "4"
+                    }
+                ]}
+            />
+            <Field
+                type="string"
+                name="dayType"
+                x-component="select"
+                title="日期类型"
+                x-props={{
+                    url:
+                        "http://dip.taobao.net/api/v2/services/schema/mock/78528",
+                    style: { width: 130 }
+                }}
+            />
+            <Download
+                href="http://dip.taobao.net/api/v2/services/schema/mock/78528"
+                params={Object.assign({}, formData, formData2)}
+            />
+        </SchemaForm>
+        <Table dataSource={tableData.data}>
+            <for in={tableData.headers}>
+                <Table.Column
+                    width={200}
+                    lock={$index == 0 ? "left" : undefined}
+                    dataIndex={$item.name}
+                    title={$item.title}
+                />
+            </for>
+            <Table.Column
+                width={200}
+                title="操作"
+                lock="right"
+                cell={(value, index, record) => {
+                    return (
+                        <InlineView>
+                            <Button
+                                shape="text"
+                                onClick={() =>
+                                    FnDialog({
+                                        style: { width: 1000 },
+                                        title: "销售详情"
+                                    }).open((resolve, reject) => (
+                                        <SaleDetail
+                                            actions={{ resolve, reject }}
+                                            record={Object.assign(
+                                                {},
+                                                formData,
+                                                formData2,
+                                                record
+                                            )}
+                                        />
+                                    ))}
+                            >
+                                期货销售详情
+                            </Button>
+                            <Button
+                                shape="text"
+                                onClick={() =>
+                                    FnDialog({
+                                        style: { width: 800 },
+                                        title: "销售趋势"
+                                    }).open((resolve, reject) => (
+                                        <SaleTrend
+                                            actions={{ resolve, reject }}
+                                            record={Object.assign(
+                                                {},
+                                                formData,
+                                                formData2,
+                                                record
+                                            )}
+                                        />
+                                    ))}
+                            >
+                                期货销售趋势
+                            </Button>
+                        </InlineView>
+                    )
+                }}
+            />
+        </Table>
+        <Block marginTop={20} align="center">
+            <Inline>
+                <Pagination {...pagination} onChange={methods.onChangePage} />
+            </Inline>
+        </Block>
+    </Panel>
+</div>
+<component name="Download">
+    <Button onClick={methods.loadData} disabled={loading}>
+        {loading ? <Icon type="loading" /> : null}导出数据
+    </Button>
+    <if condition={data && !error}>
+        <Button
+            shape="text"
+            component="a"
+            href={data}
+            style={{ marginLeft: 10, fontSize: 12 }}
+            download
+        >
+            下载文件
+        </Button>
+    </if>
+    <if condition={error}>
+        <Text color="red" fontSize={12} marginLeft={10}>
+            {error}
+        </Text>
+    </if>
+    <relim-script>
+        module.exports = {
+            state: {
+                loading: false
+            },
+            methods: {
+                loadData() {
+                    this.setState({
+                        loading: true
+                    })
+                    fetch(this.props.href, {
+                        data: this.props.params
+                    }).then(
+                        res => {
+                            if (res && res.success) {
+                                this.setState({
+                                    loading: false,
+                                    data: res.module,
+                                    error: null
+                                })
+                            } else {
+                                this.setState({
+                                    loading: false,
+                                    error:
+                                        res.msg ||
+                                        res.message ||
+                                        res.data ||
+                                        "服务器异常，请重试"
+                                })
+                            }
+                        },
+                        () => {
+                            this.setState({
+                                loading: false,
+                                error: "服务器异常，请重试"
+                            })
+                        }
+                    )
+                }
+            }
+        }
+    </relim-script>
+</component>
+<component name="SaleDetail">
+    <div style={{ height: 600 }}>
+        <Table dataSource={tableData.data} maxBodyHeight={500} fixedHeader>
+            <for in={tableData.headers}>
+                <Table.Column
+                    width={200}
+                    lock={$index == 0 ? "left" : undefined}
+                    dataIndex={$item.name}
+                    title={$item.title}
+                />
+            </for>
+        </Table>
+    </div>
+    <relim-script>
+        module.exports = {
+            state: {
+                tableData: {
+                    data: [],
+                    headers: []
+                }
+            },
+            methods: {
+                loadTableData() {
+                    fetch(
+                        "http://dip.taobao.net/api/v2/services/schema/mock/78525",
+                        {
+                            data: this.props.record
+                        }
+                    )
+                        .then(res => res.json())
+                        .then(res => {
+                            if (res && res.success) {
+                                this.setState({
+                                    tableData: res.module
+                                })
+                            }
+                        })
+                }
+            },
+            componentDidMount() {
+                this.methods.loadTableData()
+            }
+        }
+    </relim-script>
+</component>
+<component name="SaleTrend">
+    <Chart forceFit height={400} data={lineData}>
+        <Axis name="ymd" />
+        <Axis name="dim_value" visible={false} label={null} />
+        <Tooltip crosshairs={{ type: "y" }} format={v => v + "%"} />
+        <Legend />
+        <Geom
+            type="line"
+            position="ymd*dim_value"
+            color="dims"
+            tooltip={[
+                "dims*dim_value",
+                (name, value) => {
+                    return {
+                        name,
+                        value: value + "%"
+                    }
+                }
+            ]}
+        />
+        <Geom
+            type="point"
+            position="ymd*dim_value"
+            Tooltip={false}
+            size={4}
+            shape={"circle"}
+            color={"dims"}
+            style={{ stroke: "#fff", lineWidth: 1 }}
+        />
+    </Chart>
+    <relim-script>
+        const DataSet = require("data-set")
+        const ds = new DataSet()
+        module.exports = {
+            state: { lineData: [] },
+            methods: {
+                loadLineData(data) {
+                    fetch(
+                        "http://dip.taobao.net/api/v2/services/schema/mock/78522",
+                        {
+                            data: this.props.record
+                        }
+                    )
+                        .then(res => res.json())
+                        .then(res => {
+                            if (res && res.success) {
+                                var dataSource = res.module.option.dataSource
+                                var lineData = ds
+                                    .createView()
+                                    .source(dataSource)
+                                lineData.transform({
+                                    type: "fold",
+                                    fields: Object.keys(
+                                        dataSource[0] || {}
+                                    ).filter(key => key !== "ymd"),
+                                    key: "dims",
+                                    value: "dim_value"
+                                })
+                                this.setState({
+                                    lineData
+                                })
+                            }
+                        })
+                }
+            },
+            componentDidMount() {
+                this.methods.loadLineData()
+            }
+        }
+    </relim-script>
+</component>
+<component name="TabSelect">
+    <div class="tab-select">
+        <for in={dataSource}>
+            <div
+                class={{ "tab-item": true, active: value == $item.value }}
+                onClick={methods.onClickHandler($item)}
+            >
+                {$item.label}
+            </div>
+        </for>
+    </div>
+    <style>
+        .tab-select {
+            border: 1px solid #eee;
+        }
+        .tab-select .tab-item {
+            display: inline-block;
+            padding: 9px 20px;
+            font-size: 12px;
+            line-height: 1;
+            color: #666;
+            cursor: pointer;
+            border-left: 1px solid #eee;
+        }
+        .tab-select .tab-item:first-child {
+            border: none;
+        }
+        .tab-select .tab-item.active {
+            background: #f9f2f2;
+            color: #c40000;
+        }
+    </style>
+    <relim-script>
+        module.exports = {
+            state(props) {
+                return {
+                    dataSource: props.dataSource || [],
+                    value: props.value || props.defaultValue
+                }
+            },
+            componentWillReceiveProps(nextProps) {
+                if (nextProps.value !== this.state.value) {
+                    this.setState({
+                        value: nextProps.value
+                    })
+                }
+            },
+            methods: {
+                onClickHandler(item) {
+                    return () => {
+                        this.setState(
+                            {
+                                value: item.value
+                            },
+                            () => {
+                                if (this.props.onChange) {
+                                    this.props.onChange(item.value)
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+        }
+    </relim-script>
+</component>
+<component name="Progg">
+    <Block align="center" marginTop={100}>
+        <Text color="#666" fontSize={18}>
+            {props.title || "N/A"}
+        </Text>
+    </Block>
+    <Block align="center" margin={20}>
+        <Progress
+            percent={props.type ? parseInt(props.type) : 0}
+            size="large"
+            shape="circle"
+        />
+    </Block>
+    <Block align="center" margin={20}>
+        <Text color="#666">{props.value || "N/A"}</Text>
+    </Block>
+    <style>
+        .next-progress-circle-overlay-normal {
+            stroke: #68d1c0;
+        }
+    </style>
+</component>
+<component name="SelectWrapper">
+    <RequestSelect {...props} hasClear showSearch={false} />
+</component>
+<relim-script>
+    const attachSchemaForm = require("attach-schema-form")
+    const DataSet = require("data-set")
+    const ds = new DataSet()
+    attachSchemaForm({
+        select: SelectWrapper,
+        tabselect: TabSelect
+    })
+    module.exports = {
+        state: {
+            categorys: [],
+            brands: [],
+            formData: {
+                endTime: "2018-04-04"
+            },
+            formData2: {
+                dayType: 7,
+                arriTag: 1
+            },
+            ringData: {
+                option1: {},
+                option2: {},
+                option3: {}
+            },
+            pagination: {
+                total: 0,
+                pageSize: 11,
+                current: 1
+            },
+            lineData: [],
+            tableData: {
+                data: [],
+                headers: []
+            }
+        },
+        componentDidMount() {
+            const { formData, formData2 } = this.state
+            this.methods.loadCats(formData)
+            this.methods.loadRingData(formData)
+            this.methods.loadLineData(formData)
+            this.methods.loadTableData(Object.assign({}, formData, formData2))
+        },
+        methods: {
+            loadRingData(data) {
+                fetch(
+                    "http://dip.taobao.net/api/v2/services/schema/mock/78517",
+                    { data }
+                )
+                    .then(res => res.json())
+                    .then(res => {
+                        if (res && res.success) {
+                            this.setState({
+                                ringData: res.module
+                            })
+                        }
+                    })
+            },
+            onChangePage(page) {
+                this.setState(
+                    {
+                        pagination: {
+                            ...this.state.pagination,
+                            current: page
+                        }
+                    },
+                    () => {
+                        this.methods.loadTableData(
+                            Object.assign(
+                                {},
+                                this.state.formData,
+                                this.state.formData2
+                            )
+                        )
+                    }
+                )
+            },
+            loadLineData(data) {
+                fetch(
+                    "http://dip.taobao.net/api/v2/services/schema/mock/78522",
+                    {
+                        data
+                    }
+                )
+                    .then(res => res.json())
+                    .then(res => {
+                        if (res && res.success) {
+                            var dataSource = res.module.option.dataSource
+                            var lineData = ds.createView().source(dataSource)
+                            lineData.transform({
+                                type: "fold",
+                                fields: Object.keys(dataSource[0] || {}).filter(
+                                    key => key !== "ymd"
+                                ),
+                                key: "dims",
+                                value: "dim_value"
+                            })
+                            this.setState({
+                                lineData
+                            })
+                        }
+                    })
+            },
+            loadTableData(data) {
+                const { pagination } = this.state
+                fetch(
+                    "http://dip.taobao.net/api/v2/services/schema/mock/78525",
+                    {
+                        data: {
+                            ...data,
+                            currentPage: pagination.current
+                        }
+                    }
+                )
+                    .then(res => res.json())
+                    .then(res => {
+                        if (res && res.success) {
+                            this.setState({
+                                tableData: res.module,
+                                pagination: {
+                                    ...pagination,
+                                    total: res.module.totalCount
+                                }
+                            })
+                        }
+                    })
+            },
+            loadCats() {
+                fetch("http://dip.taobao.net/api/v2/services/schema/mock/78530")
+                    .then(res => res.json())
+                    .then(res => {
+                        if (res && res.success) {
+                            this.setState({
+                                categorys: res.data
+                            })
+                        }
+                    })
+            },
+            onFormSubmit(values) {
+                this.state.formData = values
+                this.state.pagination.current = 1
+                this.methods.loadRingData(values)
+                this.methods.loadLineData(values)
+                this.methods.loadTableData(values)
+            },
+            onFormSubmit2(values) {
+                this.state.formData2 = values
+                this.state.pagination.current = 1
+                this.methods.loadTableData(
+                    Object.assign({}, this.state.formData, values)
+                )
+            }
+        }
+    }
+</relim-script>

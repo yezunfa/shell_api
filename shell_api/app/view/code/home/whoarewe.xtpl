@@ -1,0 +1,131 @@
+<style>
+.ourteam.testimonials .text p{
+    text-align: left;
+}
+</style>
+<section id="aboutus" class="bar background-pentagon no-mb text-md-center">
+    <div class="container">
+        <div class="heading text-center">
+            <h2>我们团队</h2>
+        </div>
+        <p class="lead">一个专业、有爱、有料、有趣的全栈技术与运营团队</p>
+        <!-- Carousel Start-->
+        <ul class="owl-carousel ourteam testimonials list-unstyled equal-height owl-loaded owl-drag">
+            <div class="owl-stage-outer">
+                <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: 0s; width: 1388px;">
+                    <div class="owl-item active" style="width: 277.5px;">
+                        <li class="item">
+                            <div class="testimonial d-flex flex-wrap">
+                                <div class="text">
+                                    <p>目标成就一家小而美的科技公司。创业，无论成败，都意味着成长！这就是为什么要选择创业。</p>
+                                    <p>技术人出身，所以很确定我要做的是一家技术公司，一家科技公司，目标也是想用技术（如AI),深度结合新灵售的布局为社群生态服务。所以我也决定用“热情感动自己
+                                        技术改变未来”作为团队的核价值观之一</p>
+                                </div>
+                                <div class="bottom d-flex align-items-center justify-content-between align-self-end">
+                                    <div class="icon"><i class="fa fa-quote-left"></i></div>
+                                    <div class="testimonial-info d-flex">
+                                        <div class="title">
+                                            <h5>Alex</h5>
+                                            <p>技术产品总负责人</p>
+                                            <p>北京航空航天大学工学士学位</p>
+                                        </div>
+                                        <div class="avatar"><img alt="" src="{{websiteSourcePath}}img/we/alex.png"
+                                                class="img-fluid"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                    <div class="owl-item active" style="width: 277.5px;">
+                        <li class="item">
+                            <div class="testimonial d-flex flex-wrap">
+                                <div class="text">
+                                    <p>其实业务方向的核心还是创新，用产品解决用户在社群活动运营管理中的痛点，也即是实现刚需。我们没有必要将我们的创业故事讲得天花乱坠，只需要踏踏实实地将我们的产品做好，必须有足够的理由让我们的客户买单，有足够的理由让用户使用并且墙裂地推荐给他的伙伴一起使用。唯有这样，才能建立起牢不可破的竞争壁垒，这也是我们团队的最大KPI,最大的挑战。
+                                    </p>
+                                </div>
+                                <div class="bottom d-flex align-items-center justify-content-between align-self-end">
+                                    <div class="icon"><i class="fa fa-quote-left"></i></div>
+                                    <div class="testimonial-info d-flex">
+                                        <div class="title">
+                                            <h5>黄小树</h5>
+                                            <p>高级运营总监</p>
+                                            <p>北京航空航天大学工学士学位</p>
+                                        </div>
+                                        <div class="avatar"><img alt="" src="{{websiteSourcePath}}img/we/shu.png"
+                                                class="img-fluid"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                    <div class="owl-item active" style="width: 277.5px;">
+                        <li class="item">
+                            <div class="testimonial d-flex flex-wrap">
+                                <div class="text">
+                                    <p>我们希望这个能作为赋能行业的切入点，把我们的数据能力、算法能力、工程能力展示给我们用户，服务我们的用户。</p>
+                                    <p>产品做成什么样子，更多不是取决于能力，更多的是决定于思维</p>
+                                </div>
+                                <div class="bottom d-flex align-items-center justify-content-between align-self-end">
+                                    <div class="icon"><i class="fa fa-quote-left"></i></div>
+                                    <div class="testimonial-info d-flex">
+                                        <div class="title">
+                                            <h5>叶小花</h5>
+                                            <p>技术总经理</p>
+                                            <p>江西农业大学工学士学位</p>
+                                        </div>
+                                        <div class="avatar"><img alt="" src="{{websiteSourcePath}}img/we/ye.png"
+                                                class="img-fluid"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                    <div class="owl-item active" style="width: 277.5px;">
+                        <li class="item">
+                            <div class="testimonial d-flex flex-wrap">
+                                <div class="text">
+                                    <p>事实上没有所谓的样样都懂，样样都精通的“全栈工程师”， 我们这里要强调的是“全栈“只是一种思路或思维方式，全栈研发团队”是我们认为更高效的组织形式。</p>
+                                    <p>我觉得，作为一名技术人员，一定要有自己的思考，无论是学习也好，开发也好</p>
+                                </div>
+                                <div class="bottom d-flex align-items-center justify-content-between align-self-end">
+                                    <div class="icon"><i class="fa fa-quote-left"></i></div>
+                                    <div class="testimonial-info d-flex">
+                                        <div class="title">
+                                            <h5>钟海潇</h5>
+                                            <p>全栈开发工程师 </p>
+                                            <p>仲恺农业工程学院软件工程学士</p>
+                                        </div>
+                                        <div class="avatar"><img alt="" src="{{websiteSourcePath}}img/we/zhong.png"
+                                                class="img-fluid"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                    <div class="owl-item" style="width: 277.5px;">
+                        <li class="item">
+                            <div class="testimonial d-flex flex-wrap">
+                                <div class="text">
+                                    <p>知易行难，有些事情你以为你想通了，脑海里、口头上总结得好好的，但要将你的总结写下来，通过文章或PPT发表出来，让别人领会你的意图，才发现到处是卡顿。</p>
+                                </div>
+                                <div class="bottom d-flex align-items-center justify-content-between align-self-end">
+                                    <div class="icon"><i class="fa fa-quote-left"></i></div>
+                                    <div class="testimonial-info d-flex">
+                                        <div class="title">
+                                            <h5>苏德永</h5>
+                                            <p>测试开发工程师 </p>
+                                            <p>广西大学工学士学位</p>
+                                        </div>
+                                        <div class="avatar"><img alt="" src="{{websiteSourcePath}}img/we/zhong.png" class="img-fluid"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </div>
+            </div>
+           
+        </ul>
+        <!-- Carousel End-->
+    </div>
+</section>

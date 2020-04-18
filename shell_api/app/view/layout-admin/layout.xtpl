@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>中国算力后台管理中心</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="shortcut icon" href="../favicon.ico" />
+    <link rel="icon" href="../animated_favicon.gif" type="image/gif" />
+    <link href="{{ helper.getCDNHost() }}/public/frame/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="{{ helper.getCDNHost() }}/public/frame/css/iconfont.css" rel="stylesheet" type="text/css" />
+    <link href="{{ helper.getCDNHost() }}/public/frame/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ helper.getCDNHost() }}/public/frame/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ helper.getCDNHost() }}/public/frame/css/purebox.css" rel="stylesheet" type="text/css">
+    <link href="{{ helper.getCDNHost() }}/public/frame/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ helper.getCDNHost() }}/public/frame/css/calendar.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ helper.getCDNHost() }}/public/frame/css/spectrum.css" rel="stylesheet" type="text/css">
+    <link href="{{ helper.getCDNHost() }}/public/src/font/iconfont.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/jquery.json.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/transport_jquery.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/utils.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/listtable.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/listtable_pb.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/perfect-scrollbar.min.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/hf_admin2.0.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/calendar.min.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/jquery.bgColorSelector.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/jquery.validation.min.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/common.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/jquery.form.js"></script>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/jquery.nyroModal.js"></script>
+    <!--[if lt IE 9]>
+	<script src="/public/frame/js/css3-mediaqueries.js"></script>
+<![endif]-->
+    <script language="JavaScript">
+        /*这里把JS用到的所有语言都赋值到这里*/
+        var process_request = "<i class='icon-spinner icon-spin'></i>";
+        var todolist_caption = "记事本";
+        var todolist_autosave = "自动保存";
+        var todolist_save = "保存";
+        var todolist_clear = "清除";
+        var todolist_confirm_save = "是否将更改保存到记事本？";
+        var todolist_confirm_clear = "是否清空内容？";
+        var expand_all = "展开";
+        var collapse_all = "闭合";
+        var shop_name_not_null = "商店名称不能为空";
+        var good_name_not_null = "商品名称不能为空";
+        var good_category_not_null = "商品分类不能为空";
+        var good_number_not_number = "商品数量不是数值";
+        var good_price_not_number = "商品价格不是数值";
+
+    </script>
+</head>
+
+<body class="page" style="background-color: #31b4e1; overflow:hidden;">
+    {{!include ("./all-menus.xtpl")}}
+    {{include ("./common-header.xtpl")}}
+    <div class="admin-main">
+        <div class="top-border"></div>
+        <div class="admin-main-left">
+            {{set(homePage = {
+                dataParam: "",
+                dataUrl: ""
+            })}}
+            {{#each(menu)}}
+                {{set(menuId = Id)}}
+                 {{#if(IsHomePage && IsHomePage === '1')}}
+                    {{set(homePage.dataParam = Id)}}
+                    {{set(homePage.dataUrl = Url)}}
+                {{/if}}
+                {{#each(children)}}
+                    {{#if(IsHomePage && IsHomePage === '1')}}
+                     
+                        {{set(homePage.dataParam = menuId + "_" + Id)}}
+                        {{set(homePage.dataUrl = Url)}}
+                    {{/if}}
+                    {{set(subMenuId = Id)}}
+                    {{#each(children)}}
+                        {{#if(IsHomePage && IsHomePage === '1')}}
+                         
+                            {{set(homePage.dataParam = menuId + "_" + subMenuId + "_" + Id)}}
+                            {{set(homePage.dataUrl = Url)}}
+                        {{/if}}
+                    {{/each}}
+
+                {{/each}}
+            {{/each}}
+            {{include ("./left-menu.xtpl")}}
+        </div>
+        <div class="admin-main-right">
+            <iframe src="{{homePage.dataUrl}}" data-param="{{homePage.dataParam}}" id="workspace" name="workspace" frameborder="0" width="100%" height="95%" scrolling="yes"></iframe>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/jquery.purebox.js"></script>
+    <script type="text/javascript">
+        var bodyWidth = $("body").width();
+        if (bodyWidth < 1204) {
+            $("#workspace").height("92%");
+        }
+        let iframe = document.getElementById('workspace');
+        iframe.onload = function() {
+            let obj = {};
+            let jsonArr = iframe.contentWindow.location.search.substr(1).split('&');
+            for( i = 0 ; i < jsonArr.length ; i++){
+                const item = jsonArr[i];
+                let array = item.split('=');
+                obj[array[0]] = array[1];
+            }
+            if(obj['parm']){
+                let idArr = obj['parm'].split('_');
+                $(`.navLeftTab`).hide();
+                $(`.navLeftTab`).find('.sub-menu').hide();
+                $(`.${idArr[0]}.navLeftTab`).show();
+                $('li.active').removeClass("active");
+                $(`li.${idArr[0]}`).addClass("active");
+                $(`.navLeftTab li`).removeClass("curr");
+                $(`div.item`).removeClass("current");
+                $(`div.${idArr[0]}_${idArr[1]}`).addClass("current");
+                $(`div.${idArr[0]}_${idArr[1]}`).find('.sub-menu').show();
+                $(`li.${idArr[0]}_${idArr[1]}_${idArr[2]}`).addClass("curr");
+            }
+            
+        }
+    </script>
+</body>
+
+</html>

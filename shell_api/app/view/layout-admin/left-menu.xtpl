@@ -1,0 +1,35 @@
+<div class="admincj_nav">
+    {{#each(menu)}}
+
+        <div class="navLeftTab {{Id}}" data-param="{{Id}}">
+            {{#each(children)}}
+                <div class="item {{../Id}}_{{Id}}">
+                    <div class="tit">
+                        <a href="javascript:void(0);" data-url="{{Url}}" data-param="{{../Id}}_{{Id}}" target="workspace">
+                            <i class="iconfont {{Iconic}}"></i>
+                            <h4>{{Name}}</h4>
+                        </a>
+                    </div>
+                    <div class="sub-menu">
+                        <ul>
+                            {{#each(children)}}
+                                
+                                    <li class="{{../../Id}}_{{../Id}}_{{Id}}">
+                                        <s></s>
+                                        <a href="javascript:void(0);" data-url="{{Url}}" data-param="{{../../Id}}_{{../Id}}_{{Id}}" target="workspace">{{Name}}</a>
+                                    </li>
+
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+
+            {{/each}}
+        </div>
+    {{/each}}
+    <style>
+        .iconfont {
+            font-size: 20px;
+        }
+    </style>
+</div>

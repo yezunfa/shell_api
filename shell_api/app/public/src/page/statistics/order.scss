@@ -1,0 +1,48 @@
+@import '../common.scss';
+
+div.body {
+    span {
+        display: inline-block;
+        vertical-align: top;
+    }
+    .count {
+        width: 1300px;
+        height: 50px;
+        padding-top: 20px;
+        padding-left: 40px;
+        padding-bottom: 20px;
+        font-size: 14px;
+
+        .count-title {
+            height: 25px;
+            line-height: 25px;
+        }
+
+        .nav {
+            float: right;
+            .one {
+                width: 200px;
+                height: 25px;
+
+                i {
+                    font-style: normal;
+                    padding-left: 20px;
+                }
+            }
+            .two {
+                height: 25px;
+                width: 300px;
+            }
+        }
+
+        button.text-btn {
+            font-size: 14px;
+            padding: 0 10px;
+            border: 0;
+            outline: none;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 0.5px 0px #666;
+        }
+    }
+}

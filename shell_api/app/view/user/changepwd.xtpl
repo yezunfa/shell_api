@@ -1,0 +1,88 @@
+{{extend ("../layout/layout.xtpl")}}
+
+{{#block ("head")}}
+{{/block}}
+
+{{#block ("body")}}
+ 
+ 
+<Panel title="更改密码">
+    <Feedback style={ { marginBottom: 20 } }>
+        更改密码说明〜
+    </Feedback>
+    <FormSchema
+        traverse={qverse($ => {
+            $("*")
+            .itemProps({
+                labelCol: 3
+            })
+            .required(true); // 设置所有字段是必填
+             $("Name").props({
+                disabled: true
+            });
+        })}
+        defaultValue = {
+           { Name: '{{$user.Name}}' }
+        }
+        onSubmit={methods.onSubmitHandler}
+        >
+        <Field  type="string" name="Name" title="登录名"   />
+        <Field  type="string" name="OrginPassword" title="原密码" x-props={ {  htmlType: "password" } }  />
+		<Field  type="string" name="Password" title="新密码" x-props={ {  htmlType: "password" } }  />
+		<Field  type="string" name="comfirm_Password" title="确认新密码" x-props={ {  htmlType: "password" } }  />
+		
+
+        <FormButtonGroup offset={6}>
+            <Submit>修改密码</Submit>
+        </FormButtonGroup>
+    </FormSchema>
+</Panel>
+<relim-script>
+    const Toast = require("toast")
+    module.exports = {
+        state: function(){
+            return {
+                formData: {}
+            }
+        },
+        methods:{
+            onSubmitHandler(values){
+                
+                values["Img"] = this.state.Img_upload;
+
+                
+                values._csrf = '{{ $csrf }}';
+                fetch("/api/user/changepwd",{
+                    credentials: 'same-origin',
+                    method: "POST",
+                    data:values
+                }).then(res=>res.json()).then(res=>{
+                    if(res && res.success){
+                        Toast.success('修改成功！');
+                        setTimeout(() => {
+                            window.parent.location.href= '/user/logout';
+                        }, 2000)
+                       
+                    } else {
+                        if(res && res.message) {
+                            Toast.error('提交失败:' + res.message);
+                        } else {
+                            Toast.error('提交失败,请稍后重试');
+                        }
+                    }
+                })
+            }
+        }
+    }
+</relim-script>
+<style>
+    .schema-form-container div[name="Id"].next-form-item.next-row {
+        display: none !important;
+    }
+</style>
+ 
+
+
+  
+{{/block}}
+

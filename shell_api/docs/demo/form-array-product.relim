@@ -1,0 +1,84 @@
+<Feedback style={ { marginBottom: 20 } }>
+    该用例主要是控制数组类型组件内部如何使用网格展示
+  </Feedback>
+  <FormSchema
+    labelAlign="top"
+    traverse={qverse($ => {
+      $("products")
+        .itemProps({
+          labelCol: 2
+        })
+        .style({
+          width: "100%"
+        });
+      $("products.*").itemProps({
+        labelCol: 6,
+        itemCol: 8
+      });
+    })}
+    defaultValue={ { products: [{}] } }
+    onSubmit={values => console.log(values)}
+  >
+    <Field
+      type="object"
+      x-component="wrapper"
+      x-props={ { style: { width: "100%" } } }
+      title="商品列表"
+    >
+      <Field type="array" name="products">
+        <Field type="object">
+          <Field type="string" title="商品ID" />
+          <Field type="string" name="name" title="商品名称" />
+          <Field type="number" name="price" title="商品价格" />
+          <Field type="boolean" name="delivery" title="是否包邮" />
+          <Field name="name" title="姓名" type="string" />
+          <Field name="tel" title="电话" type="string" />
+          <Field
+            name="email"
+            title="邮箱"
+            type="string"
+            enum={["@126.com", "@163.com", "@gmail.com"]}
+          />
+          <Field
+            name="sex"
+            title="性别"
+            enum={["男性", "女性"]}
+            x-component="radio"
+            type="string"
+          />
+          <Field name="monitor" title="开启监控" type="boolean" />
+          <Field
+            type="string"
+            name="categoryIds"
+            title="类目"
+            enum={[
+              {
+                label: "AAA",
+                value: "AAA"
+              },
+              {
+                label: "BBB",
+                value: "BBB"
+              },
+              {
+                label: "CCC",
+                value: "CCC"
+              },
+              {
+                label: "DDD",
+                value: "DDD"
+              },
+              {
+                label: "EEE",
+                value: "EEE"
+              }
+            ]}
+          />
+        </Field>
+      </Field>
+    </Field>
+    <FormButtonGroup>
+      <Submit>提交</Submit>
+      <Reset>重置</Reset>
+    </FormButtonGroup>
+  </FormSchema>

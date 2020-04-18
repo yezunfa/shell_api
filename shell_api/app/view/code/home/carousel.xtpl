@@ -1,0 +1,48 @@
+    
+     <section style="" class="bar background-white relative-positioned">
+        <div class="container">
+          <!-- Carousel Start-->
+          <div class="home-carousel">
+            <div class="dark-mask mask-primary" style="background-size: cover;background-image: linear-gradient(45deg, #3F5EFB 0%, #FC466B 100%);" ></div>
+            <div class="container">  
+              <div class="homepage owl-carousel">
+                <div class="item">
+                  <div class="row">
+                    <div class="col-md-5 text-right">
+                      <p><img src="{{websiteSourcePath}}img/logo.png" alt="" class="ml-auto"></p>
+                      <h1>AI赋能社群活动管理</h1>
+                      <p>打造专业、有爱、有料、有趣的社群活动管理平台<br>共建健康向上、有活力的社群生态系统</p>
+                    </div>
+                    <div class="col-md-7"><img src="{{websiteSourcePath}}img/template-homepage.png" alt="" class="img-fluid"></div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="row">
+                    <div class="col-md-5 text-right">
+                      <h1>设计AI赋能社群活动</h1>
+                      <ul class="list-unstyled">
+                        <li>热情感动自己 技术改变未来</li>
+                        <li>持续改进 推陈出新</li>
+                      </ul>
+                    </div>
+                    <div class="col-md-7"><img src="{{websiteSourcePath}}img/template-easy-customize.png" alt="" class="img-fluid"></div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="row">
+                    <div class="col-md-7"><img src="{{websiteSourcePath}}img/template-easy-code.png" alt="" class="img-fluid"></div>
+                    <div class="col-md-5">
+                      <h1>是的，你没看错！</h1>
+                      <ul class="list-unstyled">
+                        <li>我们用代码改变世界 </li>
+                        <li>用AI赋能去改变人们生活的方方面面</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Carousel End-->
+        </div>
+      </section>

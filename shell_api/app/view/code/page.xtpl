@@ -1,0 +1,307 @@
+{{set(theme = 'yonce')}}
+{{set(codeMirrorPath = helper.getCDNHost() + '/public/third-part/codemirror-5.52.0' )}}
+{{set(thirdpartPath = helper.getCDNHost() + '/public/third-part/' )}}
+{{extend ("./layout/index.xtpl")}}
+
+{{#block("head")}}
+
+
+<title>页面代码编辑器</title>
+<link rel="stylesheet" href="{{ codeMirrorPath }}/lib/codemirror.css">
+<link rel="stylesheet" href="{{ codeMirrorPath }}/theme/{{theme}}.css">
+<script src="{{ codeMirrorPath }}/lib/codemirror.js"></script>
+<script src="{{ codeMirrorPath }}/mode/javascript/javascript.js"></script>
+<script src="{{ codeMirrorPath }}/addon/selection/active-line.js"></script>
+<script src="{{ codeMirrorPath }}/addon/edit/matchbrackets.js"></script>
+
+<script src="{{ codeMirrorPath }}/mode/xml/xml.js"></script>
+<script src="{{ codeMirrorPath }}/addon/selection/active-line.js"></script>
+
+<script src="{{ codeMirrorPath }}/addon/edit/closebrackets.js"></script>
+
+<link rel="stylesheet" href="{{ codeMirrorPath }}/addon/fold/foldgutter.css" />
+<script src="{{ codeMirrorPath }}/addon/fold/foldcode.js"></script>
+<script src="{{ codeMirrorPath }}/addon/fold/foldgutter.js"></script>
+<script src="{{ codeMirrorPath }}/addon/fold/brace-fold.js"></script>
+<script src="{{ codeMirrorPath }}/addon/fold/xml-fold.js"></script>
+<script src="{{ codeMirrorPath }}/addon/fold/indent-fold.js"></script>
+<script src="{{ codeMirrorPath }}/addon/fold/markdown-fold.js"></script>
+<script src="{{ codeMirrorPath }}/addon/fold/comment-fold.js"></script>
+<script src="{{ codeMirrorPath }}/mode/javascript/javascript.js"></script>
+<script src="{{ codeMirrorPath }}/mode/xml/xml.js"></script>
+<script src="{{ codeMirrorPath }}/mode/css/css.js"></script>
+<script src="{{ codeMirrorPath }}/mode/htmlmixed/htmlmixed.js"></script>
+<script src="{{ codeMirrorPath }}/mode/python/python.js"></script>
+<script src="{{ codeMirrorPath }}/mode/markdown/markdown.js"></script>
+
+<script src="{{ codeMirrorPath }}/addon/edit/closetag.js"></script>
+<script src="{{ codeMirrorPath }}/addon/edit/matchtags.js"></script>
+<script src="{{ codeMirrorPath }}//addon/display/fullscreen.js"></script>
+
+<style>
+    .page-editor {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .code-area {
+        width: 80%;
+        height: 100%;
+    }
+
+    iframe {
+        height: 1000px;
+    }
+
+    .page-setting{
+         position: relative;
+    }
+    .page-setting-form{
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        background-color: #fff;
+        padding: 24px;
+        border-radius: 0 10px 20px rgba(0, 0, 0 .3);
+    }
+
+</style>
+
+{{/block}}
+
+
+{{#block("body")}}
+<section id="nav-bar">
+    <div class="container">
+        <div class="row d-flex align-items-center">
+            <div class="col-md-9">
+                <div class="page-setting">
+                    <div class="info">页面名称:<input id="Name" value="{{pageData.Name}}" type="text">URL: https://madingyu.com/page/<input id="Url" type="text" value="{{pageData.Url}}"> <a class="change-setting">更多设置</a></div>
+                    <form class="page-setting-form">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="PageGroupId">PageGroupId</label>
+                                    <input id="PageGroupId" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="Description">Description</label>
+                                    <textarea id="Description" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-template-outlined btn-save-setting"><i
+                                        class="fa fa-envelope-o"></i>确定</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <button id="btn-save" type="button" class="btn btn-lg btn-primary">保存</button>
+                <button id="btn-publish" type="button" class="btn btn-lg btn-primary">发布</button>
+                <button id="btn-back" type="button" class="btn btn-lg btn-primary">返回 </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="page-editor">
+    <div class="code-area">
+        <textarea id="code" name="code" style="height:1500px;">
+        {{#if(pageData && pageData.Content)}}
+           {{pageData.Content}}
+        {{else}}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{{pageData && pageData.Name }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <link type="text/css" rel="stylesheet" href="{{thirdpartPath}}jquery/reset.css">
+    <script type="text/javascript" src="{{thirdpartPath}}jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="{{thirdpartPath}}jquery/rem.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{thirdpartPath}}jquery/swiper.min.css"/>
+    <script type="text/javascript" src="{{thirdpartPath}}jquery/swiper.min.js"></script>
+</head>
+<body>
+    <h2>hello world!</h2>   
+</body>
+</html>
+          
+        {{/if}}
+        </textarea>
+    </div>
+    <iframe id="preview"></iframe>
+
+</div>
+{{/block}}
+
+
+
+{{#block("footer")}}
+<script>
+    CodeMirror.commands.autocomplete = function (cm) {
+        cm.showHint({
+            hint: CodeMirror.hint.anyword
+        });
+    }
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        mode: "text/html",
+        lineNumbers: true,
+        styleActiveLine: true,
+        matchBrackets: true,
+        styleActiveLine: true,
+        lineWrapping: true,
+        autoCloseBrackets: true,
+        autoCloseTags: true,
+        matchTags: {
+            bothTags: true
+        },
+        extraKeys: {
+            "Ctrl-Q": function (cm) {
+                cm.foldCode(cm.getCursor());
+            },
+            "Ctrl-Space": "autocomplete",
+            "Ctrl-F11": function(cm) {
+                cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+            },
+            "Esc": function(cm) {
+                if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+            }
+        },
+        foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+    });
+    editor.setOption("theme", '{{theme}}');
+    editor.setSize('100%','1000')
+
+    var delay;
+    editor.on("change", function () {
+        clearTimeout(delay);
+        delay = setTimeout(updatePreview, 300);
+    });
+
+    function updatePreview() {
+        var previewFrame = document.getElementById('preview');
+        var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
+        preview.open();
+        preview.write(editor.getValue());
+        preview.close();
+    }
+    setTimeout(updatePreview, 300);
+
+</script>
+
+<script>
+
+    function checkOk(pageData) {
+        if(!pageData.Name) {
+            alert('页面名称不能为空');
+            return false;
+        }
+
+        if(!pageData.Url) {
+            alert('页面Url不能为空');
+            return false;
+        }
+        return true;  
+    } 
+    $(function () {
+        // save click
+        $("#btn-save").bind('click', () => {
+            const pageData = {
+                Id: '{{ pageData.Id || ''}}',
+                Name: $('#Name').val(),
+                Url: $('#Url').val(),
+                Content: editor.getValue()
+            }
+
+            if(!checkOk(pageData)) return;
+            
+            $.ajax({
+                url: '/code/page/save',
+                method: 'POST',
+                data: pageData,
+                success: (res) => {
+                    if (res && res.success) {
+                        alert("Save Success")
+                        if(pageData.Id) {
+                            console.log('不用刷新')
+                        } else {
+                            window.location.href = "/code/page?Id=" + res.data.Id;
+                        }
+                       
+                    } else {
+                        alert(res.message || '保存失败')
+                    }
+                },
+                fail(err) {
+                    alert(err.message || '网络异常')
+                }
+            })
+        });
+
+        // publish click
+        $("#btn-publish").bind('click', () => {
+            const pageData = {
+                Id: '{{ pageData.Id || ''}}',
+                Name: $('#Name').val(),
+                Url: $('#Url').val(),
+                Content: editor.getValue()
+            }
+
+            if(!pageData.Id) {
+                alert('未保存的页面不能发布！')
+                return;
+            }
+
+            if(!checkOk(pageData)) return;
+            $.ajax({
+                url: '/code/page/publish',
+                method: 'POST',
+                data: pageData,
+                success: (res) => {
+                    if (res && res.success) {
+                        alert("发布 Success")
+                    } else {
+                        alert(res.message || '发布失败')
+                    }
+                },
+                fail(err) {
+                    alert(err.message || '网络异常')
+                }
+            })
+        });
+    })
+
+</script>
+
+<script>
+    $(function() {
+
+        $(".change-setting").bind('click', () => {
+            $(".page-setting-form").fadeIn();
+
+        });
+        $(".btn-save-setting").bind('click', () => {
+            $(".page-setting-form").fadeOut();
+            
+        });
+
+         $("#btn-back").bind('click', () => {
+            window.location.href = '/code/page/list'
+            
+        });
+
+
+        
+    })
+</script>
+{{/block}}

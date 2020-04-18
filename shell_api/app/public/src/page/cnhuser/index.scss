@@ -1,0 +1,75 @@
+// @import '../common.scss';
+
+.reload {
+    position: absolute;
+    top: 25px;
+    right: 0;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 78px;
+    height: 28px;
+    border: 1px #333 solid;
+    text-align: center;
+    font-size: 14px;
+    color: #4077CC !important;
+  }
+
+.next-card-body {
+    .user-dialog {
+        display: flex;
+        justify-content: flex-end;
+        > * {
+            margin-left: 10px;
+        }
+    }
+    .table {
+        .next-table-header tr {
+            height: 50px;
+
+            th {
+                height: 50px;
+                text-align: center;
+            }
+        }
+
+        tr {
+            text-align: center;
+
+            th,
+            td {
+                height: 40px;
+
+                &.last {
+                    width: 200px;
+
+                    .block-view {
+                        display: flex;
+                        flex-wrap: wrap;
+                    }
+                }
+            }
+        }
+    }
+
+    .handle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .isValid {
+            display: block;
+            width: 59px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #867373;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .block-view {
+            display: flex;
+            align-items: flex-end;
+            height: 28px;
+        }
+    }
+}

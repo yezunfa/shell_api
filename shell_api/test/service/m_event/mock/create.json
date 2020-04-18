@@ -1,0 +1,60 @@
+{
+   "Name": "周未游玩",
+   "Banner": "https://cdn-xcx-qunsou.weiyoubot.cn/xcx/2019-12-12/5adb7c680966481aab9d556a798096a6.png",
+   "StartTime": 1577116800,
+   "EndTime": 1577289599,
+   "LimitedCount": 11,
+   "Fee": 1000,
+   "EventStartTime": 1576598400,
+   "EventEndTime": 1577807999,
+   "Address": "北京市北京市1",
+   "Latitude": 0,
+   "Longitude": 0,
+   "GroupId": null,
+   "Pictures": null,
+   "EventDetail": [
+      {
+         "IsSensitive": false,
+         "ContentType": "text",
+         "Content": "周未游玩\n大南山游玩约起",
+         "Empty": true,
+         "Focus": 0
+      }
+   ],
+   "EventRegField": [
+      {
+         "State": 1,
+         "Type": 0,
+         "Editable": true,
+         "Required": 1,
+         "LenMin": 1,
+         "LenMax": 500,
+         "Len": 50,
+         "Name": "姓名"
+      },
+      {
+         "State": 1,
+         "Type": 0,
+         "Editable": true,
+         "Required": 1,
+         "LenMin": 1,
+         "LenMax": 500,
+         "Len": 50,
+         "Name": "邮箱"
+      }
+   ],
+   "UserVisible": 1,
+   "visibility": 0,
+   "LimitedCountBehalf": 2,
+   "Verify": 1,
+   "Cancelable": 1,
+   "SupportQueue": 0,
+   "BtnType": 0,
+   "role": 0,
+   "SignName": "上津-六韬",
+   "Mobile": "19925481257",
+   "VerifyCode": "33333",
+   "WeixinNo": "",
+   "access_token": "905e769695704529829305ae897dfd3f",
+   "eid": "5df7a6198deb058503834ee8"
+}

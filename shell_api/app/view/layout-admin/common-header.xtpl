@@ -1,0 +1,107 @@
+<script type="text/javascript" src="{{ helper.getCDNHost() }}/public/frame/js/adminIndex.js"></script>
+<div class="admin-header clearfix">
+    <!-- 颜色选择层 bylu -->
+    <div class="bgSelector"></div>
+    <div class="admin-logo">
+        <a href="javascript:void(0);" data-url="/" data-param="index|main" target="workspace">
+            <img src="{{ helper.getCDNHost() }}/public/frame/images/logo-white.png" style="width: 118px;margin: 7px 10px 0;">
+        </a>
+        <div class="foldsider">
+            <i class="icon icon-indent-left"></i>
+        </div>
+    </div>
+    <div class="module-menu">
+        <ul>
+            {{#each(menu)}}
+                <li class={{Id}} data-param="{{Id}}">
+                    <a href={{ Url || "javascript:void(0);"}}>{{Name}}</a>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="admin-header-right">
+        <div class="manager">
+            <dl>
+                <dt class="name">{{$user.Name}}</dt>
+                <dd class="group">管理员</dd>
+            </dl>
+            <span class="avatar" data-userid="{{this.ctx.session.user.Id}}">
+                {{! <form action="index.php" id="fileForm" method="post" enctype="multipart/form-data" runat="server">
+                    <input name="img" type="file" class="admin-avatar-file" id="_pic" title="设置管理员头像">
+                </form> }}
+                <img nctype="admin_avatar" src="{{ helper.getCDNHost() }}/public/frame/images/admin.png" />
+            </span>
+        <div id="admin-manager-btn" class="admin-manager-btn">
+               {{!  <i class="arrow"></i>}}
+            </div>
+         {{! <div class="manager-menu">
+                <div class="title">
+                    <h4>最后登录</h4>
+                    <a href="privilege.php?act=edit&id=57" target="workspace" class="edit_pwd">修改密码</a>
+                </div>
+                <div class="login-date">
+                    <strong>2018-06-15 23:22:56</strong>
+                    <span>(IP:113.97.32.22)</span>
+                </div>
+                <div class="title mt10">
+                    <h4>常用操作</h4>
+                    <a href="javascript:;" class="add_nav">添加菜单</a>
+                </div>
+                <div class="quick_link">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            }}
+        </div>
+        <div  class="operate">
+            <li style="position: relative;display:none;">
+                <a href="javascript:void(0);" class="msg" title="查看消息">&nbsp;</a>
+                <div id="msg_Container">
+                    <div class="item">
+                        <h3>订单提示</h3>
+                        <div class="msg_content" ectype="orderMsg"></div>
+                    </div>
+                    <div class="item">
+                        <h3>商家审核提示</h3>
+                        <div class="msg_content" ectype="sellerMsg"></div>
+                    </div>
+                    <div class="item">
+                        <h3>广告位提示</h3>
+                        <div class="msg_content" ectype="advMsg"></div>
+                    </div>
+                    <div class="item hide" ectype="cServiceDiv">
+                        <h3>售后服务</h3>
+                        <div class="msg_content" ectype="cService"></div>
+                    </div>
+                </div>
+            </li>
+            <!-- <i></i>
+                <li><a href="../" target="_blank" class="home" title="新窗口打开商城首页">&nbsp;</a></li>
+            <i></i>
+            <li style="display:none">
+                <a href="javascript:void(0);" class="sitemap" title="查看全部管理菜单">&nbsp;</a>
+            </li>
+            <i></i>
+             -->
+            <li>
+                <a href="javascript:void(0);" id="trace_show" class="style-color" title="给管理中心换个颜色">&nbsp;</a>
+            </li>
+            <i></i>
+            <!-- 
+            <li style="display:none">
+                <a href="index.php?act=clear_cache" class="clear" target="workspace" title="清除缓存">&nbsp;</a>
+            </li>
+            <i></i>
+             -->
+            <li>
+                <a href="/user/logout" class="prompt" title="安全退出管理中心">&nbsp;</a>
+            </li>
+        </div>
+    </div>
+</div>
+<style>
+    .avatar{
+        cursor: pointer;
+    }
+</style>

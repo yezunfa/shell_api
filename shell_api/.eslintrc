@@ -1,0 +1,14 @@
+{
+  "extends": "eslint-config-egg",
+  "globals": {
+    "GLOBAL": true,
+    "define": true,
+    "requirejs": true,
+    "window": true,
+    "document": true,
+    "alert": true
+  },
+  "rules": {
+    "no-alert": "warn"
+  }
+}

@@ -1,0 +1,58 @@
+.next-dialog {
+  border: 0;
+  border-radius: 5px; }
+  .next-dialog .next-dialog-header {
+    box-sizing: border-box;
+    height: 30px;
+    padding-top: 10px;
+    border-radius: 5px 5px 0 0;
+    font-size: 16px;
+    color: #666;
+    background-color: #f2f2f2; }
+  .next-dialog .next-loading {
+    display: block; }
+    .next-dialog .next-loading .dialog-select-user {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center; }
+      .next-dialog .next-loading .dialog-select-user .next-input {
+        margin: 0 15px; }
+    .next-dialog .next-loading .dialog-message {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-wrap: wrap;
+          -ms-flex-wrap: wrap;
+              flex-wrap: wrap;
+      margin-top: 20px; }
+      .next-dialog .next-loading .dialog-message .next-input {
+        margin: 0 15px; }
+    .next-dialog .next-loading .dialog-count {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center;
+      margin-top: 20px; }
+      .next-dialog .next-loading .dialog-count .margin {
+        margin: 0 20px 0 15px; }
+    .next-dialog .next-loading .actions {
+      margin-top: 20px;
+      text-align: right; }
+      .next-dialog .next-loading .actions .submit {
+        margin-right: 20px; }
+  .next-dialog .before:before {
+    display: inline-block;
+    margin-right: 4px;
+    content: "*";
+    font-family: SimSun;
+    color: #D43; }

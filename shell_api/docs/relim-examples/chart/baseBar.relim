@@ -1,0 +1,40 @@
+<RelimDocRender componentPkgs={[{
+  name: "RelimReactBizcharts",
+  page: "//g.alicdn.com/relim/relim-react-bizcharts/3.0.0/index.umd.js"
+}]} markdown={`
+\`\`\`\`relimeditor
+<component name="BaseBar">
+  <template>
+    <Chart height={400} data={props.data} scale={props.cols} forceFit>
+      <Axis name="year" />
+      <Axis name="value" />
+      <Tooltip crosshairs={{type : "y"}}/>
+      <Geom type="interval" position="year*sales" />
+    </Chart>
+  </template>
+  <relim-script>
+    var data = [
+      { year: '1951 年', sales: 38 },
+      { year: '1952 年', sales: 52 },
+      { year: '1956 年', sales: 61 },
+      { year: '1957 年', sales: 145 },
+      { year: '1958 年', sales: 48 },
+      { year: '1959 年', sales: 38 },
+      { year: '1960 年', sales: 38 },
+      { year: '1962 年', sales: 38 },
+    ]
+    var cols = {
+      'sales': {tickInterval: 20},
+    }
+    module.exports = {
+      props: {
+        data: data,
+        cols: cols
+      }
+    }
+  </relim-script>
+</component>
+<BaseBar />
+  
+\`\`\`\`
+`} />

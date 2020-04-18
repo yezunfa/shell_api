@@ -1,0 +1,82 @@
+.reload {
+  position: absolute;
+  top: 25px;
+  right: 0;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 78px;
+  height: 28px;
+  border: 1px #333 solid;
+  text-align: center;
+  font-size: 14px;
+  color: #4077CC !important; }
+
+.next-card-body .user-dialog {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end; }
+  .next-card-body .user-dialog > * {
+    margin-left: 10px; }
+
+.next-card-body .table .next-table-header tr {
+  height: 50px; }
+  .next-card-body .table .next-table-header tr th {
+    height: 50px;
+    text-align: center; }
+
+.next-card-body .table tr {
+  text-align: center; }
+  .next-card-body .table tr th,
+  .next-card-body .table tr td {
+    height: 40px; }
+    .next-card-body .table tr th.last,
+    .next-card-body .table tr td.last {
+      width: 200px; }
+      .next-card-body .table tr th.last .block-view,
+      .next-card-body .table tr td.last .block-view {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+                flex-wrap: wrap; }
+
+.next-card-body .handle {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+  .next-card-body .handle .isValid {
+    display: block;
+    width: 59px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #867373;
+    -webkit-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    cursor: pointer; }
+  .next-card-body .handle .block-view {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+    height: 28px; }

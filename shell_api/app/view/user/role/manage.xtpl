@@ -1,0 +1,191 @@
+{{extend ( "../../layout/layout.xtpl" )}}
+{{#block ( "head" )}}
+    <link rel="stylesheet" href="{{ helper.getCDNHost() }}/public/build/page/product/other.css"> 
+{{/block}} 
+{{#block ("body")}}
+
+<div class="page-count">
+<Panel>
+    <div class="page-head">
+        <div class="nav">
+            <h2>角色列表</h2>
+            <span><a href="/user/role-right">刷新</a></span>
+        </div>
+    </div>
+    <div class="query">
+    <SchemaForm traverse={qverse(($)=>{
+        $('*').itemProps({
+            itemCol:8,
+            labelCol:6
+        })
+    })} onSubmit={methods.onSubmitHandler}>
+        
+        	{{! <Field type="string" name="Id" title="主键" /> }}
+			<Field type="string" name="Name" title="角色名称" />
+			<Field type="string" name="Description" title="描述" />
+
+        <FormButtonGroup offset={2}>
+            <Submit>查询</Submit>
+            <Reset>重置</Reset>
+            <a href="javascript:void(0);" onClick={()=>{
+                window.location.href = '/page/sysrole/create';
+            }}>创建角色 (Sysrole)</a>
+        </FormButtonGroup>
+    </SchemaForm>
+    </div>
+    <div class="table">
+    <Table
+        dataSource={state.dataSource}
+        isTree={false}
+        style={ { minHeight: 200,marginTop:20 } }
+        isLoading={state.loading}
+    >
+        {{! <Table.Column dataIndex="Id" title="主键" /> }}
+		<Table.Column dataIndex="Name" title="角色名称" />
+		<Table.Column dataIndex="Description" title="描述" />
+
+        
+        <Table.Column
+            title="操作"
+            lock="right"
+            cell={(value, index, record) => {
+                return (
+                    <BlockView marginY={10}>
+                        <Button
+                            size="small"
+                            onClick={() => {
+                                window.location.href =  "/user/role/" + record.Id + "?Name=" + record.Name;
+                            } }
+                        >
+                            编辑权限
+                        </Button>
+                        <Button
+                            size="small"
+                            onClick={methods.onRemoveHandler(record)}
+                        >
+                            删除
+                        </Button>
+                    </BlockView>
+                )
+            }}
+        />
+    </Table>
+    </div>
+    <BlockView align="center" marginTop = {20}>
+        <Pagination {...state.pagination}  onChange= {methods.onChangePage} />
+    </BlockView>
+</Panel>
+<relim-script>
+    const Toast = require("toast");
+    const Dialog = require("dialog");
+    const MAIN_URL = "/api/sysrole/search";
+    const REMOVE_URL = "/api/sysrole/remove"
+    module.exports = {
+        state: {
+            loading: false,
+            errorMessage: "",
+            status: "normal",
+            formData: {},
+            pagination: {
+                current: 1,
+                total: 0,
+                pageSize: 8
+            }
+        },
+        methods: {
+            onChangePage(pageIndex) {
+                this.setState({
+                    pagination: Object.assign(this.state.pagination, {
+                        current: pageIndex
+                    })
+                })
+                this.methods.loadData()
+            },
+            onRemoveHandler(record) {
+                return () => {
+                    Dialog.confirm({
+                        title: "提示",
+                        content: "您确定要删除吗？",
+                        onOk: () => {
+                            fetch(REMOVE_URL, {
+                                credentials: 'same-origin',
+                                method: 'POST',
+                                data: {
+                                    _csrf: '{{ $csrf }}',
+                                    Id: record.Id  
+                                }
+                            })
+                            .then(res => res.json())
+                            .then(res => {
+                                if (res && res.success) {
+                                    Toast.success("删除成功")
+                                    this.methods.loadData()
+                                } else {
+                                    Toast.error("删除失败，请稍后重试");
+                                }
+                            })
+                        }
+                    })
+                }
+            },
+            onSubmitHandler(values) {
+                this.setState(
+                    {
+                        formData: values
+                    },
+                    () => {
+                        this.methods.loadData()
+                    }
+                )
+            },
+            loadData(values) {
+                this.setState({
+                    loading: true
+                })
+                fetch(MAIN_URL, {
+                    credentials: 'same-origin',
+                    data: {
+                        pagination: JSON.stringify(this.state.pagination),
+                        query: JSON.stringify(
+                            Object.assign(this.state.formData, values)
+                        ),
+                        timestamp: Date.now()
+                    }
+                })
+                    .then(res => res.json())
+                    .then(
+                        res => {
+                            if (res && res.success) {
+                                this.setState({
+                                    loading: false,
+                                    status: "normal",
+                                    dataSource: res.data,
+                                    pagination: Object.assign(this.state.pagination, {
+                                        total: res.totalCount
+                                    })
+                                })
+                            } else {
+                                this.setState({
+                                    loading: false,
+                                    status: "error",
+                                    errorMessage: res.msg
+                                })
+                            }
+                        },
+                        err => {
+                            this.setState({
+                                loading: false,
+                                status: "error",
+                                errorMessage: ""
+                            })
+                        }
+                    )
+            }
+        },
+        componentDidMount() {
+            this.methods.loadData()
+        }
+    }
+</relim-script>
+</div>
+{{/block}}

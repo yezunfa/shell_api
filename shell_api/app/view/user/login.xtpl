@@ -1,0 +1,227 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>中国算力后台{{title}}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="icon" href="../animated_favicon.gif" type="image/gif" />
+<link href="{{ helper.getCDNHost() }}/public/user/login.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{{ helper.getCDNHost() }}/public/third-part/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{{ helper.getCDNHost() }}/public/third-part/jquery/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="{{ helper.getCDNHost() }}/public/third-part/jquery/jquery.validation.min.js"></script>
+<script type="text/javascript" src="{{ helper.getCDNHost() }}/public/third-part/jquery/jquery.cookie.js"></script>
+<!--[if lte IE 8]>
+	<script type="Text/Javascript" language="JavaScript">
+    	$(function(){
+            pb({
+                id:'notIe',
+                content:'<div class="noContent"><div class="noText"><p class="p1">您当前浏览器版本过低</p><p class="p1">不支持浏览</p><p class="p2">建议使用</p><p class="p3">谷歌、火狐、360极速、IE9以上版本</p></div></div>',
+                drag:false,
+                head:false,
+                cl_cBtn:false,
+                width:316,
+                height:376,
+                ok_title:"确定",
+                onOk:function(){
+                    location.href = "../index.php";
+                }
+            });
+            
+            $("#pb-mask").css('cssText','position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; opacity: 1; overflow: hidden; z-index: 100002; background-color:#fff;')
+        });
+    </script>
+<![endif]-->
+<script type="text/javascript">
+//若cookie值不存在，则跳出iframe框架
+if(!$.cookie('dscActionParam') && $.cookie('admin_type') != 1){
+	$.cookie('admin_type','1' , {expires: 1 ,path:'/'});
+	top.location.href = location.href;
+}
+</script>
+</head>
+
+<body>
+	<div class="login-layout">
+    	<!-- <div class="logo"><img src="images/loginImg.png"></div> -->
+        <form action="privilege.php?act=signin" name='theForm' id="theForm" method="post">
+            <div class="login-form" style="position: relative">
+                <div class="formContent">
+                	<div class="title">中国算力后台业务管理系统</div>
+                    <div class="formInfo">
+                    	<div class="formText">
+                        	<i class="icon icon-user"></i>
+                            <input type="text" name="username" autocomplete="off" class="input-text" value="" placeholder="用户名" />
+                        </div>
+                        <div class="formText">
+                        	<i class="icon icon-pwd"></i>
+                                <input type="password"  style="display:none"/> 
+                            <input type="password" name="password" autocomplete="off" class="input-text" value="" placeholder="密  码" />
+                        </div>
+                        <div class="formText">
+                        	<div class="checkbox">
+                            	<div class="cur">
+                                    <input type="hidden" value="0" name="remember"/>
+                                </div>
+                            </div>
+                           {{! <span class="span">保存信息</span> }}
+                            <a href="get_password.php?act=forget_pwd" class="forget_pwd">忘记密码？</a>
+                        </div>
+                        <div class="formText submitDiv">
+                                                        <span class="submit_span">
+                            	<input style="border-radius: 50px;margin:0 auto;display: block;" type="submit"  name="submit" class="sub" value="登录" />
+                            </span>
+                                                    </div>
+                    </div>
+                </div>
+                <div id="error" style="position: absolute;left:0px;bottom: 30px;text-align: center;width:395px;">
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="bannerBox">
+        <ul id="slideBanner" class="slideBanner">
+            <li><img src="{{ helper.getCDNHost() }}/public/user/img/banner_1.jpg"></li>
+            <li><img src="{{ helper.getCDNHost() }}/public/user/img/banner_2.jpg"></li>
+            <li><img src="{{ helper.getCDNHost() }}/public/user/img/banner_3.jpg"></li>
+            <li><img src="{{ helper.getCDNHost() }}/public/user/img/banner_4.jpg"></li>
+            <li><img src="{{ helper.getCDNHost() }}/public/user/img/banner_5.jpg"></li>
+        </ul>
+    </div>
+    <script type="text/javascript" src="{{ helper.getCDNHost() }}/public/third-part/jquery/jquery.purebox.js"></script>    <script type="text/javascript">
+    	$("#bannerBox").slide({mainCell:".slideBanner",effect:"fold",interTime:3500,delayTime:500,autoPlay:true,autoPage:true,endFun:function(i,c,s){
+			$(window).resize(function(){
+				var width = $(window).width();
+				var height = $(window).height();
+				s.find(".slideBanner,.slideBanner li").css({"width":width,"height":height});
+			});
+		}});
+		
+		$(function(){
+			$(".formText .input-text").focus(function(){
+				$(this).parent().addClass("focus");
+			});
+			
+			$(".formText .input-text").blur(function(){
+				$(this).parent().removeClass("focus");
+			});
+			
+			$(".checkbox").click(function(){
+				if($(this).hasClass("checked")){
+					$(this).removeClass("checked");
+                    $('input[name=remember]').val(0);
+				}else{
+					$(this).addClass("checked");
+                    $('input[name=remember]').val(1);
+				}
+			});
+			
+			$(".formText .input-yzm").focus(function(){
+				$(this).prev().show();
+			});
+			
+			$(".formText").blur(function(){
+				$(this).prev().hide();
+			});
+			
+			
+		});
+
+        $(function(){
+            $('.submit_span .sub').on('click',function(){
+                $('.code').show();
+            });
+            $('#theForm input[name=submit]').on('click',function(e){
+                var username=true;
+                var password=true;
+                var captcha=true;
+                var rememberMe = false;
+                if($('#theForm input[name=username]').val() == ''){
+                    $('#error').html('<span class="error">用户名不能为空!</span>');
+                    $('#theForm input[name=username]').focus();
+                    username = false;
+                    return false;
+                }
+
+                if($('#theForm input[name=password]').val() == ''){
+                    $('#error').html('<span class="error">密码不能为空!</span>');
+                    $('#theForm input[name=password]').focus();
+                    password = false;
+                    return false;
+                }
+      
+                if($('#theForm input[name=captcha]').val() == ''){
+                    $('#error').html('<span class="error">验证码不能为空!</span>');
+                    $('#theForm input[name=captcha]').focus();
+                    captcha = false;
+                    return false;
+                }
+
+                if($('input[name=remember]').val() === "1") {
+                    rememberMe = true
+                }
+
+
+                if($('#theForm input[name=username]').val() != '' && $('#theForm input[name=password]').val() != ''){
+                    function getQueryString(name) {
+                        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", i); // 匹配目标参数
+                        var result = window.location.search.substr(1).match(reg); // 对querystring匹配目标参数
+                        if (result != null) {
+                            return decodeURIComponent(result[2]);
+                        } else {
+                            return null;
+                        }
+                    }
+
+                    var loginUrl = '/user/login';
+                    // if(getQueryString('redirectUrl')){
+                    //    loginUrl = loginUrl + "?redirectUrl=" + encodeURIComponent(getQueryString('redirectUrl'));
+                    // }
+
+                    $.ajax({
+                        async: false,
+                        url: loginUrl,
+                        data:{
+                            _csrf:'{{ $csrf }}',
+                            'username': $('#theForm input[name=username]').val(),
+                            'password': $('#theForm input[name=password]').val(),
+                            'captcha': captcha,
+                            'rememberMe': rememberMe,
+                        },
+                        type:'post',
+                        success:function(res){
+                            if(res.success && res.data && res.data.isLogin){
+                                window.location.href = "/";
+                            } else {
+                                $('#error').html('<span class="error">用户名或密码错误!</span>');
+                                $('.code-img img').attr('src','index.php?act=captcha&'+Math.random());
+                                username=false;
+                                password=false;
+                                return false;
+                            }
+                        }
+                    });
+                }
+                
+                e.preventDefault();
+                return false;
+                // if(captcha && username && password){
+                //     $('#theForm').submit();
+                // }else{
+                //     return false;
+                // }
+            });
+			
+			$(document).click(function(e){
+				if(e.target.name !='captcha' && !$(e.target).parents("div").is(".submitDiv")){
+					$('.code').hide();
+				}
+			});
+        });
+    
+    </script>
+</body>
+</html>

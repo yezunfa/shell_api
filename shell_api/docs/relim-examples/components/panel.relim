@@ -1,0 +1,12 @@
+<!-- 抽象一个Panel组件吧 -->
+<Card
+    title={props.title || '默认标题'}
+    style={{
+        display: "block",
+        marginTop: 20,
+        minHeight: 300
+    }}
+    bodyHeight="auto"
+>
+{props.children}
+</Card>

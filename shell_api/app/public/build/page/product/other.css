@@ -1,0 +1,64 @@
+.page-head {
+  width: 100%;
+  height: 50px;
+  background-color: #F0F0F0; }
+  .page-head .nav {
+    width: 1300px;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 40px; }
+    .page-head .nav h2 {
+      width: 120px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 16px;
+      color: #666666;
+      margin: 0 !important;
+      float: left; }
+    .page-head .nav span, .page-head .nav Button {
+      display: block;
+      font-size: 14px;
+      width: 68px;
+      height: 28px;
+      line-height: 28px;
+      border: 1px #333 solid;
+      margin-top: 10px;
+      margin-right: 40px;
+      float: right;
+      text-align: center;
+      background-color: #FaFaFa; }
+      .page-head .nav span a, .page-head .nav Button a {
+        text-decoration: none;
+        color: #333; }
+    .page-head .nav Button {
+      width: 138px; }
+
+.page-count {
+  width: 1360px;
+  margin: auto; }
+  .page-count .next-card .query {
+    width: 100%;
+    margin-top: 40px; }
+  .page-count .next-card .table {
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 40px; }
+    .page-count .next-card .table .next-table-header tr {
+      height: 50px; }
+      .page-count .next-card .table .next-table-header tr th {
+        color: #111;
+        font-size: 16px;
+        font-weight: bold;
+        height: 50px;
+        text-align: center; }
+    .page-count .next-card .table tr div.next-table-cell-wrapper {
+      padding: 0;
+      text-align: center;
+      min-height: 30px;
+      line-height: 30px; }
+    .page-count .next-card .table tr td .block-view div {
+      display: inline-block !important; }
+
+a:visited {
+  color: #4077CC !important; }

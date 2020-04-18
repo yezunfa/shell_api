@@ -1,0 +1,84 @@
+{{extend ("./layout/index.xtpl")}}
+
+{{#block("head")}}
+
+
+<style type="text/css">
+    table.hovertable {
+        font-family: verdana, arial, sans-serif;
+        font-size: 11px;
+        color: #333333;
+        border-width: 1px;
+        border-color: #999999;
+        border-collapse: collapse;
+    }
+
+    table.hovertable th {
+        background-color: #c3dde0;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+
+    table.hovertable tr {
+        background-color: #d4e3e5;
+    }
+
+    table.hovertable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+
+</style>
+
+{{/block}}
+
+
+{{#block("body")}}
+<section class="bar bg-gray no-mb padding-big text-center-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <h5>页面列表管理</h5>
+            </div>
+            <div class="col-md-8">
+                <table class="hovertable">
+                    <tr>
+                        <td>页面Id</td>
+                        <td>页面名称</td>
+                        <td>URL</td>
+                        <td>操作</td>
+                    </tr>
+                    {{#each(pageData)}}
+                    <tr>
+                        <td>{{Id}}</td>
+                        <td>{{Name}}</td>
+                        <td>{{Url}}</td>
+                        <td>
+                            <a href="/code/page?Id={{Id}}">编辑</a>
+                            <a href="/render/?Id={{Id}}">线上Id</a>
+                            <a href="/render/{{Url}}">线上Url</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
+            <div class="col-md-2">
+                <a href="/code/page">新增</a>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+{{/block}}
+
+
+
+{{#block("footer")}}
+
+{{/block}}

@@ -1,0 +1,16 @@
+    <Route path="/chart" exact component={(props) => <include path="./singleLine.relim" />} {...props} />
+    <Route path="/chart/singleLine" component={(props) => <include path="./singleLine.relim" />} {...props} />
+    <Route path="/chart/doubleLine" component={(props) => <include path="./doubleLine.relim" />} {...props} />
+    <Route path="/chart/smoothLine" component={(props) => <include path="./smoothLine.relim" />} {...props} />
+    <Route path="/chart/baseBar" component={(props) => <include path="./baseBar.relim" />} {...props} />
+    <Route path="/chart/dodgeBar" component={(props) => <include path="./dodgeBar.relim" />} {...props} />
+    <Route path="/chart/stackBar" component={(props) => <include path="./stackBar.relim" />} {...props} />
+    <Route path="/chart/pie" component={(props) => <include path="./pie.relim" />} {...props} />
+    <Route path="/chart/ring" component={(props) => <include path="./ring.relim" />} {...props} />
+    <Route path="/chart/sunburst" component={(props) => <include path="./sunburst.relim" />} {...props} />
+    <Route path="/chart/scatterseries" component={(props) => <include path="./scatterseries.relim" />} {...props} />
+    <Route path="/chart/bubble" component={(props) => <include path="./bubble.relim" />} {...props} />
+    <Route path="/chart/area" component={(props) => <include path="./area.relim" />} {...props} />
+    <Route path="/chart/stackArea" component={(props) => <include path="./stackArea.relim" />} {...props} />
+    <Route path="/chart/percentageArea" component={(props) => <include path="./percentageArea.relim" />} {...props} />
+    <Route path="/chart/complex" component={(props) => <include path="./complex.relim" />} {...props} />

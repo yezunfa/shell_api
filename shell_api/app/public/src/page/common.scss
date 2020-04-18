@@ -1,0 +1,99 @@
+$borderColor: #D4D2D2;
+$colorRed: #F04844;
+$cardTitleColor: #666;
+$grayBg: #F3F3F3;
+.page-head {
+    width: 100%;
+    height: 50px;
+    background-color: #F0F0F0;
+    .nav {
+        width: 1360px;
+        height: 50px;
+        margin: auto;
+        margin-bottom: 40px;
+        h2 {
+            width: 120px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 16px;
+            color: #666666;
+            margin: 0 !important;
+            float: left;
+        }
+
+        span {
+            display: block;
+            font-size: 14px;
+            width: 78px;
+            height: 28px;
+            line-height: 28px;
+            border: 1px #333 solid;
+            margin-top: 10px;
+            margin-right: 40px;
+            float: right;
+            text-align: center;
+            background-color: #FaFaFa;
+
+            a {
+                text-decoration: none;
+                color: #333;
+            }
+        }
+    }
+}
+.page-content {
+    width: 1360px;
+    margin: auto;
+    padding: 10px 22px 0 22px;
+    background-color: $grayBg;
+    a {
+        color: #666;
+        display: block;
+    }
+    a:link {
+        color: #666;
+    }
+    a:hover {
+        color: #1ABC9C;
+    }
+    h2 {
+        border: 1px solid $borderColor;
+        font-size: 14px;
+        color: $cardTitleColor;
+        background-color: $grayBg;
+        margin: 0;
+        padding: 7px 12px;
+    }
+}
+
+.mod {
+    width: 1060px;
+    margin: 0 0 22px;
+}
+
+.mod-2 {
+    width: 1060px;
+    display: flex;
+    justify-content: space-between;
+    .mod {
+        width: 520px;
+    }
+}
+
+
+.card {
+    width: 100%;
+    margin: 0 0 22px;
+    .body {
+        border: 1px solid $borderColor;
+        border-top: none;
+        display: block;
+        overflow: hidden;
+        padding-bottom: 10px;
+        img{
+            width: 100%;
+        }
+    }
+    
+}

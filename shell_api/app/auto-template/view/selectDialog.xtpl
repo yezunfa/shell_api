@@ -1,0 +1,236 @@
+<component name="__SelectDialogCompentName__">
+ <template>
+    <div className="reference-select-value">
+        <a id={"foreignKey-" + state.name} data-value={state.choosenRecord.Id || ""} href="javascript:void(0);"
+            onClick={ ()=> {
+                methods.showDialog(true);
+            } }
+            >
+            {  
+                state.choosenRecord.Id ? 
+                (state.choosenRecord.Name || state.choosenRecord.OrderNo)
+                :
+                "请选择"
+            }
+        </a>
+        {
+            state.choosenRecord.Id ? 
+            (<A className="to-detail" href="javascript:void(0);" onClick={ (e) => {
+                methods.toDetail(e);
+            } }>{state.detail || '查看详情' }</A>)
+            : 
+            null
+        }
+    </div>
+    <Dialog
+      visible={state.showDialog}
+      style={ { width: 900} }
+      title={state.title}
+      onOk={ ()=>methods.showDialog(false)}
+      onClose={()=> methods.showDialog(false)}
+      footer={<div>
+        <Button onClick={()=> methods.showDialog(false)}>{ 'cancel' }</Button>
+        <Button onClick={()=> {
+            if(!state.choosenRecord.Id) {
+                Toast.error("请先选择");
+            } else {
+                methods.showDialog(false);
+                state.onDataSelected(state.choosenRecord);
+            }
+        } } type="primary">{ 'ok' }</Button>
+      </div>} className="shop-tool-url-set-dialog">
+          <SchemaForm traverse={qverse(($)=>{
+        $('*').itemProps({
+            itemCol:8,
+            labelCol:6
+        })
+    })} onSubmit={methods.onSubmitHandler}>
+        
+        __SEARCH__
+        <FormButtonGroup offset={2}>
+            <Submit>查询</Submit>
+            <Reset>重置</Reset>
+            <a href="javascript:void(0);" onClick={()=>{
+                window.location.href = '/page/__tablename__/create';
+            }}>创建创建__ENTITYNAME__</a>
+        </FormButtonGroup>
+    </SchemaForm>
+    <Table
+        dataSource={state.dataSource}
+        isTree={false}
+        style={ { minHeight: 200,marginTop:20 } }
+        isLoading={state.loading}
+    >
+        <Table.Column
+            title="选择"
+            width={120}
+            cell={(value, index, record) => {
+                return (
+                    <InlineView marginY={10}>
+                        <Radio onChange={ ()=> {
+                            methods.setChoosenRecord(record);
+                        } } checked={record.Id === state.choosenRecord.Id}></Radio>
+                    </InlineView>
+                )
+            }}
+        />
+        __TABLE_COLUMN__
+
+        
+    </Table>
+    <BlockView align="center" marginTop={20}>
+        <Pagination {...state.pagination} onChange={methods.onChangePage} />
+    </BlockView>
+      </Dialog>
+ </template>
+ <style>
+    .reference-select-value{
+        display: flex;
+    }
+ </style>
+<relim-script>
+    const Toast = require("toast");
+    const Dialog = require("dialog");
+    const MAIN_URL = "/api/__tablename__/search";
+    const DETAIL_URL = "/api/__tablename__/detail";
+    const DETAIL_PAGE_URL = "/page/__tablename__/detail/";
+    module.exports = {
+        props: {
+            showDialog: false,
+            title: "请选择",
+            name: "ParentId",
+            choosenRecord: {}
+        },
+        state: function(props){
+            return {
+                loading: false,
+                errorMessage: "",
+                choosenRecord: props.choosenRecord || {},
+                title: props.title,
+                name: props.name,
+                status: "normal",
+                formData: {},
+                pagination: {
+                    current: 1,
+                    total: 0,
+                    pageSize: 3
+                },
+                onDataSelected: props.onDataSelected
+            }
+        },
+        componentWillReceiveProps: function(nextProps) {
+            if(nextProps.choosenRecord && nextProps.choosenRecord.Id !== this.state.choosenRecord.Id) {
+                this.setState({
+                    choosenRecord: nextProps.choosenRecord
+                })
+            }
+        },
+        methods: {
+            onChangePage(pageIndex) {
+                this.setState({
+                    pagination: Object.assign(this.state.pagination, {
+                        current: pageIndex
+                    })
+                })
+                this.methods.loadData()
+            },
+            showDialog(isShow) {
+                this.setState({
+                    showDialog: isShow
+                })
+            },
+            setChoosenRecord(record) {
+                 this.setState({
+                    choosenRecord: record
+                }, ()=> {
+                    this.methods.getDetail();
+                })
+            },
+            onSubmitHandler(values) {
+                this.setState(
+                    {
+                        formData: values
+                    },
+                    () => {
+                        this.methods.loadData()
+                    }
+                )
+            },
+            toDetail(e) {
+                let location = window.parent.location || window.location; 
+                location.href =  DETAIL_PAGE_URL + this.state.choosenRecord.Id;
+                e.preventDefault();
+                return false;
+            },
+            getDetail() {
+                if(!this.state.choosenRecord.Id) {
+                    return;
+                }
+                fetch(DETAIL_URL+ "/" + this.state.choosenRecord.Id, { credentials: 'same-origin', data: { _csrf: '{{ $csrf }}' } })
+                .then(res => res.json())
+                .then(res => {
+                    if (res && res.success) {
+                        this.setState({
+                            choosenRecord: res.data
+                        });
+                    }
+                }).catch(ex => {
+                    console.log(ex);
+                })
+            },
+            loadData(values) {
+                this.setState({
+                    loading: true
+                })
+                fetch(MAIN_URL, {
+                    credentials: 'same-origin',
+                    data: {
+                        pagination: JSON.stringify(this.state.pagination),
+                        query: JSON.stringify(
+                            Object.assign(this.state.formData, values)
+                        ),
+                        timestamp: Date.now()
+                    }
+                })
+                    .then(res => res.json())
+                    .then(
+                        res => {
+                            if (res && res.success) {
+                                this.setState({
+                                    loading: false,
+                                    status: "normal",
+                                    dataSource: res.data,
+                                    pagination: Object.assign(this.state.pagination, {
+                                        total: res.totalCount
+                                    })
+                                })
+                            } else {
+                                this.setState({
+                                    loading: false,
+                                    status: "error",
+                                    errorMessage: res.msg
+                                })
+                            }
+                        },
+                        err => {
+                            this.setState({
+                                loading: false,
+                                status: "error",
+                                errorMessage: ""
+                            })
+                        }
+                    )
+            }
+        },
+        componentDidMount() {
+            this.methods.loadData();
+            this.methods.getDetail();
+        }
+    }
+</relim-script>
+<style>
+.to-detail{
+    margin-left: 20px;
+}
+</style>
+</component>

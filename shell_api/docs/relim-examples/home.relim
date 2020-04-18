@@ -1,0 +1,33 @@
+<div style={{ margin: '0 20px' }}>
+    <Markdown>{`
+# Relim Examples
+
+>  这是一个Relim的例子集合，各位可以一起参与维护，不需要构建不需要任何离线环境，编辑文本，提交即可立马生效看网页
+
+目前已有的例子包含：
+
+- 借助RelimReactRouter与\`<include>\`标签实现的单页应用
+- 简单的todo list应用
+- CRUD场景
+
+该例子体现了Relim3.0的核心特性有：
+
+- 完全去工程化开发Web前端应用，无需任何命令行工具，无需安装nodejs，无需配置一系列的构建脚本
+- JSX支持
+- \`<component>\`标签支持
+- \`<include>\`标签支持
+- \`<script>\`标签支持
+- \`<style>\`标签支持
+- 封装通用组件
+- 组件懒加载
+- 编译中间代码本地缓存
+
+[下载仓库代码](http://gitlab.alibaba-inc.com/relim/relim-examples/repository/archive.zip?ref=master)  🎉🎉🎉🎉
+
+`}</Markdown>
+</div>
+<style>
+    .markdown-body{
+        padding-top:20px;
+    }
+</style>

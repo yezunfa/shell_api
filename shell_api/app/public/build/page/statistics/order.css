@@ -1,0 +1,116 @@
+.page-head {
+  width: 100%;
+  height: 50px;
+  background-color: #F0F0F0; }
+  .page-head .nav {
+    width: 1360px;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 40px; }
+    .page-head .nav h2 {
+      width: 120px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 16px;
+      color: #666666;
+      margin: 0 !important;
+      float: left; }
+    .page-head .nav span {
+      display: block;
+      font-size: 14px;
+      width: 78px;
+      height: 28px;
+      line-height: 28px;
+      border: 1px #333 solid;
+      margin-top: 10px;
+      margin-right: 40px;
+      float: right;
+      text-align: center;
+      background-color: #FaFaFa; }
+      .page-head .nav span a {
+        text-decoration: none;
+        color: #333; }
+
+.page-content {
+  width: 1360px;
+  margin: auto;
+  padding: 10px 22px 0 22px;
+  background-color: #F3F3F3; }
+  .page-content a {
+    color: #666;
+    display: block; }
+  .page-content a:link {
+    color: #666; }
+  .page-content a:hover {
+    color: #1ABC9C; }
+  .page-content h2 {
+    border: 1px solid #D4D2D2;
+    font-size: 14px;
+    color: #666;
+    background-color: #F3F3F3;
+    margin: 0;
+    padding: 7px 12px; }
+
+.mod {
+  width: 1060px;
+  margin: 0 0 22px; }
+
+.mod-2 {
+  width: 1060px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+  .mod-2 .mod {
+    width: 520px; }
+
+.card {
+  width: 100%;
+  margin: 0 0 22px; }
+  .card .body {
+    border: 1px solid #D4D2D2;
+    border-top: none;
+    display: block;
+    overflow: hidden;
+    padding-bottom: 10px; }
+    .card .body img {
+      width: 100%; }
+
+div.body span {
+  display: inline-block;
+  vertical-align: top; }
+
+div.body .count {
+  width: 1300px;
+  height: 50px;
+  padding-top: 20px;
+  padding-left: 40px;
+  padding-bottom: 20px;
+  font-size: 14px; }
+  div.body .count .count-title {
+    height: 25px;
+    line-height: 25px; }
+  div.body .count .nav {
+    float: right; }
+    div.body .count .nav .one {
+      width: 200px;
+      height: 25px; }
+      div.body .count .nav .one i {
+        font-style: normal;
+        padding-left: 20px; }
+    div.body .count .nav .two {
+      height: 25px;
+      width: 300px; }
+  div.body .count button.text-btn {
+    font-size: 14px;
+    padding: 0 10px;
+    border: 0;
+    outline: none;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 0.5px 0px #666; }

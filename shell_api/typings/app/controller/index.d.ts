@@ -27,6 +27,7 @@ import ExportVerification = require('../../../app/controller/verification');
 import ExportWechat = require('../../../app/controller/wechat');
 import ExportWxpay = require('../../../app/controller/wxpay');
 import ExportShellMember = require('../../../app/controller/shell/member');
+import ExportShellProduct = require('../../../app/controller/shell/product');
 
 declare module 'egg' {
   interface IController {
@@ -56,6 +57,7 @@ declare module 'egg' {
     wxpay: ExportWxpay;
     shell: {
       member: ExportShellMember;
+      product: ExportShellProduct;
     }
   }
 }

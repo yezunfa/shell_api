@@ -94,6 +94,7 @@ import ExportCodeIndex = require('../../../app/service/code/index');
 import ExportMessageOrderSuccess = require('../../../app/service/message/order_success');
 import ExportPaymentWxpay = require('../../../app/service/payment/wxpay');
 import ExportShellMember = require('../../../app/service/shell/member');
+import ExportShellProduct = require('../../../app/service/shell/product');
 import ExportUtilsExcel = require('../../../app/service/utils/excel');
 import ExportUtilsOlderBaseData = require('../../../app/service/utils/olderBaseData');
 import ExportUtilsRedis = require('../../../app/service/utils/redis');
@@ -195,6 +196,7 @@ declare module 'egg' {
     }
     shell: {
       member: AutoInstanceType<typeof ExportShellMember>;
+      product: AutoInstanceType<typeof ExportShellProduct>;
     }
     utils: {
       excel: AutoInstanceType<typeof ExportUtilsExcel>;

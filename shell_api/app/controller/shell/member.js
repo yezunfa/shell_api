@@ -40,13 +40,7 @@ class Member extends Controller {
             const wechatResult = await ctx.curl(wechatApi , { dataType: 'json' })
             const { openid, session_key, unionid, errmsg } = wechatResult.data
             if (!openid) throw Error(errmsg || "cant't get openid")
-            tourist.openid = openid
-            
-            if (!unionid) {
-                console.log('cannot get user unionid')
-            } else tourist.unionid = unionid
-            console.log(tourist)
-             const user = await ctx.service.shell.member.getByopenid(openid)
+            const user = await ctx.service.shell.member.getByopenid(openid)
 
             if (user && user.length) {
                 const [ userinfo ] = user
@@ -57,6 +51,8 @@ class Member extends Controller {
             } else { // 创建新用户
                 tourist.Id = uuid.v1()
                 tourist.NickName = '游客'
+                tourist.openid = openid
+                
               const res = await ctx.service.shell.member.create(tourist)
 
                 result.message = "登录成功"

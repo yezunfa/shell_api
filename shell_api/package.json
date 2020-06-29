@@ -107,7 +107,7 @@
     "init-data": "TESTS=app/auto-template/init-data/index.js egg-bin test",
     "cov": "egg-bin cov",
     "mock": "fiemock start",
-    "model": "node app/auto-template/model-sequelize-auto/bin/egg-sequelize-auto -o \"./app/model\" -d fusion_test -h 118.190.62.2 -u cnhash -p 3306 -x cnhash@QQQ -e mysql"
+    "model": "node app/auto-template/model-sequelize-auto/bin/egg-sequelize-auto -o \"./app/model\" -d shell -h 120.24.169.8 -u root -p 3306 -x shellDental@666 -e mysql"
   },
   "ci": {
     "version": "10"

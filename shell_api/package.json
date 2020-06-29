@@ -72,7 +72,7 @@
     "inquirer": "^3.3.0",
     "lodash": "^4.17.15",
     "mocha": "^5.2.0",
-    "open": "0.0.5",
+    "open": "6.0.0",
     "os": "^0.1.1",
     "prettier": "1.9.2",
     "prettier-eslint": "^8.7.0",

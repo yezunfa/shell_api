@@ -59,6 +59,24 @@ class ProductService extends Service {
             return false
         }
     }
+
+    /**
+     * get detail by product Id
+     */
+    async getById(Id) {
+        const { ctx } = this;
+        try {
+            const Result = await ctx.model.Product.findOne({
+                where: {
+                    Id
+                },
+            })
+            return Result
+        } catch (error) {
+            ctx.logger.error(error)
+            return false
+        }
+    }
 }
 
 module.exports = ProductService 

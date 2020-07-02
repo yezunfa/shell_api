@@ -12,7 +12,7 @@ module.exports = app => {
       comment: '主键'
     },
     Type: {
-      type: DataTypes.STRING(2),
+      type: DataTypes.STRING(36),
       allowNull: true,
       comment: '产品类型'
     },
@@ -55,6 +55,11 @@ module.exports = app => {
       type: DataTypes.STRING(8000),
       allowNull: true,
       comment: '注意事项'
+    },
+    Detail: {
+      type: DataTypes.STRING(5000),
+      allowNull: true,
+      comment: '产品细节'
     },
     Valid: {
       type: DataTypes.INTEGER(1),

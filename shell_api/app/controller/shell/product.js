@@ -62,6 +62,29 @@ class Product extends Controller {
             }
         }
     }
+
+    // 商品详情
+    async detail() {
+        const ctx = this.ctx;
+        const { Id } = ctx.query;
+        try {
+            const entitylist = await ctx.service.shell.product.getById(Id);
+            ctx.body = {
+                success: true,
+                code: 200,
+                message: `get detail`,
+                data: entitylist
+            }
+        } catch (error) {
+            console.error(error)
+            ctx.logger.error(error)
+            ctx.body = {
+                success: false,
+                code: 444,
+                message: `${error}`,
+            }
+        }
+    }
     
 
 }

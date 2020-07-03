@@ -45,7 +45,7 @@ class Member extends Controller {
             if (user && user.length) {
                 const [ userinfo ] = user
                 result.message = '登录成功'
-                result.data = { userinfo }
+                result.data = { userinfo, authtoken: session_key }
                 ctx.body = result
                 return 
             } else { // 创建新用户
@@ -56,7 +56,7 @@ class Member extends Controller {
               const res = await ctx.service.shell.member.create(tourist)
 
                 result.message = "登录成功"
-                result.data = { userinfo: res }
+                result.data = { userinfo: res, authtoken: session_key }
                 ctx.body = result
             }
 

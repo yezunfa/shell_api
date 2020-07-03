@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-03 11:59:48
- * @LastEditTime: 2020-07-03 14:55:13
+ * @LastEditTime: 2020-07-03 14:56:15
  * @Description: Do not edit
  */ 
 'use strict';
@@ -18,23 +18,23 @@ class Cart extends Controller {
      */
     async create() {
         const ctx = this.ctx;
-        console.log(ctx.query);
-        const { userid, ProductId, cnt } = ctx.request.body;
+        const { ProductId, Amount } = ctx.request.body;
+        const { userid } = ctx.query;
 
         let entity = {
             Id: uuid.v4(),
             UserId: userid,
             ParentId: uuid.v4(),
             ProductId,
-            Amount: cnt,
+            Amount: Amount,
             CreateTime: new Date(),
             CreatePerson: 'system',
         }
 
-        const validCart = await ctx.service.shell.cart.getValidCart();
+        const validCart = await ctx.service.shell.cart.getValidCart(userid);
         // 已经合法的购物车已经存在，则使用旧ParentId新增一条记录
         if (validCart) {
-            console.log('validCart', validCart);
+            console.log('has valid Cart:', validCart);
             entity = {
                 ...entity,
                 ParentId: validCart.ParentId,

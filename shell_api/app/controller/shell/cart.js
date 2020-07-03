@@ -1,3 +1,9 @@
+/*
+ * @Author: yezunfa
+ * @Date: 2020-07-03 11:59:48
+ * @LastEditTime: 2020-07-03 12:06:15
+ * @Description: Do not edit
+ */ 
 'use strict';
 
 const Controller = require('egg').Controller;
@@ -12,11 +18,12 @@ class Cart extends Controller {
      */
     async create() {
         const ctx = this.ctx;
-        const { UserId, ProductId, cnt } = ctx.request.body;
+        console.log(ctx.query);
+        const { userid, ProductId, cnt } = ctx.request.body;
 
         let entity = {
             Id: uuid.v4(),
-            UserId,
+            UserId: userid,
             ParentId: uuid.v4(),
             ProductId,
             Amount: cnt,
@@ -24,7 +31,7 @@ class Cart extends Controller {
             CreatePerson: 'system',
         }
 
-        const validCart = await ctx.service.shell.cart.getValidCart(UserId);
+        const validCart = await ctx.service.shell.cart.getValidCart();
         // 已经合法的购物车已经存在，则使用旧ParentId新增一条记录
         if (validCart) {
             console.log('validCart', validCart);
@@ -52,6 +59,37 @@ class Cart extends Controller {
                 data: { ...entity, ParentId: validCart.ParentId }
             }
             return;
+        }
+    }
+    /**
+     * 
+     */
+    async getByUserId(){
+        const { ctx } = this
+        const { userid } = ctx.query
+        
+        try {
+            const ParentResult = await this.ctx.model.Cart.findOne({
+                where: {
+                    UserId: userid,
+                    ParentId: null
+                }
+            })
+            console.log(ParentResult)
+            ctx.body = {
+                success: true,
+                code: 200,
+                message: `success create cart`,
+                data: ParentResult
+            }  
+        } catch (error) {
+            console.error(error)
+            ctx.logger.error(error)
+            ctx.body = {
+                success: false,
+                code: 444,
+                message: `cart.getByUserId接口错误 ` 
+            } 
         }
     }
 }

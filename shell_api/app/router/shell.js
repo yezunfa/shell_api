@@ -19,5 +19,6 @@ module.exports = app => {
 
     // 购物车
     app.router.post('/api/cart/add', controller.shell.cart.create)
+    app.router.get('/api/cart/getByUserId', controller.shell.cart.getByUserId)
     
 };

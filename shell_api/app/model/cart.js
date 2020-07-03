@@ -5,6 +5,12 @@ module.exports = app => {
   const DataTypes = app.Sequelize;
 
   const Model = app.model.define('cart', {
+    Id: {
+      type: DataTypes.STRING(36),
+      allowNull: false,
+      primaryKey: true,
+      comment: '购物车ID'
+    },
     UserId: {
       type: DataTypes.STRING(36),
       allowNull: true,
@@ -16,16 +22,10 @@ module.exports = app => {
       defaultValue: '',
       comment: '购物车主id'
     },
-    Id: {
-      type: DataTypes.STRING(36),
-      allowNull: false,
-      primaryKey: true,
-      comment: '购物车ID'
-    },
     ProductId: {
       type: DataTypes.STRING(36),
       allowNull: true,
-      comment: '会员id'
+      comment: '产品id'
     },
     Amount: {
       type: DataTypes.DECIMAL,
@@ -36,13 +36,13 @@ module.exports = app => {
       type: DataTypes.INTEGER(1),
       allowNull: false,
       defaultValue: '1',
-      comment: '购物车id'
+      comment: '购物车状态'
     },
     Valid: {
       type: DataTypes.INTEGER(1),
       allowNull: false,
       defaultValue: '1',
-      comment: '是否有效'
+      comment: '是否有效,根据这个来判断添加到的购物车'
     },
     Sort: {
       type: DataTypes.INTEGER(2),

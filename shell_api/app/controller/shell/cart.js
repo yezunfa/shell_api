@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-03 11:59:48
- * @LastEditTime: 2020-07-03 14:56:15
+ * @LastEditTime: 2020-07-03 15:08:59
  * @Description: Do not edit
  */ 
 'use strict';
@@ -31,22 +31,27 @@ class Cart extends Controller {
             CreatePerson: 'system',
         }
 
-        const validCart = await ctx.service.shell.cart.getValidCart(userid);
+        let validCart = await ctx.service.shell.cart.getValidCart(userid);
+        console.log(validCart)
         // 已经合法的购物车已经存在，则使用旧ParentId新增一条记录
-        if (validCart) {
-            console.log('has valid Cart:', validCart);
-            entity = {
-                ...entity,
-                ParentId: validCart.ParentId,
+        if (!validCart) {
+            const NewEntity ={
+                Id: uuid.v4(),
+                UserId: userid,   
+                CreateTime: new Date(),
+                CreatePerson: 'system',
             }
+            validCart = await ctx.service.shell.cart.create(NewEntity)
         }
+        entity.ParentId = validCart.Id
+
         try {
-            await ctx.service.shell.cart.create({ ...entity, ParentId: validCart.ParentId });
+            await ctx.service.shell.cart.create(entity);
             ctx.body = {
                 success: true,
                 code: 200,
                 message: `success create cart`,
-                data: { ...entity, ParentId: validCart.ParentId }
+                data: entity
             }
             return;       
         } catch (error) {
@@ -56,7 +61,7 @@ class Cart extends Controller {
                 success: false,
                 code: 444,
                 message: `cart.create错误，捕捉cart.create的错误`,
-                data: { ...entity, ParentId: validCart.ParentId }
+                data: entity
             }
             return;
         }

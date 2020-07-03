@@ -1,3 +1,9 @@
+/*
+ * @Author: yezunfa
+ * @Date: 2020-07-03 12:11:54
+ * @LastEditTime: 2020-07-03 15:18:44
+ * @Description: Do not edit
+ */ 
 'use strict'
 
 const Service = require('egg').Service
@@ -60,6 +66,7 @@ class CartService extends Service {
                 where: {
                     Valid: 1,
                     UserId: Id,
+                    ParentId: ''
                 },
             })
             return Result

@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-03 11:59:48
- * @LastEditTime: 2020-07-03 12:06:15
+ * @LastEditTime: 2020-07-03 14:55:13
  * @Description: Do not edit
  */ 
 'use strict';
@@ -41,12 +41,12 @@ class Cart extends Controller {
             }
         }
         try {
-            await ctx.service.shell.cart.create(entity);
+            await ctx.service.shell.cart.create({ ...entity, ParentId: validCart.ParentId });
             ctx.body = {
                 success: true,
                 code: 200,
                 message: `success create cart`,
-                data: entity
+                data: { ...entity, ParentId: validCart.ParentId }
             }
             return;       
         } catch (error) {
@@ -56,7 +56,7 @@ class Cart extends Controller {
                 success: false,
                 code: 444,
                 message: `cart.create错误，捕捉cart.create的错误`,
-                data: entity
+                data: { ...entity, ParentId: validCart.ParentId }
             }
             return;
         }

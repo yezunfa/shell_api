@@ -56,7 +56,7 @@ class CartService extends Service {
     async getValidCart(Id) {
         const { ctx } = this;
         try {
-            const Result = await ctx.model.Product.findOne({
+            const Result = await ctx.model.Cart.findOne({
                 where: {
                     Valid: 1,
                     UserId: Id,

@@ -26,6 +26,7 @@ import ExportUser = require('../../../app/controller/user');
 import ExportVerification = require('../../../app/controller/verification');
 import ExportWechat = require('../../../app/controller/wechat');
 import ExportWxpay = require('../../../app/controller/wxpay');
+import ExportShellCart = require('../../../app/controller/shell/cart');
 import ExportShellMember = require('../../../app/controller/shell/member');
 import ExportShellProduct = require('../../../app/controller/shell/product');
 
@@ -56,6 +57,7 @@ declare module 'egg' {
     wechat: ExportWechat;
     wxpay: ExportWxpay;
     shell: {
+      cart: ExportShellCart;
       member: ExportShellMember;
       product: ExportShellProduct;
     }

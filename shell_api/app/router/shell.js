@@ -15,5 +15,9 @@ module.exports = app => {
     app.router.get('/api/productList/getAllProduct', controller.shell.product.getAllProduct)
     app.router.get('/api/productType/getType', controller.shell.product.getAllTypes)
     app.router.get('/api/product/detail', controller.shell.product.detail)
+
+
+    // 购物车
+    app.router.post('/api/cart/add', controller.shell.cart.create)
     
 };

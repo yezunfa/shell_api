@@ -93,6 +93,7 @@ import ExportWxpayRecord = require('../../../app/service/wxpay_record');
 import ExportCodeIndex = require('../../../app/service/code/index');
 import ExportMessageOrderSuccess = require('../../../app/service/message/order_success');
 import ExportPaymentWxpay = require('../../../app/service/payment/wxpay');
+import ExportShellCart = require('../../../app/service/shell/cart');
 import ExportShellMember = require('../../../app/service/shell/member');
 import ExportShellProduct = require('../../../app/service/shell/product');
 import ExportUtilsExcel = require('../../../app/service/utils/excel');
@@ -195,6 +196,7 @@ declare module 'egg' {
       wxpay: AutoInstanceType<typeof ExportPaymentWxpay>;
     }
     shell: {
+      cart: AutoInstanceType<typeof ExportShellCart>;
       member: AutoInstanceType<typeof ExportShellMember>;
       product: AutoInstanceType<typeof ExportShellProduct>;
     }

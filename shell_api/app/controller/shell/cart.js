@@ -41,12 +41,12 @@ class Cart extends Controller {
             }
         }
         try {
-            await ctx.service.shell.cart.create({ ...entity, ParentId: validCart.ParentId });
+            await ctx.service.shell.cart.create(entity);
             ctx.body = {
                 success: true,
                 code: 200,
                 message: `success create cart`,
-                data: { ...entity, ParentId: validCart.ParentId }
+                data: entity
             }
             return;       
         } catch (error) {
@@ -56,7 +56,7 @@ class Cart extends Controller {
                 success: false,
                 code: 444,
                 message: `cart.create错误，捕捉cart.create的错误`,
-                data: { ...entity, ParentId: validCart.ParentId }
+                data: entity
             }
             return;
         }

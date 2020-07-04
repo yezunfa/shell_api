@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-03 11:59:48
- * @LastEditTime: 2020-07-03 15:08:59
+ * @LastEditTime: 2020-07-04 17:40:55
  * @Description: Do not edit
  */ 
 'use strict';
@@ -32,7 +32,6 @@ class Cart extends Controller {
         }
 
         let validCart = await ctx.service.shell.cart.getValidCart(userid);
-        console.log(validCart)
         // 已经合法的购物车已经存在，则使用旧ParentId新增一条记录
         if (!validCart) {
             const NewEntity ={
@@ -72,21 +71,30 @@ class Cart extends Controller {
     async getByUserId(){
         const { ctx } = this
         const { userid } = ctx.query
-        
+        let  result = {}
+        let cartLength = 0
         try {
-            const ParentResult = await this.ctx.model.Cart.findOne({
+            const ParentResult = await ctx.model.Cart.findOne({
                 where: {
                     UserId: userid,
-                    ParentId: null
+                    ParentId: ''
                 }
             })
-            console.log(ParentResult)
+            if (ParentResult && ParentResult.dataValues && ParentResult.dataValues.Id) {
+                const { Id: ParentId } = ParentResult
+                result = { ...ParentResult.dataValues }
+                const productArray = await ctx.service.shell.cart.findAllByParentId({ ParentId })
+                cartLength = productArray.length
+                if (productArray && productArray.length) result = { ...result, productArray }
+            
+            } 
             ctx.body = {
                 success: true,
                 code: 200,
-                message: `success create cart`,
-                data: ParentResult
-            }  
+                total: cartLength,
+                message: `success get ${cartLength } cart Info`,
+                data: result
+            } 
         } catch (error) {
             console.error(error)
             ctx.logger.error(error)

@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-03 12:11:54
- * @LastEditTime: 2020-07-03 15:18:44
+ * @LastEditTime: 2020-07-04 15:55:14
  * @Description: Do not edit
  */ 
 'use strict'
@@ -75,6 +75,30 @@ class CartService extends Service {
             return false
         }
     }
+
+    /**
+     * findAllByParentId
+     */
+    async findAllByParentId({ParentId}){
+        const { ctx } = this
+        const sql =  `
+        select cart.Amount,product_type.Name as TypeName, product.* from cart 
+        left join product on cart.ProductId = product.Id
+        left join product_type on product_type.Id = product.Type
+        where 1 = 1 
+        and cart.ParentId = '${ParentId}'
+        and cart.State = 1
+        and cart.Valid = 1
+        `
+        try {
+            const type = ctx.model.Sequelize.QueryTypes.SELECT
+            const result = await ctx.model.query(sql, { type });
+            return result
+        } catch (error) {
+            throw error
+        }
+    }
+    
 
 }
 

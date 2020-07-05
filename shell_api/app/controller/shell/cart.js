@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-03 11:59:48
- * @LastEditTime: 2020-07-04 17:40:55
+ * @LastEditTime: 2020-07-05 11:41:47
  * @Description: Do not edit
  */ 
 'use strict';
@@ -24,7 +24,7 @@ class Cart extends Controller {
         let entity = {
             Id: uuid.v4(),
             UserId: userid,
-            ParentId: uuid.v4(),
+            // ParentId:uuid.v4(),
             ProductId,
             Amount: Amount,
             CreateTime: new Date(),
@@ -43,16 +43,27 @@ class Cart extends Controller {
             validCart = await ctx.service.shell.cart.create(NewEntity)
         }
         entity.ParentId = validCart.Id
-
+        
+        // 先判断购物车是否有相同的商品，如果有则修改商品数量
         try {
-            await ctx.service.shell.cart.create(entity);
-            ctx.body = {
-                success: true,
-                code: 200,
-                message: `success create cart`,
-                data: entity
-            }
-            return;       
+            const SameCart = await ctx.service.shell.cart.findSameCart({userid, ParentId:entity.ParentId, ProductId })
+            if (SameCart && SameCart.length) {
+                const { Amount:_old_AMOUNT } = SameCart[0];
+                const UpdateEntity = {
+                    ...SameCart[0], 
+                    Amount:parseInt(_old_AMOUNT,10) + parseInt(Amount,10),
+                    UpdatePerson: userid,
+                    UpdateTime: new Date()
+                }
+                const entity = await ctx.service.shell.cart.edit(UpdateEntity);
+                ctx.body = {
+                    success: true,
+                    code: 200,
+                    message: `success create cart`,
+                    data: entity
+                }
+                return;
+            } 
         } catch (error) {
             console.error(error)
             ctx.logger.error(error)
@@ -63,6 +74,25 @@ class Cart extends Controller {
                 data: entity
             }
             return;
+        }
+        // 没有相同的商品类型，新建一条数据
+        try {
+            await ctx.service.shell.cart.create(entity);
+            ctx.body = {
+                success: true,
+                code: 200,
+                message: `success create cart`,
+                data: entity
+            }       
+        } catch (error) {
+            console.error(error)
+            ctx.logger.error(error)
+            ctx.body = {
+                success: false,
+                code: 444,
+                message: `cart.create错误，捕捉cart.create的错误`,
+                data: entity
+            }
         }
     }
     /**

@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-03 12:11:54
- * @LastEditTime: 2020-07-04 15:55:14
+ * @LastEditTime: 2020-07-05 11:39:23
  * @Description: Do not edit
  */ 
 'use strict'
@@ -14,6 +14,19 @@ class CartService extends Service {
     async create(entity) {
         try {
             const result = await this.ctx.model.Cart.create(entity);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    async edit(entity) {
+        try {
+            const result = await this.ctx.model.Cart.update(entity.dataValues || entity, {
+                where: {
+                    Id: entity.Id
+                }
+            });
             return result;
         } catch (err) {
             throw err;
@@ -99,6 +112,25 @@ class CartService extends Service {
         }
     }
     
+    async findSameCart({userid, ParentId, ProductId }) {
+        const { ctx } = this
+        const sql = `
+        select cart.* from cart 
+        where 1 = 1 
+        and cart.ParentId = '${ParentId}'
+        and cart.ProductId = '${ProductId}'
+        and cart.UserId = '${userid}'
+        and cart.Valid = 1 
+        and cart.State = 1 -- 用户未清楚
+        `
+        try {
+            const type = ctx.model.Sequelize.QueryTypes.SELECT
+            const result = await ctx.model.query(sql, { type });
+            return result
+        } catch (error) {
+            throw error
+        }
+    }
 
 }
 

@@ -1,14 +1,14 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-05 13:34:22
- * @LastEditTime: 2020-07-05 14:05:10
+ * @LastEditTime: 2020-07-06 10:05:11
  * @Description: Do not edit
  */ 
 'use strict';
 
 const Controller = require('egg').Controller;
 const moment = require("moment");
-const utils = require('../utils/index');
+const utils = require('../../utils/index');
 const uuid = require('uuid')
 class Payment extends Controller {
 

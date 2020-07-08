@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-03-29 21:32:55
- * @LastEditTime: 2020-06-30 01:33:33
+ * @LastEditTime: 2020-07-08 16:09:51
  * @Description: Do not edit
  */ 
 module.exports = app => {
@@ -20,5 +20,7 @@ module.exports = app => {
     // 购物车
     app.router.post('/api/cart/add', controller.shell.cart.create)
     app.router.get('/api/cart/getByUserId', controller.shell.cart.getByUserId)
+    // 订单
+    app.router.post('/api/cart/createOrder', controller.shell.order.createByApi)
     
 };

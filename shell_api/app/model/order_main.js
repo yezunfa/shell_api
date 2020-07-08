@@ -16,6 +16,16 @@ module.exports = app => {
       allowNull: true,
       comment: '订单名称'
     },
+    Code: {
+      type: DataTypes.STRING(36),
+      allowNull: true,
+      comment: '订单号'
+    },
+    CartId: {
+      type: DataTypes.STRING(36),
+      allowNull: true,
+      comment: '购物车主id'
+    },
     UserId: {
       type: DataTypes.STRING(36),
       allowNull: true,
@@ -25,23 +35,23 @@ module.exports = app => {
       },
       comment: '会员id'
     },
-    CartId: {
-      type: DataTypes.STRING(36),
+    Mobile: {
+      type: DataTypes.STRING(11),
       allowNull: true,
-      comment: '购物车主id'
+      comment: '会员手机号'
     },
     Type: {
       type: DataTypes.INTEGER(2),
       allowNull: true,
       defaultValue: '1',
-      comment: '订单类型'
+      comment: '订单类型(1. 服务购买 2. 实物购买 3. 会员卡/充值)'
     },
-    Amount: {
+    Price: {
       type: DataTypes.DECIMAL,
       allowNull: true,
       comment: '实收金额'
     },
-    TotalAmount: {
+    TotalPrice: {
       type: DataTypes.DECIMAL,
       allowNull: true,
       comment: '应收金额'
@@ -49,7 +59,7 @@ module.exports = app => {
     PayWay: {
       type: DataTypes.INTEGER(1),
       allowNull: true,
-      comment: '支付方式(1. 支付宝，2微信，3现金，4 微信+优惠）)'
+      comment: '支付方式(1. 微信，2. 微信+优惠）)'
     },
     PayState: {
       type: DataTypes.INTEGER(1),
@@ -62,12 +72,6 @@ module.exports = app => {
       allowNull: false,
       defaultValue: '1',
       comment: '订单状态(1正常，0删除，2，退款, 3异常）'
-    },
-    Source: {
-      type: DataTypes.INTEGER(1),
-      allowNull: false,
-      defaultValue: '1',
-      comment: '订单来源(1. 小程序，2.前台）'
     },
     Remark: {
       type: DataTypes.STRING(200),

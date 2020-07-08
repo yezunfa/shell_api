@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-03 11:59:48
- * @LastEditTime: 2020-07-05 11:41:47
+ * @LastEditTime: 2020-07-08 17:11:49
  * @Description: Do not edit
  */ 
 'use strict';
@@ -39,6 +39,7 @@ class Cart extends Controller {
                 UserId: userid,   
                 CreateTime: new Date(),
                 CreatePerson: 'system',
+                ParentId: 'ParentId'
             }
             validCart = await ctx.service.shell.cart.create(NewEntity)
         }
@@ -107,7 +108,7 @@ class Cart extends Controller {
             const ParentResult = await ctx.model.Cart.findOne({
                 where: {
                     UserId: userid,
-                    ParentId: ''
+                    ParentId: 'ParentId'
                 }
             })
             if (ParentResult && ParentResult.dataValues && ParentResult.dataValues.Id) {

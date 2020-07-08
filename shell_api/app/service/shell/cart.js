@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-03 12:11:54
- * @LastEditTime: 2020-07-05 11:39:23
+ * @LastEditTime: 2020-07-08 17:10:07
  * @Description: Do not edit
  */ 
 'use strict'
@@ -33,6 +33,18 @@ class CartService extends Service {
         }
     }
 
+    async editByApi(payload,CartId) {
+        try {
+            const result = await this.ctx.model.Cart.update(payload , {
+                where: {
+                    Id: CartId
+                }
+            });
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    }
     /**
      * get detail by cart Id
      */
@@ -79,7 +91,7 @@ class CartService extends Service {
                 where: {
                     Valid: 1,
                     UserId: Id,
-                    ParentId: ''
+                    ParentId: 'ParentId'
                 },
             })
             return Result
@@ -95,7 +107,7 @@ class CartService extends Service {
     async findAllByParentId({ParentId}){
         const { ctx } = this
         const sql =  `
-        select cart.Amount,product_type.Name as TypeName, product.* from cart 
+        select cart.Id as CartId, cart.Amount, product_type.Name as TypeName, product.* from cart 
         left join product on cart.ProductId = product.Id
         left join product_type on product_type.Id = product.Type
         where 1 = 1 

@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-08 15:51:57
- * @LastEditTime: 2020-07-08 16:38:46
+ * @LastEditTime: 2020-07-09 13:08:47
  * @Description: Do not edit
  */ 
 'use strict';
@@ -100,6 +100,26 @@ class Order extends Controller {
                 code: 444,
                 message: `${error}`,
             }
+        }
+    }
+
+    async paymentCancel(){
+        const { ctx } = this
+        const { OrderId } = ctx.request.body
+
+        try {
+            const SubArray = await ctx.service.shell.orderMain.findCartInfo({OrderId})
+            for (let index = 0; index < SubArray.length; index++) {
+                const element = SubArray[index];
+                const { CartId } = element
+                await ctx.service.shell.cart.editByApi({State: 1},CartId)
+            }
+            const result = await ctx.service.shell.orderMain.editByApi({PayState: 0}, OrderId)// 支付未完成
+            ctx.body = this.idempotent('用户已取消订单', { OrderId, result})
+        } catch (error) {
+            console.log(error)
+            ctx.logger.error(error, '订单取消失败')
+            ctx.body = this.reportbody('系统繁忙，请重试')
         }
     }
 }

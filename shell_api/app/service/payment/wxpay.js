@@ -10,9 +10,9 @@ const WXPay = require('../../extend/wxpay');
 const fs = require('fs');
 
 const wxpay = WXPay({
-    appid: 'wx1fe7f046ead630b6',
-    mch_id: '1466285902',
-    partner_key: 'fusionfusionfusionfusionfusion88', // '商户密钥（证书密码）',
+    appid: 'wx2e2fefd27c5d13c6',
+    mch_id: '1587813691',
+    partner_key: 'shelldentalshelldental8888888888', // '商户密钥（证书密码）',
     pfx: fs.readFileSync('pay/wx_cert/apiclient_cert.p12')
 });
 
@@ -48,8 +48,8 @@ class IndexService extends Service {
                 detail: payOrderInfo.detail,//支付内容
                 out_trade_no: payOrderInfo.orderNo, //订单编号
                 total_fee: payOrderInfo.amount, //支付总金额（单位：分）
-                spbill_create_ip: '39.98.215.179',
-                notify_url: 'https://www.51fusion.com/wxpay/receive/wxReceive',//支付回调地址
+                spbill_create_ip: '120.24.169.8',
+                notify_url: 'https://shelldental.top/wxpay/receive/wxReceive',//支付回调地址
             });
             result = {
                 success: true,
@@ -105,7 +105,7 @@ class IndexService extends Service {
         let result = null;
         try{
             const requestResult = await wxpay.refundOrder({
-                notify_url: 'https://www.51fusion.com/wxpay/receive/wxRefund', //回调地址
+                notify_url: 'https://shelldental.top/wxpay/receive/wxRefund', //回调地址
                 out_refund_no: refundOrderInfo.out_refund_no, //退款单号
                 out_trade_no: refundOrderInfo.out_trade_no, //订单编号
                 total_fee: 1, //订单总金额（单位：分）

@@ -5,6 +5,12 @@ module.exports = app => {
   const DataTypes = app.Sequelize;
 
   const Model = app.model.define('order_sub', {
+    Id: {
+      type: DataTypes.STRING(36),
+      allowNull: false,
+      primaryKey: true,
+      comment: '主键'
+    },
     OrderId: {
       type: DataTypes.STRING(36),
       allowNull: false,
@@ -14,12 +20,6 @@ module.exports = app => {
         key: 'Id'
       },
       comment: '主订单id'
-    },
-    Id: {
-      type: DataTypes.STRING(36),
-      allowNull: false,
-      primaryKey: true,
-      comment: '主键'
     },
     CartId: {
       type: DataTypes.STRING(36),

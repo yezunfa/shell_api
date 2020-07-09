@@ -66,11 +66,41 @@ class Order extends Controller {
     /**
      *  todo :订单详情
      */
-    async getByUserId(){
-        const { ctx } = this
-        const { userid } = ctx.query
-        let  result = {}
-        
+    async detail(){
+        const ctx = this.ctx;
+        const { userid, Id: OrderId } = ctx.query;
+
+        if (!OrderId) {
+            ctx.body = {
+                code: 444,
+                success: false,
+                message: '参数不足'
+            };
+            return;
+        }
+        try {
+            const p1 = ctx.service.shell.order.getOrderSubByOrderId(OrderId);
+            const p2 = ctx.service.shell.order.getOrderMainById(OrderId);
+            await Promise.all([p1, p2]).then(([ OrderSubList, OrderMain ]) => {
+                ctx.body = {
+                    success: false,
+                    code: 200,
+                    message: `get order detail successfully`,
+                    data: {
+                        OrderSubList,
+                        OrderMain
+                    }
+                }
+            })
+        } catch (error) {
+            console.error(error)
+            ctx.logger.error(error)
+            ctx.body = {
+                success: false,
+                code: 444,
+                message: `${error}`,
+            }
+        }
     }
 }
 

@@ -36,7 +36,7 @@ module.exports = app => {
       comment: '会员id'
     },
     Mobile: {
-      type: DataTypes.STRING(11),
+      type: DataTypes.STRING(18),
       allowNull: true,
       comment: '会员手机号'
     },

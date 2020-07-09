@@ -16,16 +16,15 @@ module.exports = app => {
       allowNull: true,
       comment: '会员id'
     },
-    ParentId: {
-      type: DataTypes.STRING(36),
-      allowNull: false,
-      defaultValue: '',
-      comment: '购物车主id'
-    },
     ProductId: {
       type: DataTypes.STRING(36),
       allowNull: true,
       comment: '产品id'
+    },
+    ParentId: {
+      type: DataTypes.STRING(36),
+      allowNull: true,
+      comment: '主键'
     },
     Amount: {
       type: DataTypes.DECIMAL,
@@ -36,13 +35,13 @@ module.exports = app => {
       type: DataTypes.INTEGER(1),
       allowNull: false,
       defaultValue: '1',
-      comment: '购物车状态'
+      comment: '购物车状态(1:正常, 2:已清除)'
     },
     Valid: {
       type: DataTypes.INTEGER(1),
       allowNull: false,
       defaultValue: '1',
-      comment: '是否有效,根据这个来判断添加到的购物车'
+      comment: '是否有效（0:失效/过期，1:正常）'
     },
     Sort: {
       type: DataTypes.INTEGER(2),

@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-03 12:11:54
- * @LastEditTime: 2020-07-03 15:18:44
+ * @LastEditTime: 2020-07-08 17:10:07
  * @Description: Do not edit
  */ 
 'use strict'
@@ -20,6 +20,31 @@ class CartService extends Service {
         }
     }
 
+    async edit(entity) {
+        try {
+            const result = await this.ctx.model.Cart.update(entity.dataValues || entity, {
+                where: {
+                    Id: entity.Id
+                }
+            });
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    async editByApi(payload,CartId) {
+        try {
+            const result = await this.ctx.model.Cart.update(payload , {
+                where: {
+                    Id: CartId
+                }
+            });
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    }
     /**
      * get detail by cart Id
      */
@@ -66,13 +91,56 @@ class CartService extends Service {
                 where: {
                     Valid: 1,
                     UserId: Id,
-                    ParentId: ''
+                    ParentId: 'ParentId'
                 },
             })
             return Result
         } catch (error) {
             ctx.logger.error(error)
             return false
+        }
+    }
+
+    /**
+     * findAllByParentId
+     */
+    async findAllByParentId({ParentId}){
+        const { ctx } = this
+        const sql =  `
+        select cart.Id as CartId, cart.Amount, product_type.Name as TypeName, product.* from cart 
+        left join product on cart.ProductId = product.Id
+        left join product_type on product_type.Id = product.Type
+        where 1 = 1 
+        and cart.ParentId = '${ParentId}'
+        and cart.State = 1
+        and cart.Valid = 1
+        `
+        try {
+            const type = ctx.model.Sequelize.QueryTypes.SELECT
+            const result = await ctx.model.query(sql, { type });
+            return result
+        } catch (error) {
+            throw error
+        }
+    }
+    
+    async findSameCart({userid, ParentId, ProductId }) {
+        const { ctx } = this
+        const sql = `
+        select cart.* from cart 
+        where 1 = 1 
+        and cart.ParentId = '${ParentId}'
+        and cart.ProductId = '${ProductId}'
+        and cart.UserId = '${userid}'
+        and cart.Valid = 1 
+        and cart.State = 1 -- 用户未清楚
+        `
+        try {
+            const type = ctx.model.Sequelize.QueryTypes.SELECT
+            const result = await ctx.model.query(sql, { type });
+            return result
+        } catch (error) {
+            throw error
         }
     }
 

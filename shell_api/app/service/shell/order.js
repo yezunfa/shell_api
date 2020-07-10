@@ -24,7 +24,8 @@ class OrderService extends Service {
         product.Notice as ProductNotice,
         product.Detail as ProductDetail,
         product.Valid as ProductValid,
-        product.Remark as ProductRemark
+        product.Remark as ProductRemark,
+        product.BannerList
         from order_sub
         left join product on product.Id = order_sub.ProductId
         where 1=1
@@ -80,7 +81,7 @@ class OrderService extends Service {
 
     async edit(entity) {
         try {
-            const result = await this.ctx.model.Order.update(entity.dataValues || entity, {
+            const result = await this.ctx.model.OrderMain.update(entity.dataValues || entity, {
                 where: {
                     Id: entity.Id
                 }

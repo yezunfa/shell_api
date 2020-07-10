@@ -63,6 +63,37 @@ class Order extends Controller {
         }
     }
 
+
+    async edit() {
+        const ctx = this.ctx;
+        const orderEntity = ctx.request.body;
+        if (!orderEntity.Id) {
+            ctx.body = {
+                code: 444,
+                success: false,
+                message: '参数不合法'
+            };
+            return;
+        }
+        try {
+            const result = ctx.service.shell.order.edit(orderEntity);
+            ctx.body = {
+                success: true,
+                code: 200,
+                message: `edit order data successfully`,
+                data: result,
+            }
+        } catch (error) {
+            console.error(error)
+            ctx.logger.error(error)
+            ctx.body = {
+                success: false,
+                code: 444,
+                message: `${error}`,
+            }
+        }
+    }
+
     /**
      *  todo :订单详情
      */

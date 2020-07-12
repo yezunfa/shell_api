@@ -63,14 +63,75 @@ class Order extends Controller {
         }
     }
 
+
+    async edit() {
+        const ctx = this.ctx;
+        const orderEntity = ctx.request.body;
+        if (!orderEntity.Id) {
+            ctx.body = {
+                code: 444,
+                success: false,
+                message: '参数不合法'
+            };
+            return;
+        }
+        try {
+            const result = ctx.service.shell.order.edit(orderEntity);
+            ctx.body = {
+                success: true,
+                code: 200,
+                message: `edit order data successfully`,
+                data: result,
+            }
+        } catch (error) {
+            console.error(error)
+            ctx.logger.error(error)
+            ctx.body = {
+                success: false,
+                code: 444,
+                message: `${error}`,
+            }
+        }
+    }
+
     /**
      *  todo :订单详情
      */
-    async getByUserId(){
-        const { ctx } = this
-        const { userid } = ctx.query
-        let  result = {}
-        
+    async detail(){
+        const ctx = this.ctx;
+        const { userid, Id: OrderId } = ctx.query;
+
+        if (!OrderId) {
+            ctx.body = {
+                code: 444,
+                success: false,
+                message: '参数不足'
+            };
+            return;
+        }
+        try {
+            const p1 = ctx.service.shell.order.getOrderSubByOrderId(OrderId);
+            const p2 = ctx.service.shell.order.getOrderMainById(OrderId);
+            await Promise.all([p1, p2]).then(([ OrderSubList, OrderMain ]) => {
+                ctx.body = {
+                    success: false,
+                    code: 200,
+                    message: `get order detail successfully`,
+                    data: {
+                        OrderSubList,
+                        OrderMain
+                    }
+                }
+            })
+        } catch (error) {
+            console.error(error)
+            ctx.logger.error(error)
+            ctx.body = {
+                success: false,
+                code: 444,
+                message: `${error}`,
+            }
+        }
     }
 
     async paymentCancel(){

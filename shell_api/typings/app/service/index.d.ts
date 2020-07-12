@@ -1,4 +1,4 @@
-// This file is created by egg-ts-helper@1.25.7
+// This file is created by egg-ts-helper@1.25.8
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
@@ -95,6 +95,7 @@ import ExportMessageOrderSuccess = require('../../../app/service/message/order_s
 import ExportPaymentWxpay = require('../../../app/service/payment/wxpay');
 import ExportShellCart = require('../../../app/service/shell/cart');
 import ExportShellMember = require('../../../app/service/shell/member');
+import ExportShellOrder = require('../../../app/service/shell/order');
 import ExportShellOrderMain = require('../../../app/service/shell/orderMain');
 import ExportShellProduct = require('../../../app/service/shell/product');
 import ExportUtilsExcel = require('../../../app/service/utils/excel');
@@ -199,6 +200,7 @@ declare module 'egg' {
     shell: {
       cart: AutoInstanceType<typeof ExportShellCart>;
       member: AutoInstanceType<typeof ExportShellMember>;
+      order: AutoInstanceType<typeof ExportShellOrder>;
       orderMain: AutoInstanceType<typeof ExportShellOrderMain>;
       product: AutoInstanceType<typeof ExportShellProduct>;
     }

@@ -35,7 +35,7 @@ module.exports = app => {
       type: DataTypes.INTEGER(1),
       allowNull: false,
       defaultValue: '1',
-      comment: '购物车状态(1:正常, 2:已清除)'
+      comment: '购物车状态(1:正常, 2:已提交订单，3:已完成订单，4:已移除)'
     },
     Valid: {
       type: DataTypes.INTEGER(1),

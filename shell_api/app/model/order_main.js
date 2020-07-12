@@ -36,9 +36,19 @@ module.exports = app => {
       comment: '会员id'
     },
     Mobile: {
-      type: DataTypes.STRING(11),
+      type: DataTypes.STRING(18),
       allowNull: true,
       comment: '会员手机号'
+    },
+    LinkName: {
+      type: DataTypes.STRING(36),
+      allowNull: true,
+      comment: '联系人姓名'
+    },
+    LinkMobile: {
+      type: DataTypes.STRING(36),
+      allowNull: true,
+      comment: '联系人手机'
     },
     Type: {
       type: DataTypes.INTEGER(2),

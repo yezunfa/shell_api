@@ -134,6 +134,54 @@ class Order extends Controller {
         }
     }
 
+    async getAllOrder() {
+        const { ctx } = this;
+        const { userid } = ctx.query;
+        if (!userid) {
+            ctx.body = {
+                code: 444,
+                success: false,
+                message: '参数不足'
+            };
+            return;
+        }
+        try {
+            const orderMainList = await ctx.service.shell.order.getAllOrderMainByUserId(userid);
+            if (!orderMainList || !orderMainList.length) {
+                ctx.body = {
+                    code: 200,
+                    success: true,
+                    message: '暂无相关的订单~'
+                };
+                return;
+            }
+            for (let orderMain of orderMainList) {
+                const orderSub = await ctx.service.shell.order.getOrderSubByOrderId(orderMain.Id);
+                // 理论上是不存在有orderMain的Id没有对应上orderSub的Id的
+                if (!orderSub) {
+                    ctx.body = {
+                        code: 444,
+                        success: false,
+                        message: '系统错误，请重试'
+                    };
+                    return;
+                }
+                orderMain.child = orderSub;
+            }
+            ctx.body = {
+                code: 200,
+                success: true,
+                message: 'get all order successfully',
+                data: orderMainList
+            };
+            return;
+        } catch (error) {
+            console.log(error)
+            ctx.logger.error(error, '订单取消失败')
+            ctx.body = this.reportbody('系统繁忙，请重试')
+        }
+    }
+
     async paymentCancel(){
         const { ctx } = this
         const { OrderId } = ctx.request.body

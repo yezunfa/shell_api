@@ -92,6 +92,25 @@ class OrderService extends Service {
         }
     }
 
+    async getAllOrderMainByUserId(UserId) {
+        const { ctx } = this;
+        const sql = `
+            select
+            *
+            from order_main
+            where 1=1
+            and UserId = '${UserId}'
+        `
+        try {
+            const Result = await ctx.model.query(sql, {
+                type: this.ctx.model.Sequelize.QueryTypes.SELECT,
+            })
+            return Result
+        } catch (error) {
+            ctx.logger.error(error)
+            return false
+        }
+    }
 }
 
 module.exports = OrderService; 

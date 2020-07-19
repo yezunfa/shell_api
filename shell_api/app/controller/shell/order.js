@@ -9,6 +9,7 @@
 const Controller = require('egg').Controller;
 const uuid = require('uuid');
 const moment = require('moment')
+const { handlelTableParams } = require('../../utils/format-mango')
 
 class Order extends Controller {
     reportbody(message) { return { message, code: 500, success: false }  }
@@ -181,6 +182,49 @@ class Order extends Controller {
             ctx.body = this.reportbody('系统繁忙，请重试')
         }
     }
+    
+    /**
+     * 未测试
+     */
+    async getSubOrder() {
+        const { ctx } = this;
+        const { userid } = ctx.query;
+        if (!userid) {
+            ctx.body = {
+                code: 444,
+                success: false,
+                message: '参数不足'
+            };
+            return;
+        }
+        try {
+            const orderMainList = await ctx.service.shell.order.getAllOrderMainByUserId(ctx.query);
+            const orderSubList = [];
+            for (let orderMain of orderMainList) {
+                const orderSub = await ctx.service.shell.order.getOrderSubByOrderId(orderMain.Id);
+                if (!orderSub) {
+                    ctx.body = {
+                        code: 444,
+                        success: false,
+                        message: '系统错误，请重试'
+                    };
+                    return;
+                }
+                orderSubList.push(orderSub)
+            }
+            ctx.body = {
+                code: 200,
+                success: true,
+                message: 'get all sub order successfully',
+                data: orderSubList
+            };
+            return;
+        } catch (error) {
+            console.log(error)
+            ctx.logger.error(error, '订单取消失败')
+            ctx.body = this.reportbody('系统繁忙，请重试')
+        }
+    }
 
     async paymentCancel(){
         const { ctx } = this
@@ -201,6 +245,40 @@ class Order extends Controller {
             ctx.body = this.reportbody('系统繁忙，请重试')
         }
     }
+
+    /**
+     * 订单支付成功
+     */
+    async success () {
+        const ctx = this.ctx;
+        const orderEntity = ctx.request.body;
+        if (!orderEntity.Id) {
+            ctx.body = {
+                code: 444,
+                success: false,
+                message: '参数不合法'
+            };
+            return;
+        }
+        try {
+            const result = ctx.service.shell.order.success(orderEntity.Id);
+            ctx.body = {
+                success: true,
+                code: 200,
+                message: `order pay successfully`,
+                data: result,
+            }
+        } catch (error) {
+            console.error(error, 'controller.shell.controller.success错误，调用service.shell.order.success错误')
+            ctx.logger.error(error)
+            ctx.body = {
+                success: false,
+                code: 444,
+                message: `${error}`,
+            }
+        }
+    }
+
 }
 
 module.exports = Order;

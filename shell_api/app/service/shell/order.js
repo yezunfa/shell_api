@@ -92,10 +92,12 @@ class OrderService extends Service {
         }
     }
 
-    async getAllOrderMainByUserId({ userid, PayState, State }) {
+    async getAllOrderMainByUserId({ userid, PayState: _PayState, State: _State }) {
+        const PayState = JSON.parse(_PayState);
+        const State = JSON.parse(_State);
         let condition = '';
-        if (PayState) condition += ` and PayState = ${PayState} `
-        if (State) condition += ` and State = ${State} `
+        if (PayState && Array.isArray(PayState) && PayState.length !== 0) condition += ` and PayState in (${PayState.join(',')}) `;
+        if (State && Array.isArray(State) && State.length !== 0) condition += ` and State in (${State.join(',')}) `;
         const { ctx } = this;
         const sql = `
             select
@@ -108,6 +110,23 @@ class OrderService extends Service {
         try {
             const Result = await ctx.model.query(sql, {
                 type: this.ctx.model.Sequelize.QueryTypes.SELECT,
+            })
+            return Result
+        } catch (error) {
+            ctx.logger.error(error)
+            return false
+        }
+    }
+
+    async success(Id) {
+        const sql = `
+            update order_main 
+            set PayState = 1 
+            where Id = '${Id}'
+        `;
+        try {
+            const Result = await ctx.model.query(sql, {
+                type: this.ctx.model.Sequelize.QueryTypes.UPADTE,
             })
             return Result
         } catch (error) {

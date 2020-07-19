@@ -23,7 +23,9 @@ module.exports = app => {
     // 订单
     app.router.post('/api/cart/createOrder', controller.shell.order.createByApi)
     app.router.post('/api/order/edit', controller.shell.order.edit)
+    app.router.post('/api/order/sub_success', controller.shell.order.success)
     app.router.get('/api/order/list', controller.shell.order.getAllOrder)
+    app.router.get('/api/order/sub_list', controller.shell.order.getSubOrder)
     app.router.get('/api/order/detail', controller.shell.order.detail)
     app.router.post('/order/payment/cancel', controller.shell.order.paymentCancel)
     

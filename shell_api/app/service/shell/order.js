@@ -119,6 +119,8 @@ class OrderService extends Service {
     }
 
     async success(Id) {
+        console.log(`支付成功，order_main_id为：${Id}`)
+        const { ctx } = this;
         const sql = `
             update order_main 
             set PayState = 1 
@@ -126,7 +128,7 @@ class OrderService extends Service {
         `;
         try {
             const Result = await ctx.model.query(sql, {
-                type: this.ctx.model.Sequelize.QueryTypes.UPADTE,
+                type: ctx.model.Sequelize.QueryTypes.UPADTE,
             })
             return Result
         } catch (error) {

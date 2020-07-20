@@ -109,7 +109,7 @@ class Member extends Controller {
 
             const pc = new WXBizDataCrypt(appid, session_key)  
             const data = pc.decryptData(encryptedData, iv);
-            console.log(data)
+            let memberInfo = {}
             if(saveMobile) {
                 const { countryCode, purePhoneNumber} = data;
                 const { openid } = result.data;
@@ -119,12 +119,21 @@ class Member extends Controller {
                 } catch(ex) {
                     this.logger.error(ex, '保存手机号异常');
                 }
+                // 返回用户数据，刷新页面
+                try {
+                    const user = await this.ctx.service.shell.member.getByopenid(openid)
+                    const [ userinfo ] = user
+                    memberInfo = { userinfo}
+                } catch (error) {
+                    this.logger.error(error, '获取用户信息异常');
+                }
             }
+            
             this.ctx.body = {
                 code: 200,
                 success: true,
                 message: '成功',
-                data: data
+                data: memberInfo
             }
         } catch(ex) {
             this.logger.error(ex);

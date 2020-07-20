@@ -92,14 +92,18 @@ class OrderService extends Service {
         }
     }
 
-    async getAllOrderMainByUserId(UserId) {
+    async getAllOrderMainByUserId({ userid, PayState, State }) {
+        let condition = '';
+        if (PayState) condition += ` and PayState = ${PayState} `
+        if (State) condition += ` and State = ${State} `
         const { ctx } = this;
         const sql = `
             select
             *
             from order_main
             where 1=1
-            and UserId = '${UserId}'
+            and UserId = '${userid}'
+            ${condition}
         `
         try {
             const Result = await ctx.model.query(sql, {

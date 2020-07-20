@@ -146,7 +146,7 @@ class Order extends Controller {
             return;
         }
         try {
-            const orderMainList = await ctx.service.shell.order.getAllOrderMainByUserId(userid);
+            const orderMainList = await ctx.service.shell.order.getAllOrderMainByUserId(ctx.query);
             if (!orderMainList || !orderMainList.length) {
                 ctx.body = {
                     code: 200,

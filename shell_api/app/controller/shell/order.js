@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-08 15:51:57
- * @LastEditTime: 2020-08-02 20:48:59
+ * @LastEditTime: 2020-08-02 21:44:41
  * @Description: Do not edit
  */ 
 'use strict';
@@ -240,12 +240,26 @@ class Order extends Controller {
         }
 
         try {
-            const orderMainList = await ctx.service.shell.orderMain.getAllOrderMain({$pagination, $query, $sort});
+            const response = await ctx.service.shell.orderMain.getAllOrderMain({$pagination, $query, $sort});
+            const { dataList } = response
+            for (let orderMain of dataList) {
+                const orderSub = await ctx.service.shell.order.getOrderSubByOrderId(orderMain.Id);
+                // 理论上是不存在有orderMain的Id没有对应上orderSub的Id的
+                if (!orderSub) {
+                    ctx.body = {
+                        code: 444,
+                        success: false,
+                        message: '系统错误，请重试'
+                    };
+                    return;
+                }
+                orderMain.child = orderSub;
+            }
             ctx.body = {
                 code: 200,
                 success: true,
                 message: 'get all order successfully',
-                data: orderMainList
+                data: response
             };
             return;
         } catch (error) {

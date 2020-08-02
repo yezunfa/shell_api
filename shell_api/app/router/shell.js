@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-03-29 21:32:55
- * @LastEditTime: 2020-07-08 16:09:51
+ * @LastEditTime: 2020-08-02 20:47:23
  * @Description: Do not edit
  */ 
 module.exports = app => {
@@ -28,5 +28,6 @@ module.exports = app => {
     app.router.get('/api/order/sub_list', controller.shell.order.getSubOrder)
     app.router.get('/api/order/detail', controller.shell.order.detail)
     app.router.post('/order/payment/cancel', controller.shell.order.paymentCancel)
+    app.router.get('/api/order/get_all',controller.shell.order.getAllOrderMain)
     
 };

@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-08 15:51:57
- * @LastEditTime: 2020-07-09 13:08:47
+ * @LastEditTime: 2020-08-02 20:48:59
  * @Description: Do not edit
  */ 
 'use strict';
@@ -179,6 +179,49 @@ class Order extends Controller {
         } catch (error) {
             console.log(error)
             ctx.logger.error(error, '订单取消失败')
+            ctx.body = this.reportbody('系统繁忙，请重试')
+        }
+    }
+
+    async getAllOrderMain(){
+        const { ctx } = this;
+        let { $sort, $query, $pagination } = {}
+
+        try {
+            ({ $sort, $query, $pagination } = handlelTableParams(ctx.query, {
+                $sort: [
+                    ['CreateTime', 'desc']
+                ],
+                $query: {
+                    Valid: 1
+                },
+                $pagination: {
+                    current: 1,
+                    pageSize: 10,
+                    disabled: false
+                }
+            }))
+        } catch (error) {
+            const code = 500
+            const success = false
+            const message = error.message || error
+            ctx.logger.error(message);
+            ctx.body = { success, message, code }
+            return false
+        }
+
+        try {
+            const orderMainList = await ctx.service.shell.orderMain.getAllOrderMain({$pagination, $query, $sort});
+            ctx.body = {
+                code: 200,
+                success: true,
+                message: 'get all order successfully',
+                data: orderMainList
+            };
+            return;
+        } catch (error) {
+            console.log(error)
+            ctx.logger.error(error, '获取所有主订单失败')
             ctx.body = this.reportbody('系统繁忙，请重试')
         }
     }

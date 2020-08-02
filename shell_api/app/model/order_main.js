@@ -75,13 +75,13 @@ module.exports = app => {
       type: DataTypes.INTEGER(1),
       allowNull: false,
       defaultValue: '0',
-      comment: '支付状态(0未支付、1已经支付、2分期付款中)'
+      comment: '支付状态(0未支付、1已经支付、2分期付款中,3已完成)'
     },
     State: {
       type: DataTypes.INTEGER(1),
       allowNull: false,
       defaultValue: '1',
-      comment: '订单状态(1正常，0删除，2，退款, 3异常）'
+      comment: '订单状态(1正常，0删除，2退款, 3异常）'
     },
     Remark: {
       type: DataTypes.STRING(200),

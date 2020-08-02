@@ -47,8 +47,8 @@ class Tools extends Controller {
 
         try {
             const type = 'client_credential' // 获取access_token填写client_credential
-            const appid = 'wx1fe7f046ead630b6' // 第三方用户唯一凭证
-            const secret = '696eafc0412f275508515eb6d51d0b65' // 第三方用户唯一凭证密钥，即appsecret
+            const appid = 'wx2e2fefd27c5d13c6' // 第三方用户唯一凭证 shell
+            const secret = '86edb2452f2bf1db6edad3abe33db081' // 第三方用户唯一凭证密钥，即appsecret
             const url_get_access_token = `https://api.weixin.qq.com/cgi-bin/token?grant_type=${type}&appid=${appid}&secret=${secret}`
             const result = await ctx.curl(url_get_access_token, { dataType: 'json' })
             const cache_result = await ctx.service.sysCache.create({
@@ -83,7 +83,7 @@ class Tools extends Controller {
                 let url_post_wxqrcode = `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${access_token}`
                 let data = JSON.stringify({  // 不能在data传access_token: access_token,!
                     scene: scene, // 只能传32位的可见字符串(数字、英文以及!#$&'()*+,/:;=?@-._~)
-                    page: 'pages/home/index',
+                    page: 'pages/home/home',  // 跳转页面是否要直接到订单核销页面？
                 })
                 let result = await ctx.curl(url_post_wxqrcode, {
                     headers: 'Content-Type:application/json',
@@ -92,7 +92,7 @@ class Tools extends Controller {
                     data
                 })
 
-                ctx.logger.info(`wxqrcode:${typeof result.data}`, result && result.data ?  result.data.toString() : typeof result.data)
+                // ctx.logger.info(`wxqrcode:${typeof result.data}`, result && result.data ?  result.data.toString() : typeof result.data)
                 try{
                     if(result && result.data  && parseInt(JSON.parse(result.data.toString()).errcode) === 40001) {
                         ctx.logger.info('wxqrcode:重新生成getAccessToken');
@@ -101,7 +101,6 @@ class Tools extends Controller {
                 } catch(ex) {
                     // ctx.logger.error('getAccessToken(true):', ex)
                 }
-               
                 return result;
 
             }

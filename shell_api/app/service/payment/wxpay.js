@@ -41,7 +41,6 @@ class IndexService extends Service {
 
         let result = null;
         try{
-           
             const requestResult = await wxpay.getBrandWCPayRequestParams({
                 openid: payOrderInfo.openid, //微信用户openid
                 body: payOrderInfo.body, //支付内容

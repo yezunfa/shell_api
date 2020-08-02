@@ -135,6 +135,35 @@ class Order extends Controller {
         }
     }
 
+    async getOrderMainById() {
+        const { ctx } = this;
+        const { userid, OrderMainId } = ctx.query;
+        if (!OrderMainId) {
+            ctx.body = {
+                code: 444,
+                success: false,
+                message: '参数不足'
+            };
+            return;
+        }
+        try {
+            const orderMain = await ctx.service.shell.order.getOrderMainById(OrderMainId)
+            const orderSubList = await ctx.service.shell.order.getOrderSubByOrderId(OrderMainId);
+            ctx.body = {
+                code: 200,
+                success: true,
+                message: 'get order-main successfully',
+                data: {
+                    orderMain,
+                    orderSubList,
+                }
+            };
+        } catch (error) {
+            console.log(error)
+            ctx.body = this.reportbody('系统繁忙，请重试')
+        }
+    }
+ 
     async getAllOrder() {
         const { ctx } = this;
         const { userid } = ctx.query;
@@ -304,7 +333,7 @@ class Order extends Controller {
             return;
         }
         try {
-            const result = ctx.service.shell.order.success(orderEntity.Id);
+            const result = await ctx.service.shell.order.success(orderEntity.Id);
             ctx.body = {
                 success: true,
                 code: 200,
@@ -319,6 +348,51 @@ class Order extends Controller {
                 code: 444,
                 message: `${error}`,
             }
+        }
+    }
+
+    /**
+     * 核销订单
+     * 根据OrderSubId进行核销
+     * 核销完后需要判断orderMain是否还有剩余的orderSub，没有则需要更新sorderMain的状态
+     */
+    async writeOff() {
+        const ctx = this.ctx;
+        const { OrderSubId, cnt } = ctx.request.body;
+
+        try {
+            await ctx.service.shell.order.orderSubWriteOff(OrderSubId, cnt);
+        } catch (error) {
+            console.error(error, 'controller.shell.controller.writeOff错误，调用service.shell.order.writeOff错误')
+            ctx.logger.error(error)
+            ctx.body = {
+                success: false,
+                code: 444,
+                message: `${error}`,
+            }
+            return;
+        }
+        try {
+            const orderMainEntity = await ctx.service.shell.order.getParentIdByOrderSubId(OrderSubId);
+            const orderSub = await ctx.service.shell.order.getOrderSubByOrderId(orderMainEntity[0].Id);
+            // 是否找不到未使用的子订单则修改主订单的Steta
+            if (!orderSub.find(v => v.State === 0)) {
+                await ctx.service.shell.order.orderMainWriteOff(orderMainEntity[0].Id);
+            }
+        } catch (error) {
+            console.error(error, 'controller.shell.controller.writeOff错误，检查主订单错误')
+            ctx.logger.error(error)
+            ctx.body = {
+                success: false,
+                code: 444,
+                message: `${error}`,
+            }
+            return;
+        }
+        ctx.body = {
+            success: true,
+            code: 200,
+            message: `核销成功`,
         }
     }
 

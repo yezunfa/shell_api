@@ -145,6 +145,12 @@ module.exports = app => {
       type: DataTypes.STRING(36),
       allowNull: true,
       comment: '更新人'
+    },
+    IsSysUser: {
+      type: DataTypes.INTEGER(2),
+      allowNull: true,
+      defaultValue: '0',
+      comment: '是否为系统员工'
     }
   }, {
     tableName: 'member',

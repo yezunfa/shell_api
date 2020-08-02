@@ -136,6 +136,66 @@ class OrderService extends Service {
             return false
         }
     }
+
+    async orderSubWriteOff(Id, cnt) {
+        console.log(`核销${cnt}张次级订单：`, Id);
+        const { ctx } = this;
+        const sql = `
+            update order_sub
+            set 
+            State = case when Count > ${cnt} then 0 else 1 end,
+            Count = Count - ${cnt}
+            where Id = '${Id}'
+        `;
+        try {
+            const Result = await ctx.model.query(sql, {
+                type: ctx.model.Sequelize.QueryTypes.UPADTE,
+            })
+            return Result
+        } catch (error) {
+            ctx.logger.error(error)
+            return false
+        }
+    }
+
+    async orderMainWriteOff(Id) {
+        console.log('核销主订单：', Id);
+        const { ctx } = this;
+        const sql = `
+            update order_main
+            set State = 4
+            where Id = '${Id}'
+        `;
+        try {
+            const Result = await ctx.model.query(sql, {
+                type: ctx.model.Sequelize.QueryTypes.UPADTE,
+            })
+            return Result
+        } catch (error) {
+            ctx.logger.error(error)
+            return false
+        }
+    }
+
+    async getParentIdByOrderSubId(Id) {
+        const { ctx } = this;
+        const sql = `
+            select order_main.*
+            from order_main
+            left join order_sub on order_sub.OrderId = order_main.Id
+            where order_sub.Id = '${Id}'
+        `;
+        try {
+            const Result = await ctx.model.query(sql, {
+                type: ctx.model.Sequelize.QueryTypes.SELECT,
+            })
+            return Result
+        } catch (error) {
+            ctx.logger.error(error)
+            return false
+        }
+    }
+
 }
 
 module.exports = OrderService; 

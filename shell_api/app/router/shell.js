@@ -25,8 +25,10 @@ module.exports = app => {
     app.router.post('/api/order/edit', controller.shell.order.edit)
     app.router.post('/api/order/sub_success', controller.shell.order.success)
     app.router.get('/api/order/list', controller.shell.order.getAllOrder)
+    app.router.get('/api/order/order_main', controller.shell.order.getOrderMainById)
     app.router.get('/api/order/sub_list', controller.shell.order.getSubOrder)
     app.router.get('/api/order/detail', controller.shell.order.detail)
+    app.router.post('/api/order/writeOff', controller.shell.order.writeOff)
     app.router.post('/order/payment/cancel', controller.shell.order.paymentCancel)
     
 };

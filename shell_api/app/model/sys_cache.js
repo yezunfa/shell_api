@@ -4,50 +4,23 @@
 module.exports = app => {
   const DataTypes = app.Sequelize;
 
-  const Model = app.model.define('order_sub', {
+  const Model = app.model.define('sys_cache', {
     Id: {
       type: DataTypes.STRING(36),
       allowNull: false,
       primaryKey: true,
       comment: '主键'
     },
-    OrderId: {
+    KeyName: {
       type: DataTypes.STRING(36),
       allowNull: false,
       defaultValue: '',
-      references: {
-        model: 'order_main',
-        key: 'Id'
-      },
-      comment: '主订单id'
+      comment: '键'
     },
-    CartId: {
-      type: DataTypes.STRING(36),
-      allowNull: false,
-      defaultValue: '',
-      comment: '购物车id'
-    },
-    ProductId: {
-      type: DataTypes.STRING(36),
-      allowNull: false,
-      defaultValue: '',
-      comment: '产品id'
-    },
-    Price: {
-      type: DataTypes.DECIMAL,
+    Value: {
+      type: DataTypes.STRING(1024),
       allowNull: true,
-      comment: '单价'
-    },
-    Count: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      defaultValue: '1',
-      comment: '购买数量'
-    },
-    TotalPrice: {
-      type: DataTypes.DECIMAL,
-      allowNull: true,
-      comment: '总价'
+      comment: '值'
     },
     Valid: {
       type: DataTypes.INTEGER(1),
@@ -79,15 +52,9 @@ module.exports = app => {
       type: DataTypes.STRING(36),
       allowNull: true,
       comment: '更新人'
-    },
-    State: {
-      type: DataTypes.INTEGER(1),
-      allowNull: true,
-      defaultValue: '0',
-      comment: '核销状态'
     }
   }, {
-    tableName: 'order_sub',
+    tableName: 'sys_cache',
     timestamps: false
   });
 

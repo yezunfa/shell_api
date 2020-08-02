@@ -11,6 +11,7 @@ import ExportOrderRefund = require('../../../app/model/order_refund');
 import ExportOrderSub = require('../../../app/model/order_sub');
 import ExportProduct = require('../../../app/model/product');
 import ExportProductType = require('../../../app/model/product_type');
+import ExportSysCache = require('../../../app/model/sys_cache');
 import ExportSysUser = require('../../../app/model/sys_user');
 
 declare module 'egg' {
@@ -24,6 +25,7 @@ declare module 'egg' {
     OrderSub: ReturnType<typeof ExportOrderSub>;
     Product: ReturnType<typeof ExportProduct>;
     ProductType: ReturnType<typeof ExportProductType>;
+    SysCache: ReturnType<typeof ExportSysCache>;
     SysUser: ReturnType<typeof ExportSysUser>;
   }
 }

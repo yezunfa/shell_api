@@ -31,12 +31,6 @@ module.exports = app => {
       allowNull: true,
       comment: '加入购物车商品数量'
     },
-    State: {
-      type: DataTypes.INTEGER(1),
-      allowNull: false,
-      defaultValue: '1',
-      comment: '购物车状态(1:正常, 2:已提交订单，3:已完成订单，4:已移除)'
-    },
     Valid: {
       type: DataTypes.INTEGER(1),
       allowNull: false,
@@ -52,6 +46,12 @@ module.exports = app => {
       type: DataTypes.DATE(6),
       allowNull: true,
       comment: '创建时间'
+    },
+    State: {
+      type: DataTypes.INTEGER(1),
+      allowNull: false,
+      defaultValue: '1',
+      comment: '购物车状态(1:正常, 2:已提交订单，3:已完成订单，4:已移除)'
     },
     CreatePerson: {
       type: DataTypes.STRING(36),

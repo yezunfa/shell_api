@@ -162,6 +162,9 @@ class Member extends Controller {
         const { body } = this.ctx.request;
         const userInfo = { ...body }
 
+        if (userInfo && userInfo.unionid) {
+            delete userInfo.unionid
+        }
         const result = {}
         const CreateTime = new Date()
 

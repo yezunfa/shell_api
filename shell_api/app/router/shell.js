@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-03-29 21:32:55
- * @LastEditTime: 2020-08-02 20:47:23
+ * @LastEditTime: 2020-10-28 15:36:10
  * @Description: Do not edit
  */ 
 module.exports = app => {
@@ -9,6 +9,7 @@ module.exports = app => {
 
     app.router.post('/api/shell_login/wechat', controller.shell.member.wechatLogin) // 用户登陆
     app.router.post('/api/shell_wechat/cryptdata', controller.shell.member.cryptdata)
+    app.router.post('/api/shell_wechat/register', controller.shell.member.register)
     
     // 口腔类商品
     

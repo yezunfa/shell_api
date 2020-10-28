@@ -236,11 +236,13 @@ class WxPayController extends Controller {
         wxpay.eggWXCallback(ctx.req, ctx.res, function (msg, req, res) {
             ctx.logger.info('收到支付回调 eggWXCallback', msg);
             ctx.logger.info(' typeof ctx.service.wxpayRecord.saveWxpayRecord: ' + typeof ctx.service.wxpayRecord.saveWxpayRecord)
-            try{
-                ctx.service.wxpayRecord.saveWxpayRecord(msg);
-            } catch(ex) {
-                ctx.logger.error('saveWxpayRecord异常', ex);
-            }
+            
+            // todo 保存微信支付记录
+            // try{
+            //     ctx.service.wxpayRecord.saveWxpayRecord(msg);
+            // } catch(ex) {
+            //     ctx.logger.error('saveWxpayRecord异常', ex);
+            // }
            
             /* msg
             {   appid: 'xxxxxxx',

@@ -94,46 +94,46 @@ class Member extends Controller {
                 return;
             }
 
-            // 这段不要也可以解密码吧？是为了安全
-            const signature2 = sha1(rawData + session_key);
-            if (signature !== signature2) {
-                this.ctx.body = {
-                    success: false,
-                    signature,
-                    signature2,
-                    message: '数据签名校验不一致',
-                    data: null
-                }
-                return;
-            }
+            // // 这段不要也可以解密码吧？是为了安全
+            // const signature2 = sha1(rawData + session_key);
+            // if (signature !== signature2) {
+            //     this.ctx.body = {
+            //         success: false,
+            //         signature,
+            //         signature2,
+            //         message: '数据签名校验不一致',
+            //         data: null
+            //     }
+            //     return;
+            // }
 
             const pc = new WXBizDataCrypt(appid, session_key)  
             const data = pc.decryptData(encryptedData, iv);
-            let memberInfo = {}
-            if(saveMobile) {
-                const { countryCode, purePhoneNumber} = data;
-                const { openid } = result.data;
-                try{
-                    await this.ctx.service.shell.member.updateMobileByOpenid(openid, purePhoneNumber, countryCode);
-                    await this.ctx.service.shell.member.updataUserInfoByOpenid(openid, rawData)
-                } catch(ex) {
-                    this.logger.error(ex, '保存手机号异常');
-                }
-                // 返回用户数据，刷新页面
-                try {
-                    const user = await this.ctx.service.shell.member.getByopenid(openid)
-                    const [ userinfo ] = user
-                    memberInfo = { userinfo}
-                } catch (error) {
-                    this.logger.error(error, '获取用户信息异常');
-                }
-            }
+            // let memberInfo = {}
+            // if(saveMobile) {
+            //     const { countryCode, purePhoneNumber} = data;
+            //     const { openid } = result.data;
+            //     try{
+            //         await this.ctx.service.shell.member.updateMobileByOpenid(openid, purePhoneNumber, countryCode);
+            //         // await this.ctx.service.shell.member.updataUserInfoByOpenid(openid, rawData)
+            //     } catch(ex) {
+            //         this.logger.error(ex, '保存手机号异常');
+            //     }
+            //     // 返回用户数据，刷新页面
+            //     try {
+            //         const user = await this.ctx.service.shell.member.getByopenid(openid)
+            //         const [ userinfo ] = user
+            //         memberInfo = { userinfo }
+            //     } catch (error) {
+            //         this.logger.error(error, '获取用户信息异常');
+            //     }
+            // }
             
             this.ctx.body = {
                 code: 200,
                 success: true,
                 message: '成功',
-                data: memberInfo
+                data: data
             }
         } catch(ex) {
             this.logger.error(ex);
@@ -141,18 +141,69 @@ class Member extends Controller {
                 success: false,
                 ex,
                 code: 500,
-                message: '数据签名校验失败',
+                message: '网络开小差了，请重试～',
                 data: null
             }
         }
 
     }
+
     async index(){
         console.log(this.ctx.model)
         const users = await this.ctx.model.User.findAll();
         this.ctx.body = users;
     }
     
+        /**
+     * 用户注册
+     */
+    async register() {
+        const { ctx } = this
+        const { body } = this.ctx.request;
+        const userInfo = { ...body }
+
+        const result = {}
+        const CreateTime = new Date()
+
+        try {
+            result.code = 200
+            result.success = true
+            if (!userInfo.openid) throw new Error("身份识别码获取异常")
+            // if (!userInfo.Name) throw new Error("请填写真实姓名")
+            if (!userInfo.Mobile) throw new Error("请填写手机号")
+
+            const { Mobile, openid } = userInfo // CheckCode
+            let senior = await ctx.service.shell.member.checkOpenid(openid)
+            
+            if (senior && senior.Id) {
+                const { Id } = senior
+                const { openid } = userInfo
+                console.log(senior)
+
+                // 删除除了senior之外的其他openid相同的数据
+                await ctx.service.shell.member.deleteByopenid(openid, senior.Id);
+                await ctx.service.shell.member.updateFildesBy(userInfo, { Id })
+                result.data = {...senior, ...userInfo}
+                result.message = '修改成功'
+            } else {
+                console.log('create a new member')
+                const entity = { ...userInfo, CreateTime, Source: 0 }
+                entity.Id = uuid.v1()
+                result.data = await ctx.service.shell.member.create(entity)
+                result.message = '注册成功'
+            }
+
+            
+        } catch (error) {
+            console.log(error)
+            ctx.logger.error(error)
+            result.code = 500
+            result.success = false
+            result.message = error.message || '注册失败'
+        }
+        ctx.body = result
+    }
+
 
 }
 

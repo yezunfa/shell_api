@@ -1,3 +1,9 @@
+/*
+ * @Author: yezunfa
+ * @Date: 2020-07-09 11:44:38
+ * @LastEditTime: 2020-10-28 15:47:41
+ * @Description: Do not edit
+ */
 'use strict'
 
 const Service = require('egg').Service
@@ -65,6 +71,7 @@ class UserService extends Service {
      * @param {String} purePhoneNumber 
      */
     async updataUserInfoByOpenid(openid, rawData) {
+        console.log(rawData)
         const { nickName, gender, city, language, province, country, avatarUrl } = JSON.parse(rawData)
         const sql = `update member 
             set NickName='${nickName}',Name='${nickName}',WeChatName='${nickName}',
@@ -84,7 +91,58 @@ class UserService extends Service {
             throw err;
         }
     }
-   
+
+    async checkOpenid (openid) {
+        const sql = `select * from member where member.openid = "${openid}"`
+        try {
+            const type = this.ctx.model.Sequelize.QueryTypes.SELECT
+            
+            const result = await this.ctx.model.query(sql, { type });
+
+            return result[0] || result
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async deleteByopenid (openid, Id) {
+        const sql = `
+        delete from member 
+            where member.openid = "${openid}"
+            and member.Id <> "${Id}";
+`
+        try {
+            const type = this.ctx.model.Sequelize.QueryTypes.DELETE
+            return await this.ctx.model.query(sql, { type });
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async updateFildesBy (fileds, conditions) {
+        const sets = []
+        const wheres = []
+        const { ctx } = this
+        for (const key in fileds) {
+            const value = fileds[key]
+            if (value && value !== 'null') sets.push(`member.${key} = "${value}"`)
+        }
+        for (const key in conditions) {
+            const value = conditions[key]
+            wheres.push(`member.${key} = "${value}"`)
+        }
+        const sql = `update member
+        set ${sets.join(`, `)}
+        where ${wheres.join(` and `)}`
+        try {
+            if (sets && sets.length) {
+                const type = ctx.model.Sequelize.QueryTypes.UPDATE
+                return await ctx.model.query(sql, { type });
+            }
+        } catch (error) {
+            throw error
+        }
+    }
     
 }
 

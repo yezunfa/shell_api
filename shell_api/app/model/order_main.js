@@ -81,7 +81,7 @@ module.exports = app => {
       type: DataTypes.INTEGER(1),
       allowNull: false,
       defaultValue: '1',
-      comment: '订单状态(1正常，0删除，2退款, 3异常）'
+      comment: '订单状态(1正常，0删除，2退款, 3异常, 4已核销）'
     },
     Remark: {
       type: DataTypes.STRING(200),

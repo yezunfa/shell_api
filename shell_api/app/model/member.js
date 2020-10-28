@@ -109,12 +109,6 @@ module.exports = app => {
       unique: true,
       comment: '微信小程序openid'
     },
-    unionid: {
-      type: DataTypes.STRING(36),
-      allowNull: true,
-      unique: true,
-      comment: '微信unionid'
-    },
     Valid: {
       type: DataTypes.INTEGER(1),
       allowNull: true,

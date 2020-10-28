@@ -55,6 +55,12 @@ module.exports = app => {
       defaultValue: '1',
       comment: '是否有效'
     },
+    State: {
+      type: DataTypes.INTEGER(1),
+      allowNull: true,
+      defaultValue: '0',
+      comment: '核销状态'
+    },
     Remark: {
       type: DataTypes.STRING(200),
       allowNull: true,
@@ -79,12 +85,6 @@ module.exports = app => {
       type: DataTypes.STRING(36),
       allowNull: true,
       comment: '更新人'
-    },
-    State: {
-      type: DataTypes.INTEGER(1),
-      allowNull: true,
-      defaultValue: '0',
-      comment: '核销状态'
     }
   }, {
     tableName: 'order_sub',

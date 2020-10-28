@@ -40,7 +40,7 @@ class Tools extends Controller {
     async getAccessToken( isNew ) {
         const { ctx } = this
         const cTime = new Date()
-        const app_access_token = await ctx.service.sysCacheExpand.getCacheByKeyname('access_token_qrcode')
+        const app_access_token = await ctx.service.sysCacheExpand.getCacheByKeyname('access_token_shell_qrcode')
         ctx.logger.info(`是否重新生成:isNew:${isNew}`, app_access_token.length > 0 && app_access_token[0].Value && !isNew)
         if (app_access_token.length > 0 && app_access_token[0].Value && !isNew ) return app_access_token[0].Value
 
@@ -53,7 +53,7 @@ class Tools extends Controller {
             const result = await ctx.curl(url_get_access_token, { dataType: 'json' })
             const cache_result = await ctx.service.sysCache.create({
                 Id: uuid.v4(),
-                KeyName: 'access_token_qrcode',
+                KeyName: 'access_token_shell_qrcode',
                 Value: result.data.access_token,
                 CreateTime: cTime,
                 CreatePerson: 'service',

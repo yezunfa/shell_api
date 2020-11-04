@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-06-30 01:34:44
- * @LastEditTime: 2020-06-30 02:29:59
+ * @LastEditTime: 2020-11-04 13:01:18
  * @Description: Do not edit
  */ 
 'use strict'
@@ -26,6 +26,7 @@ class ProductService extends Service {
         const sql =`
         select pt.Id as id,pt.Name as name
         from product_type pt
+        where pt.Valid = 1
         order by Id asc
         `
         try {

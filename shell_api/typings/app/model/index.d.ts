@@ -4,6 +4,7 @@
 import 'egg';
 import ExportBanner = require('../../../app/model/banner');
 import ExportCart = require('../../../app/model/cart');
+import ExportIntegrationHistory = require('../../../app/model/integration_history');
 import ExportMember = require('../../../app/model/member');
 import ExportOrderMain = require('../../../app/model/order_main');
 import ExportOrderPayment = require('../../../app/model/order_payment');
@@ -18,6 +19,7 @@ declare module 'egg' {
   interface IModel {
     Banner: ReturnType<typeof ExportBanner>;
     Cart: ReturnType<typeof ExportCart>;
+    IntegrationHistory: ReturnType<typeof ExportIntegrationHistory>;
     Member: ReturnType<typeof ExportMember>;
     OrderMain: ReturnType<typeof ExportOrderMain>;
     OrderPayment: ReturnType<typeof ExportOrderPayment>;

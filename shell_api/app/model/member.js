@@ -145,6 +145,12 @@ module.exports = app => {
       allowNull: true,
       defaultValue: '0',
       comment: '是否为系统员工'
+    },
+    Integration: {
+      type: DataTypes.STRING(12),
+      allowNull: true,
+      defaultValue: '0',
+      comment: '会员积分'
     }
   }, {
     tableName: 'member',

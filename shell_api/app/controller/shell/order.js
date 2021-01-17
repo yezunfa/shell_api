@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-08 15:51:57
- * @LastEditTime: 2020-08-02 21:44:41
+ * @LastEditTime: 2021-01-17 18:53:05
  * @Description: Do not edit
  */ 
 'use strict';
@@ -346,6 +346,34 @@ class Order extends Controller {
             };
             return;
         }
+
+        // 支付完成给会员添加积分及积分历史 
+        // 消费：积分 20:1 
+        try {
+            const history = {}
+            history.Id = uuid.v4();
+            history.Valid = 1;
+            history.IsAdd = 1;
+            history.State = 1;
+            history.CreateTime = new Date();
+            history.OperationType = 1; // 增加积分
+    
+            const orderInfo = await ctx.service.shell.order.getOrderMainById(orderEntity.Id)
+            const { UserId:MemberId, TotalPrice } = orderInfo.dataValues
+
+            const Integration = Math.round( parseInt(TotalPrice,10 ) / 20 )
+            await ctx.service.shell.member.addIntegration(Integration, MemberId)
+
+            history.CreatePerson = MemberId;
+            history.Integration = Integration;
+            history.MemberId = MemberId;
+
+            await ctx.model.IntegrationHistory.create(history)
+        } catch (error) {
+            ctx.logger.error(error)
+        }
+        
+        // 修改主订单支付状态 
         try {
             const result = await ctx.service.shell.order.success(orderEntity.Id);
             ctx.body = {

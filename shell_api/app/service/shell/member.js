@@ -1,7 +1,7 @@
 /*
  * @Author: yezunfa
  * @Date: 2020-07-09 11:44:38
- * @LastEditTime: 2020-10-28 15:47:41
+ * @LastEditTime: 2021-01-17 18:48:14
  * @Description: Do not edit
  */
 'use strict'
@@ -141,6 +141,23 @@ class UserService extends Service {
             }
         } catch (error) {
             throw error
+        }
+    }
+
+    async addIntegration (integration,MemberId){
+        const { ctx } = this
+        const sql = `
+        update member 
+        set member.Integration = member.Integration + ${integration}
+        where member.Id = '${MemberId}'
+        `
+        try {
+            const result = await ctx.model.query(sql, {
+                type: this.ctx.model.Sequelize.QueryTypes.UPDATE,
+            })
+            return result
+        } catch (error) {
+            throw new Error(error)
         }
     }
     

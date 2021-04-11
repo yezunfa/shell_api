@@ -1,3 +1,9 @@
+/*
+ * @Author: yezunfa
+ * @Date: 2020-07-09 11:44:38
+ * @LastEditTime: 2021-04-08 21:43:35
+ * @Description: Do not edit
+ */
 module.exports = app => {
     const {
         controller,
@@ -7,7 +13,6 @@ module.exports = app => {
     app.router.get('/api/free/demo', controller.placeOrder.reservation)
 
     app.router.get('/api/qr_code', controller.tools.qrcode)
-    app.router.get('/api/wx/qr_code', controller.tools.wxqrcode)
     app.router.get('/api/enable/coupon', controller.coupon.getEnableCoupon)
 
     app.router.get('/api/system/config', controller.system.Config);

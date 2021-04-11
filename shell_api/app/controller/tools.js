@@ -149,6 +149,59 @@ class Tools extends Controller {
             }
         }
     }
+
+    async productQrCode (){
+        const { ctx } = this
+        const { pages, scene } = ctx.query
+        try {
+            
+            const getData  = async (isNew) => {
+                let  access_token = await this.getAccessToken(isNew)
+                // getWXACodeUnlimit 场景b
+                let url_post_wxqrcode = `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${access_token}`
+                let data = JSON.stringify({  // 不能在data传access_token: access_token,!
+                    scene: scene, // 只能传32位的可见字符串(数字、英文以及!#$&'()*+,/:;=?@-._~)
+                    page: 'pages/home/home',  
+                })
+                let result = await ctx.curl(url_post_wxqrcode, {
+                    headers: 'Content-Type:application/json',
+                    contentType: "image/jpeg",
+                    method: 'POST',
+                    data
+                })
+
+                // ctx.logger.info(`wxqrcode:${typeof result.data}`, result && result.data ?  result.data.toString() : typeof result.data)
+                try{
+                    if(result && result.data  && parseInt(JSON.parse(result.data.toString()).errcode) === 40001) {
+                        ctx.logger.info('wxqrcode:重新生成getAccessToken');
+                        result = await getData(true)
+                    }
+                } catch(ex) {
+                    // ctx.logger.error('getAccessToken(true):', ex)
+                }
+                return result;
+
+            }
+    
+            // console.log(res.data.toString())
+
+            const res = await getData();
+            ctx.body = {
+                code: 200,
+                success: true,
+                data: `data:image/jpg;base64,${res.data.toString('base64')}`
+            }
+
+        } catch (error) {
+            ctx.logger.error('二维码加载失败', error);
+            ctx.body = {
+                code: 500,
+                success: false,
+                message: `二维码加载失败`,
+                data: `${error}`
+            }
+        }
+    }
 }
 
 module.exports = Tools;

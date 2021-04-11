@@ -33,4 +33,6 @@ module.exports = app => {
     app.router.post('/order/payment/cancel', controller.shell.order.paymentCancel)
     app.router.get('/api/order/get_all',controller.shell.order.getAllOrderMain)
     
+    app.router.get('/api/wx/qr_code', controller.tools.wxqrcode)
+    app.router.get('/api/product/qr_code',controller.tools.productQrCode)
 };

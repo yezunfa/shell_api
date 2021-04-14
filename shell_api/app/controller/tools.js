@@ -152,7 +152,7 @@ class Tools extends Controller {
 
     async productQrCode (){
         const { ctx } = this
-        const { pages, scene } = ctx.query
+        const { scene } = ctx.query
         try {
             
             const getData  = async (isNew) => {
@@ -161,7 +161,7 @@ class Tools extends Controller {
                 let url_post_wxqrcode = `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${access_token}`
                 let data = JSON.stringify({  // 不能在data传access_token: access_token,!
                     scene: scene, // 只能传32位的可见字符串(数字、英文以及!#$&'()*+,/:;=?@-._~)
-                    page: 'pages/home/home',  
+                    page: `pages/product/index`//pages/product/index?Id=${productid}`, // /pages/product/index?Id=${productInfo.Id} 
                 })
                 let result = await ctx.curl(url_post_wxqrcode, {
                     headers: 'Content-Type:application/json',
